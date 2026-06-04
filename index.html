@@ -40,6 +40,48 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/animate.css">
     <link href="images/icon/updatedmylogo3.png" rel="shortcut icon">
 
+    <!-- Custom CSS for Moving Text and New Header Layout -->
+    <style>
+        /* Scrolling Marquee Animation */
+        .marquee-container { overflow: hidden; white-space: nowrap; width: 100%; }
+        .marquee-text { display: inline-block; animation: marquee 15s linear infinite; font-weight: bold; font-size: 18px; letter-spacing: 1px; }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        
+        /* Color Changing Animation */
+        .color-change { animation: colorChange 5s infinite; }
+        @keyframes colorChange { 
+            0% { color: #e91e63; } /* Pink */
+            25% { color: #ff9800; } /* Orange */
+            50% { color: #4caf50; } /* Green */
+            75% { color: #2196f3; } /* Blue */
+            100% { color: #e91e63; } /* Pink */
+        }
+        
+        /* New Header Flexbox Layout */
+        .new-top-bar { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; background: #fff; border-bottom: 2px solid #f1f1f1; }
+        .new-contact-info { flex: 0 0 20%; font-size: 14px; }
+        .new-contact-info ul { list-style: none; margin: 0; padding: 0; }
+        .new-contact-info ul li { margin-bottom: 5px; }
+        .new-contact-info ul li a { color: #333; text-decoration: none; }
+        
+        .new-marquee-section { flex: 0 0 40%; text-align: center; }
+        
+        .new-right-section { flex: 0 0 38%; display: flex; align-items: center; justify-content: flex-end; gap: 25px; }
+        .new-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; }
+        .new-nav ul li a { text-decoration: none; color: #333; font-weight: 600; font-size: 15px; text-transform: uppercase; }
+        .new-nav ul li a:hover { color: #e91e63; }
+        
+        /* Mobile Responsive Header */
+        @media (max-width: 992px) {
+            .new-top-bar { flex-direction: column; text-align: center; gap: 15px; padding: 10px 0; }
+            .new-contact-info, .new-marquee-section, .new-right-section { flex: 0 0 100%; justify-content: center; }
+            .new-nav ul { justify-content: center; }
+        }
+        @media (max-width: 600px) {
+            .new-nav ul { flex-direction: column; gap: 10px; }
+            .new-right-section { flex-direction: column; }
+        }
+    </style>
 
 <script type="application/ld+json">
 {
@@ -69,9 +111,7 @@
 }
 </script>
 
-
 </head>
-
 
 <body class="header-sticky">
 
@@ -82,85 +122,43 @@
             <span class="loader3 block-loader"></span>
         </div>
     
+        <!-- NEW UNIFIED HEADER BAR -->
         <div class="header-inner-pages">
             <div class="top">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <ul class="flat-information">
-                                <li class="phone">
-                                    <a href="tel:+233557327096" title="Phone number"><i>Call us: 055-732-7096</i></a>
-                                </li>
-                                <li class="email">
-                                    <a href="mailto:franciskwadzoamuzu@gmail.com" title="Email address"><i>franciskwadzoamuzu@gmail.com</i></a>
-                                </li>
-                                <li>
-                                    <a href="https://wa.link/zkgnma" target="_blank"><img src="images/whatsapp-logo.png" alt="Apex Breez Integrated Services WhatsApp">
-                                    </a>
-                                </li>
+                    <div class="new-top-bar">
+                        <!-- Left: Contact Info -->
+                        <div class="new-contact-info">
+                            <ul>
+                                <li><a href="tel:+233557327096">📞 055-732-7096</a></li>
+                                <li><a href="mailto:franciskwadzoamuzu@gmail.com">📧 franciskwadzoamuzu@gmail.com</a></li>
+                                <li><a href="https://wa.me/233557327096" target="_blank">💬 WhatsApp</a></li>
                             </ul>
-                            
-                              <div class="style-box text-right">
-                                <ul class="flat-socials v1">
-                                    <a href="index.html" target="_blank"><img src="images/myupdatedlogo2.png" alt="Apex Breez Integrated Services Logo"></a>
-                                </ul>
-                                   
+                        </div>
+                        
+                        <!-- Center: Scrolling Marquee -->
+                        <div class="new-marquee-section">
+                            <div class="marquee-container">
+                                <div class="marquee-text color-change">Apex Breez Integrated Services &nbsp;&nbsp;&bull;&nbsp;&nbsp; Apex Breez Integrated Services &nbsp;&nbsp;&bull;&nbsp;&nbsp; Apex Breez Integrated Services &nbsp;&nbsp;&bull;&nbsp;&nbsp; Apex Breez Integrated Services</div>
                             </div>
-                        </div><!-- col-md-12 -->
-                    </div><!-- row -->
-                </div><!-- container -->
-            </div><!-- Top -->    
-        </div><!-- header-inner-pages -->
-
-        <!-- Wrap-slide -->
-        <div class="wrap-slider">
-            <!-- Header -->            
-            <header id="header" class="header style-color clearfix">
-                <div class="container">
-                    <div class="header-wrap clearfix">
-                        <div id="logo" class="logo">
-                            <a href="index.html" rel="home">
-                                <img src="images/myupdatedlogo2.png" alt="Apex Breez Integrated Services">
-                            </a>
-                        </div><!-- /.logo -->
-
-                        <div class="nav-wrap">
-                            <div class="btn-menu">
-                                <span></span>
-                            </div><!-- //mobile menu button -->
-
-                            <nav id="mainnav" class="mainnav">
-                                <ul class="menu"> 
-                                    <li class="home active">
-                                        <a href="index.html">Home</a>
-                                        <ul class="submenu">
-                                            <li></a></li>
-                                        </ul><!-- /.submenu -->
-                                    </li>
-                                    <li><a href="About-Us.html">About Us</a>
-                                     <ul class="submenu">
-                                           <li><a href="charter.pdf">Client Service Charter</a></li>
-                                           
-                                            </ul>  
-                                    </li> 
-                                    
-                                    <li><a href="business-registration.html">Services</a>
-                                     
-                                    </li>                               
-                                                                                                                
-                                         <!-- <li><a href="news.html">News</a>
-                                         
-                                    </li> -->
+                        </div>
+                        
+                        <!-- Right: Nav & Logo -->
+                        <div class="new-right-section">
+                            <nav class="new-nav">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="About-Us.html">About Us</a></li>
+                                    <li><a href="business-registration.html">Services</a></li>
                                     <li><a href="contact.html">Contact Us</a></li>
-                                </ul><!-- /.menu -->
-                            </nav><!-- /.mainnav -->
-                        </div><!-- /.nav-wrap -->
-                    </div><!-- /.header-wrap --> 
+                                </ul>
+                            </nav>
+                            <a href="index.html"><img src="images/myupdatedlogo2.png" alt="Apex Breez Integrated Services Logo" height="55"></a>
+                        </div>
+                    </div>
                 </div>
-            </header><!-- /.header -->
-        </div> <!-- /.wrap-slider -->
-
-        <!-- SLIDER REMOVED -->
+            </div>
+        </div>
 
         <section class="flat-row padding-v1 v7">
             <div class="flat-our-services v5 v7">
@@ -168,8 +166,6 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="our-services">
-                               
-
                                 <div class="title-section">
                                      <h1 class="title" >Business Registration & Digital Solutions in Ghana</h1>
                                     <h4 class="title">OUR MISSION</h4>
@@ -357,8 +353,7 @@
 
     </div><!-- /.boxed -->
 
-    <!-- Javascript -->
-       <!-- Essential Javascript -->
+    <!-- Essential Javascript -->
     <script type="text/javascript" src="javascript/jquery.min.js"></script>
     <script type="text/javascript" src="javascript/bootstrap.min.js"></script> 
     <script type="text/javascript" src="javascript/jquery.easing.js"></script> 
