@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://francis2150.github.io/Apex-Breez-Integrated-Services/sitemap.xml
+Sitemap: https://apexbreez.elevater247.com/sitemap.xml
