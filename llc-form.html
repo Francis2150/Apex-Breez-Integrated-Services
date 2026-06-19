@@ -50,19 +50,29 @@
     .page-hero .breadcrumb span{color:#fff;margin:0 8px}
     .page-hero .breadcrumb .current{color:rgba(255,255,255,.6)}
     .form-section{padding:40px 0 80px}
-    .form-card{background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.04);border:1px solid #eef0f3;padding:24px;margin-bottom:24px}
+    .form-card{background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.04);border:1px solid #eef0f3;padding:24px;margin-bottom:24px;transition:border-color .3s}
+    .form-card:hover{border-color:#e0e4ea}
     .form-card-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid #D4A843}
     .form-card-icon{width:44px;height:44px;background:rgba(212,168,67,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#D4A843;font-size:18px;flex-shrink:0}
     .form-card-title{font-size:18px;font-weight:700;color:#0B1F3B;margin:0;line-height:1.3}
     .form-grid{display:grid;grid-template-columns:1fr;gap:18px}
-    .form-group{margin-bottom:0}
+    .form-group{margin-bottom:0;position:relative}
     .form-group label{display:block;font-size:12px;font-weight:700;color:#0B1F3B;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
     .form-group label .req{color:#fb5607}
     .form-control{width:100%;padding:14px 16px;font-size:16px!important;border:1.5px solid #e0e4ea;border-radius:6px;background:#fff;color:#333;transition:border-color .2s,box-shadow .2s;font-family:inherit;appearance:none;-webkit-appearance:none}
     .form-control:focus{outline:none;border-color:#0A6E5C;box-shadow:0 0 0 3px rgba(10,110,92,.1)}
     .form-control:read-only{background:#F5F7FA;color:#888;cursor:not-allowed;border-color:#e0e4ea}
     .sub-title{font-size:14px;font-weight:700;color:#0A6E5C;margin:24px 0 14px;padding-bottom:8px;border-bottom:1px solid #e0e4ea}
-    /* Dynamic Cards */
+
+    /* === INLINE ERROR STYLES === */
+    .field-error{display:none;color:#fb5607;font-size:12px;font-weight:600;margin-top:5px;align-items:center;gap:5px;line-height:1.3}
+    .field-error.visible{display:flex}
+    .field-error i{font-size:12px;flex-shrink:0}
+    .form-group.has-error .form-control{border-color:#fb5607!important;box-shadow:0 0 0 3px rgba(251,86,7,.12)!important}
+    @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+    .form-group.shake{animation:shake .45s ease}
+
+    /* === DYNAMIC CARDS === */
     .dyn-card{background:#fff;border:1.5px solid #e0e4ea;border-radius:8px;padding:20px;margin-bottom:20px;position:relative;transition:border-color .3s}
     .dyn-card:hover{border-color:#D4A843}
     .dyn-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #f0f2f5}
@@ -71,23 +81,28 @@
     .remove-dyn-btn{width:32px;height:32px;border-radius:50%;background:#fff;border:1.5px solid #fb5607;color:#fb5607;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;padding:0;line-height:1}
     .remove-dyn-btn:hover{background:#fb5607;color:#fff}
     .role-checks{background:#f0faf7;border:1.5px dashed #0A6E5C;border-radius:6px;padding:14px;margin-bottom:18px;display:flex;flex-direction:column;gap:10px}
-    .role-check-label{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;font-weight:600;color:#0B1F3B;text-transform:none;letter-spacing:0;margin:0}
+    .role-check-label{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;font-weight:600;color:#0B1F3B;text-transform:none;letter-spacing:0;margin:0;transition:opacity .3s}
     .role-check-label input[type="checkbox"]{width:20px;height:20px;accent-color:#0A6E5C;cursor:pointer;flex-shrink:0}
     .share-box{margin-left:30px;padding:10px 14px;background:#fff;border-radius:6px;border-left:3px solid #D4A843;display:none}
     .share-box label{display:block;font-size:12px;font-weight:700;color:#0B1F3B;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
     .share-box input{width:140px;padding:10px 12px;font-size:14px;border:1.5px solid #e0e4ea;border-radius:6px;font-family:inherit}
-    .synced-badge{background:#e3f2fd;border-left:4px solid #4cc9f0;padding:10px 14px;margin-bottom:14px;border-radius:4px;font-size:13px;color:#0B1F3B;display:flex;align-items:center;gap:8px}
-    .synced-badge i{color:#4cc9f0}
-    .sec-note{background:#e3f2fd;border-left:4px solid #4cc9f0;padding:14px;margin-bottom:18px;border-radius:4px;font-size:14px;color:#0B1F3B;display:none;align-items:center;gap:8px}
-    .sec-note i{color:#4cc9f0}
-    .add-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:#fff;border:1.5px dashed #0A6E5C;border-radius:6px;color:#0A6E5C;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;transition:all .3s;font-family:inherit}
+    .share-total{background:#fff8e1;border:1.5px solid #D4A843;border-radius:6px;padding:12px 16px;margin-top:16px;font-size:14px;font-weight:700;color:#0B1F3B;display:flex;align-items:center;gap:10px}
+    .share-total i{color:#D4A843;font-size:16px}
+    .share-total .val{color:#0A6E5C;font-size:18px;font-weight:800}
+    .share-total.over{background:#fff0f0;border-color:#fb5607}
+    .share-total.over .val{color:#fb5607}
+    .synced-badge{background:#e8f5e9;border-left:4px solid #0A6E5C;padding:10px 14px;margin-bottom:14px;border-radius:4px;font-size:13px;color:#0B1F3B;display:flex;align-items:center;gap:8px;font-weight:600}
+    .synced-badge i{color:#0A6E5C}
+    .sec-note{background:#e8f5e9;border-left:4px solid #0A6E5C;padding:14px;margin-bottom:18px;border-radius:4px;font-size:14px;color:#0B1F3B;display:none;align-items:center;gap:8px;font-weight:600}
+    .sec-note i{color:#0A6E5C}
+    .add-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:#fff;border:1.5px dashed #0A6E5C;border-radius:6px;color:#0A6E5C;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;transition:all .3s;font-family:inherit;margin-top:4px}
     .add-btn:hover{background:#0A6E5C;color:#fff;border-style:solid}
     .btn-submit{width:100%;padding:16px;background:linear-gradient(135deg,#D4A843,#E8C36A);color:#0B1F3B;border:none;border-radius:6px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all .3s;margin-top:10px;font-family:inherit}
     .btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(212,168,67,.4)}
     .btn-submit:disabled{background:#ccc;transform:none;box-shadow:none;cursor:not-allowed}
     .btn-reset{width:100%;padding:14px;background:transparent;color:#666;border:1.5px solid #ddd;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;margin-top:12px;font-family:inherit}
     .btn-reset:hover{border-color:#fb5607;color:#fb5607}
-    .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-120px);padding:16px 28px;border-radius:8px;color:#fff;font-weight:600;font-size:14px;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,.15);transition:transform .4s cubic-bezier(.4,0,.2,1);text-align:center;width:calc(100% - 40px);max-width:400px}
+    .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-120px);padding:16px 28px;border-radius:8px;color:#fff;font-weight:600;font-size:14px;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,.15);transition:transform .4s cubic-bezier(.4,0,.2,1);text-align:center;width:calc(100% - 40px);max-width:420px;display:flex;align-items:center;gap:10px;justify-content:center}
     .toast.show{transform:translateX(-50%) translateY(0)}
     .toast.success{background:#0A6E5C}
     .toast.error{background:#fb5607}
@@ -97,7 +112,7 @@
     .footer-bottom a:hover{color:#E8C36A}
     @media(min-width:768px){.form-grid-2{grid-template-columns:1fr 1fr}.form-card{padding:32px}}
     @media(max-width:991px){.mobile-toggle{display:flex}.main-nav{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:#fff;box-shadow:-5px 0 30px rgba(11,31,59,.15);z-index:2000;transition:right .35s ease;overflow-y:auto;padding:24px 0;display:block!important}.main-nav.open{right:0}.main-nav>ul{flex-direction:column;align-items:stretch}.main-nav>ul>li>a{padding:14px 24px;border-bottom:1px solid #F0F2F5;justify-content:flex-start;font-size:13px}.main-nav .nav-dropdown{display:none!important}.main-nav>ul>li>a .fa-chevron-down{display:none}}
-    @media(max-width:767px){.share-box input{width:100%}.role-checks{padding:12px}}
+    @media(max-width:767px){.share-box input{width:100%}.role-checks{padding:12px}.page-hero h1{font-size:24px}.form-card{padding:18px}}
     </style>
 </head>
 <body>
@@ -147,9 +162,21 @@
                         <h2 class="form-card-title">Company Information</h2>
                     </div>
                     <div class="form-grid form-grid-2">
-                        <div class="form-group" style="grid-column:1/-1"><label>Company Name <span class="req">*</span></label><input type="text" class="form-control static-field" data-f="company_name" required></div>
-                        <div class="form-group"><label>Presented By <span class="req">*</span></label><input type="text" class="form-control static-field" data-f="presented_by" required></div>
-                        <div class="form-group"><label>Presenter TIN <span class="req">*</span></label><input type="text" class="form-control static-field" data-f="presenter_tin" required></div>
+                        <div class="form-group" style="grid-column:1/-1">
+                            <label>Company Name <span class="req">*</span></label>
+                            <input type="text" class="form-control static-field" data-f="company_name" required>
+                            <span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>Company name is required</span></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Presented By <span class="req">*</span></label>
+                            <input type="text" class="form-control static-field" data-f="presented_by" required>
+                            <span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>Presenter name is required</span></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Presenter TIN <span class="req">*</span></label>
+                            <input type="text" class="form-control static-field" data-f="presenter_tin" required>
+                            <span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>Presenter TIN is required</span></span>
+                        </div>
                         <div class="form-group" style="grid-column:1/-1"><label>Business Activities</label><input type="text" class="form-control static-field" data-f="activities" placeholder="e.g. General trading, consultancy"></div>
                         <div class="form-group"><label>Stated Capital (GHS)</label><input type="number" class="form-control static-field" data-f="stated_capital" step="0.01"></div>
                         <div class="form-group"><label>Estimated Revenue (GHS)</label><input type="number" class="form-control static-field" data-f="estimated_revenue" step="0.01"></div>
@@ -197,23 +224,47 @@
                         <div class="form-card-icon"><i class="fa fa-user-secret"></i></div>
                         <h2 class="form-card-title">Secretary Details</h2>
                     </div>
-                    <div class="sec-note" id="secNote"><i class="fa fa-info-circle"></i> <span id="secNoteText">Secretary information is copied from a director above.</span></div>
+                    <div class="sec-note" id="secNote"><i class="fa fa-link"></i> <span id="secNoteText">Secretary information is copied from a director above.</span></div>
                     <div id="secFields">
                         <div class="form-group"><label>Qualification</label><input type="text" class="form-control static-field" data-f="sec_qualification"></div>
                         <div class="form-grid form-grid-2">
-                            <div class="form-group"><label>First Name <span class="req">*</span></label><input type="text" class="form-control static-field" data-f="sec_first_name" required></div>
+                            <div class="form-group">
+                                <label>First Name <span class="req">*</span></label>
+                                <input type="text" class="form-control static-field" data-f="sec_first_name" required>
+                                <span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>First name is required</span></span>
+                            </div>
                             <div class="form-group"><label>Middle Name</label><input type="text" class="form-control static-field" data-f="sec_middle_name"></div>
-                            <div class="form-group"><label>Surname <span class="req">*</span></label><input type="text" class="form-control static-field" data-f="sec_surname" required></div>
+                            <div class="form-group">
+                                <label>Surname <span class="req">*</span></label>
+                                <input type="text" class="form-control static-field" data-f="sec_surname" required>
+                                <span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>Surname is required</span></span>
+                            </div>
                             <div class="form-group"><label>Former Name</label><input type="text" class="form-control static-field" data-f="sec_former_name"></div>
-                            <div class="form-group"><label>Date of Birth <span class="req">*</span></label><input type="date" class="form-control static-field" data-f="sec_dob" required></div>
+                            <div class="form-group">
+                                <label>Date of Birth <span class="req">*</span></label>
+                                <input type="date" class="form-control static-field" data-f="sec_dob" required>
+                                <span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>Date of birth is required</span></span>
+                            </div>
                             <div class="form-group"><label>Place of Birth</label><input type="text" class="form-control static-field" data-f="sec_pob"></div>
                             <div class="form-group"><label>Nationality</label><input type="text" class="form-control static-field" data-f="sec_nationality" value="Ghanaian"></div>
                             <div class="form-group"><label>Occupation</label><input type="text" class="form-control static-field" data-f="sec_occupation"></div>
-                            <div class="form-group"><label>Contact 1 <span class="req">*</span></label><input type="tel" class="form-control static-field" data-f="sec_contact1" required></div>
+                            <div class="form-group">
+                                <label>Contact 1 <span class="req">*</span></label>
+                                <input type="tel" class="form-control static-field" data-f="sec_contact1" required>
+                                <span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>Contact number is required</span></span>
+                            </div>
                             <div class="form-group"><label>Contact 2</label><input type="tel" class="form-control static-field" data-f="sec_contact2"></div>
-                            <div class="form-group" style="grid-column:1/-1"><label>Email <span class="req">*</span></label><input type="email" class="form-control static-field" data-f="sec_email" required></div>
+                            <div class="form-group" style="grid-column:1/-1">
+                                <label>Email <span class="req">*</span></label>
+                                <input type="email" class="form-control static-field" data-f="sec_email" required>
+                                <span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>Valid email is required</span></span>
+                            </div>
                             <div class="form-group"><label>TIN</label><input type="text" class="form-control static-field" data-f="sec_tin"></div>
-                            <div class="form-group"><label>Ghana Card <span class="req">*</span></label><input type="text" class="form-control static-field" data-f="sec_ghana_card" required></div>
+                            <div class="form-group">
+                                <label>Ghana Card <span class="req">*</span></label>
+                                <input type="text" class="form-control static-field" data-f="sec_ghana_card" required>
+                                <span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>Ghana Card number is required</span></span>
+                            </div>
                         </div>
                         <h4 class="sub-title">Residential Address</h4>
                         <div class="form-grid form-grid-2">
@@ -237,6 +288,9 @@
                         <h2 class="form-card-title">Subscribers</h2>
                     </div>
                     <div id="subscribersContainer"></div>
+                    <div id="shareTotal" class="share-total" style="display:none">
+                        <i class="fa fa-chart-pie"></i> Total Share Allocation: <span class="val" id="shareTotalVal">0%</span>
+                    </div>
                     <button type="button" class="add-btn" onclick="addSubscriber()"><i class="fa fa-plus"></i> Add Subscriber</button>
                 </div>
 
@@ -259,291 +313,591 @@
         var secFromDir = -1;
 
         // --- Mobile Nav ---
-        var toggle=document.getElementById('mobileToggle'),nav=document.getElementById('mainNav'),overlay=document.getElementById('navOverlay');
-        if(toggle&&nav&&overlay){function oN(){nav.classList.add('open');toggle.classList.add('active');overlay.classList.add('active');document.body.style.overflow='hidden'}function cN(){nav.classList.remove('open');toggle.classList.remove('active');overlay.classList.remove('active');document.body.style.overflow=''}toggle.addEventListener('click',function(e){e.stopPropagation();nav.classList.contains('open')?cN():oN()});overlay.addEventListener('click',cN);nav.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){if(window.innerWidth<=991)cN()})});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){cN();toggle.focus()}});window.addEventListener('resize',function(){if(window.innerWidth>991)cN()})}
+        var toggle = document.getElementById('mobileToggle');
+        var nav = document.getElementById('mainNav');
+        var overlay = document.getElementById('navOverlay');
+        if (toggle && nav && overlay) {
+            function openNav() { nav.classList.add('open'); toggle.classList.add('active'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+            function closeNav() { nav.classList.remove('open'); toggle.classList.remove('active'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+            toggle.addEventListener('click', function(e) { e.stopPropagation(); nav.classList.contains('open') ? closeNav() : openNav(); });
+            overlay.addEventListener('click', closeNav);
+            nav.querySelectorAll('a').forEach(function(l) { l.addEventListener('click', function() { if (window.innerWidth <= 991) closeNav(); }); });
+            document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && nav.classList.contains('open')) { closeNav(); toggle.focus(); } });
+            window.addEventListener('resize', function() { if (window.innerWidth > 991) closeNav(); });
+        }
 
-        // --- Director Template ---
-        function dirFields(){return['first_name','middle_name','surname','former_name','dob','pob','nationality','occupation','contact1','contact2','email','tin','ghana_card','res_gps','res_landmark','res_house_no','res_street','res_city','res_town','res_district','res_region','res_country']}
-        function dirHTML(i,d){
-            d=d||{};
-            var f=dirFields(),h='<div class="dyn-card" data-type="director" data-index="'+i+'">';
-            h+='<div class="dyn-card-header"><h3><i class="fa fa-user-tie"></i> Director '+(i+1)+'</h3>';
-            h+='<button type="button" class="remove-dyn-btn" onclick="removeDyn(this)" '+(i===0?'style="display:none"':'')+'>×</button></div>';
-            h+='<div class="role-checks">';
-            h+='<label class="role-check-label"><input type="checkbox" class="is-sub-cb" '+(d.is_subscriber?'checked':'')+' onchange="handleSubCheck('+i+')"> <span>Is also a Subscriber</span></label>';
-            h+='<div class="share-box" style="display:'+(d.is_subscriber?'block':'none')+'"><label>Share Percentage (%)</label><input type="number" value="'+(d.share_percent||'')+'" min="0" max="100" step="0.01"></div>';
-            h+='<label class="role-check-label"><input type="checkbox" class="is-sec-cb" '+(d.is_secretary?'checked':'')+' onchange="handleSecCheck('+i+')"> <span>Is also the Secretary</span></label>';
-            h+='</div><div class="form-grid form-grid-2">';
-            var labels={'first_name':'First Name *','middle_name':'Middle Name','surname':'Surname *','former_name':'Former Name','dob':'Date of Birth *','pob':'Place of Birth','nationality':'Nationality *','occupation':'Occupation','contact1':'Contact 1 *','contact2':'Contact 2','email':'Email *','tin':'TIN','ghana_card':'Ghana Card *','res_gps':'GPS','res_landmark':'Landmark','res_house_no':'House No.','res_street':'Street','res_city':'City','res_town':'Town','res_district':'District','res_region':'Region','res_country':'Country'};
-            var types={'dob':'date'};
-            f.forEach(function(k){
-                var req=labels[k].indexOf('*')>-1;
-                var lbl=labels[k].replace('*','').trim();
-                var full=lbl+(req?' <span class="req">*</span>':'');
-                var val=d[k]||'';
-                if(k==='nationality'&&!val)val='Ghanaian';
-                if(k==='res_country'&&!val)val='Ghana';
-                var span=(k==='res_country'||k==='nationality')?'style="grid-column:1/-1"':'';
-                h+='<div class="form-group" '+span+'><label>'+full+'</label><input type="'+(types[k]||'text')+'" class="form-control dyn-field" data-f="'+k+'" value="'+val+'" '+(req?'required':'')+'></div>';
+        // --- Director field definitions ---
+        function dirFields() {
+            return ['first_name','middle_name','surname','former_name','dob','pob','nationality','occupation','contact1','contact2','email','tin','ghana_card','res_gps','res_landmark','res_house_no','res_street','res_city','res_town','res_district','res_region','res_country'];
+        }
+        var dirLabels = {
+            first_name:'First Name *', middle_name:'Middle Name', surname:'Surname *',
+            former_name:'Former Name', dob:'Date of Birth *', pob:'Place of Birth',
+            nationality:'Nationality *', occupation:'Occupation', contact1:'Contact 1 *',
+            contact2:'Contact 2', email:'Email *', tin:'TIN', ghana_card:'Ghana Card *',
+            res_gps:'GPS', res_landmark:'Landmark', res_house_no:'House No.',
+            res_street:'Street', res_city:'City', res_town:'Town',
+            res_district:'District', res_region:'Region', res_country:'Country'
+        };
+
+        // Build director card HTML
+        function dirHTML(i, d) {
+            d = d || {};
+            var f = dirFields();
+            var fullSpan = ['res_country','nationality'];
+            var h = '<div class="dyn-card" data-type="director" data-index="' + i + '">';
+            h += '<div class="dyn-card-header"><h3><i class="fa fa-user-tie"></i> Director ' + (i + 1) + '</h3>';
+            h += '<button type="button" class="remove-dyn-btn" onclick="removeDyn(this)" ' + (i === 0 ? 'style="display:none"' : '') + '>&times;</button></div>';
+            h += '<div class="role-checks">';
+            h += '<label class="role-check-label"><input type="checkbox" class="is-sub-cb" ' + (d.is_subscriber ? 'checked' : '') + ' onchange="handleSubCheck(' + i + ')"> <span>Is also a Subscriber</span></label>';
+            h += '<div class="share-box" style="display:' + (d.is_subscriber ? 'block' : 'none') + '"><label>Share Percentage (%)</label><input type="number" class="share-pct-input" value="' + (d.share_percent || '') + '" min="0" max="100" step="0.01" oninput="updateShareTotal()"></div>';
+            h += '<label class="role-check-label"><input type="checkbox" class="is-sec-cb" ' + (d.is_secretary ? 'checked' : '') + ' onchange="handleSecCheck(' + i + ')"> <span>Is also the Secretary</span></label>';
+            h += '</div><div class="form-grid form-grid-2">';
+            var types = { dob: 'date' };
+            f.forEach(function(k) {
+                var req = dirLabels[k].indexOf('*') > -1;
+                var lbl = dirLabels[k].replace('*','').trim();
+                var full = lbl + (req ? ' <span class="req">*</span>' : '');
+                var val = d[k] || '';
+                if (k === 'nationality' && !val) val = 'Ghanaian';
+                if (k === 'res_country' && !val) val = 'Ghana';
+                var span = fullSpan.indexOf(k) > -1 ? 'style="grid-column:1/-1"' : '';
+                h += '<div class="form-group" ' + span + '><label>' + full + '</label>';
+                h += '<input type="' + (types[k] || 'text') + '" class="form-control dyn-field" data-f="' + k + '" value="' + val + '" ' + (req ? 'required' : '') + '>';
+                if (req) h += '<span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>' + lbl + ' is required</span></span>';
+                h += '</div>';
             });
-            h+='</div></div>';
+            h += '</div></div>';
             return h;
         }
 
-        // --- Subscriber Template ---
-        function subFields(){return['first_name','middle_name','surname','former_name','dob','pob','nationality','occupation','contact1','contact2','email','tin','ghana_card','res_gps','res_landmark','res_house_no','res_street','res_city','res_town','res_district','res_region']}
-        function subHTML(i,d,linked){
-            d=d||{};linked=linked||-1;
-            var f=subFields(),h='<div class="dyn-card" data-type="subscriber" data-index="'+i+'" data-linked="'+linked+'">';
-            if(linked>=0)h+='<div class="synced-badge"><i class="fa fa-copy"></i> Auto-filled from Director '+(linked+1)+'</div>';
-            h+='<div class="dyn-card-header"><h3><i class="fa fa-file-signature"></i> Subscriber '+(i+1)+'</h3>';
-            h+='<button type="button" class="remove-dyn-btn" onclick="removeDyn(this)" '+(i===0?'style="display:none"':'')+'>×</button></div>';
-            h+='<div class="form-grid form-grid-2">';
-            var labels={'first_name':'First Name *','middle_name':'Middle Name','surname':'Surname *','former_name':'Former Name','dob':'Date of Birth *','pob':'Place of Birth','nationality':'Nationality *','occupation':'Occupation','contact1':'Contact 1 *','contact2':'Contact 2','email':'Email *','tin':'TIN','ghana_card':'Ghana Card *','res_gps':'GPS','res_landmark':'Landmark','res_house_no':'House No.','res_street':'Street','res_city':'City','res_town':'Town','res_district':'District','res_region':'Region'};
-            var types={'dob':'date'};
-            var ro=linked>=0?'readonly':'';
-            f.forEach(function(k){
-                var req=labels[k].indexOf('*')>-1;
-                var lbl=labels[k].replace('*','').trim();
-                var full=lbl+(req?' <span class="req">*</span>':'');
-                var val=d[k]||'';
-                if(k==='nationality'&&!val)val='Ghanaian';
-                h+='<div class="form-group"><label>'+full+'</label><input type="'+(types[k]||'text')+'" class="form-control dyn-field" data-f="'+k+'" value="'+val+'" '+(req?'required':'')+' '+ro+'></div>';
+        // --- Subscriber field definitions ---
+        function subFields() {
+            return ['first_name','middle_name','surname','former_name','dob','pob','nationality','occupation','contact1','contact2','email','tin','ghana_card','res_gps','res_landmark','res_house_no','res_street','res_city','res_town','res_district','res_region'];
+        }
+        var subLabels = {
+            first_name:'First Name *', middle_name:'Middle Name', surname:'Surname *',
+            former_name:'Former Name', dob:'Date of Birth *', pob:'Place of Birth',
+            nationality:'Nationality *', occupation:'Occupation', contact1:'Contact 1 *',
+            contact2:'Contact 2', email:'Email *', tin:'TIN', ghana_card:'Ghana Card *',
+            res_gps:'GPS', res_landmark:'Landmark', res_house_no:'House No.',
+            res_street:'Street', res_city:'City', res_town:'Town',
+            res_district:'District', res_region:'Region'
+        };
+
+        // Build subscriber card HTML
+        function subHTML(i, d, linked) {
+            d = d || {};
+            linked = (linked !== undefined && linked !== null) ? linked : -1;
+            var f = subFields();
+            var h = '<div class="dyn-card" data-type="subscriber" data-index="' + i + '" data-linked="' + linked + '">';
+            if (linked >= 0) h += '<div class="synced-badge"><i class="fa fa-link"></i> Auto-filled from Director ' + (linked + 1) + '</div>';
+            h += '<div class="dyn-card-header"><h3><i class="fa fa-file-signature"></i> Subscriber ' + (i + 1) + '</h3>';
+            h += '<button type="button" class="remove-dyn-btn" onclick="removeDyn(this)" ' + (i === 0 ? 'style="display:none"' : '') + '>&times;</button></div>';
+            h += '<div class="form-grid form-grid-2">';
+            var types = { dob: 'date' };
+            var ro = linked >= 0 ? ' readonly' : '';
+            var roStyle = linked >= 0 ? ' style="background:#F5F7FA;color:#888;cursor:not-allowed"' : '';
+            f.forEach(function(k) {
+                var req = subLabels[k].indexOf('*') > -1;
+                var lbl = subLabels[k].replace('*','').trim();
+                var full = lbl + (req ? ' <span class="req">*</span>' : '');
+                var val = d[k] || '';
+                if (k === 'nationality' && !val) val = 'Ghanaian';
+                h += '<div class="form-group"><label>' + full + '</label>';
+                h += '<input type="' + (types[k] || 'text') + '" class="form-control dyn-field" data-f="' + k + '" value="' + val + '" ' + (req ? 'required' : '') + ro + roStyle + '>';
+                // Only show inline error for non-linked required fields
+                if (req && linked < 0) h += '<span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>' + lbl + ' is required</span></span>';
+                h += '</div>';
             });
-            h+='</div></div>';
+            h += '</div></div>';
             return h;
+        }
+
+        // --- Helper: parse HTML string into element without destroying siblings ---
+        function appendHTML(container, html) {
+            var wrapper = document.createElement('div');
+            wrapper.innerHTML = html;
+            while (wrapper.firstElementChild) {
+                container.appendChild(wrapper.firstElementChild);
+            }
         }
 
         // --- Init ---
-        function init(){
-            var saved=null;
-            try{saved=JSON.parse(localStorage.getItem(SKEY))}catch(e){}
-            if(saved&&saved.directors&&saved.directors.length>0){
+        function init() {
+            var saved = null;
+            try { saved = JSON.parse(localStorage.getItem(SKEY)); } catch(e) {}
+            if (saved && saved.directors && saved.directors.length > 0) {
                 rebuildFromData(saved);
-            }else{
-                document.getElementById('directorsContainer').innerHTML=dirHTML(0);
-                document.getElementById('subscribersContainer').innerHTML=subHTML(0);
+            } else {
+                appendHTML(document.getElementById('directorsContainer'), dirHTML(0));
+                appendHTML(document.getElementById('subscribersContainer'), subHTML(0));
             }
             attachListeners();
         }
 
-        function rebuildFromData(d){
-            // Directors
-            var dc=document.getElementById('directorsContainer');dc.innerHTML='';
-            d.directors.forEach(function(dd,i){dc.innerHTML+=dirHTML(i,dd)});
-            // Secretary state
-            if(d.sec_from_director>=0){
-                secFromDir=d.sec_from_director;
+        function rebuildFromData(d) {
+            var dc = document.getElementById('directorsContainer');
+            dc.innerHTML = '';
+            d.directors.forEach(function(dd, i) { appendHTML(dc, dirHTML(i, dd)); });
+
+            if (d.sec_from_director >= 0) {
+                secFromDir = d.sec_from_director;
                 applySecState();
-            }else{
-                document.getElementById('secFields').style.display='';
-                document.getElementById('secNote').style.display='none';
-                if(d.secretary){Object.keys(d.secretary).forEach(function(k){var inp=document.querySelector('.static-field[data-f="sec_'+k+'"]');if(inp)inp.value=d.secretary[k]||''})}
+                // Re-disable other sec checkboxes
+                document.querySelectorAll('.is-sec-cb').forEach(function(c, i) {
+                    if (i !== secFromDir) { c.checked = false; c.disabled = true; c.closest('.role-check-label').style.opacity = '0.4'; }
+                });
+            } else {
+                document.getElementById('secFields').style.display = '';
+                document.getElementById('secNote').style.display = 'none';
+                if (d.secretary) {
+                    Object.keys(d.secretary).forEach(function(k) {
+                        var inp = document.querySelector('.static-field[data-f="sec_' + k + '"]');
+                        if (inp) inp.value = d.secretary[k] || '';
+                    });
+                }
             }
-            // Subscribers
-            var sc=document.getElementById('subscribersContainer');sc.innerHTML='';
-            d.subscribers.forEach(function(sd,i){
-                var linked=(sd._linked!==undefined)?sd._linked:-1;
-                sc.innerHTML+=subHTML(i,sd,linked);
+
+            var sc = document.getElementById('subscribersContainer');
+            sc.innerHTML = '';
+            d.subscribers.forEach(function(sd, i) {
+                var linked = (sd._linked !== undefined) ? sd._linked : -1;
+                appendHTML(sc, subHTML(i, sd, linked));
             });
         }
 
-        // --- Add/Remove ---
-        window.addDirector=function(){
-            var c=document.getElementById('directorsContainer');
-            var n=c.querySelectorAll('.dyn-card').length;
-            c.innerHTML+=dirHTML(n);
+        // --- Add / Remove ---
+        window.addDirector = function() {
+            var c = document.getElementById('directorsContainer');
+            var n = c.querySelectorAll('.dyn-card').length;
+            appendHTML(c, dirHTML(n));
             attachListeners();
             save();
         };
-        window.addSubscriber=function(){
-            var c=document.getElementById('subscribersContainer');
-            var n=c.querySelectorAll('.dyn-card').length;
-            c.innerHTML+=subHTML(n);
+
+        window.addSubscriber = function() {
+            var c = document.getElementById('subscribersContainer');
+            var n = c.querySelectorAll('.dyn-card').length;
+            appendHTML(c, subHTML(n));
             attachListeners();
             save();
         };
-        window.removeDyn=function(btn){
-            if(!confirm('Remove this section?'))return;
-            btn.closest('.dyn-card').remove();
-            reindexCards('directorsContainer');
-            reindexCards('subscribersContainer');
+
+        window.removeDyn = function(btn) {
+            if (!confirm('Remove this section?')) return;
+            var card = btn.closest('.dyn-card');
+            var type = card.dataset.type;
+            var idx = parseInt(card.dataset.index);
+
+            card.remove();
+
+            if (type === 'director') {
+                // If this director was the secretary, clear secretary link
+                if (secFromDir === idx) {
+                    secFromDir = -1;
+                    applySecState();
+                    document.querySelectorAll('.is-sec-cb').forEach(function(c) { c.disabled = false; c.closest('.role-check-label').style.opacity = '1'; });
+                } else if (secFromDir > idx) {
+                    // Decrement secFromDir since a director before it was removed
+                    secFromDir--;
+                }
+
+                // Handle linked subscribers
+                var subs = document.querySelectorAll('#subscribersContainer .dyn-card');
+                subs.forEach(function(sc) {
+                    var linked = parseInt(sc.dataset.linked);
+                    if (linked === idx) {
+                        // Remove subscriber that was linked to this director
+                        sc.remove();
+                    } else if (linked > idx) {
+                        // Update link index
+                        sc.dataset.linked = linked - 1;
+                        var badge = sc.querySelector('.synced-badge');
+                        if (badge) badge.innerHTML = '<i class="fa fa-link"></i> Auto-filled from Director ' + (linked) + '';
+                    }
+                });
+
+                reindexCards('directorsContainer');
+                reindexCards('subscribersContainer');
+            } else {
+                reindexCards('subscribersContainer');
+            }
+
+            updateShareTotal();
             attachListeners();
             save();
         };
-        function reindexCards(containerId){
-            var cards=document.querySelectorAll('#'+containerId+' .dyn-card');
-            cards.forEach(function(c,i){
-                c.dataset.index=i;
-                var h3=c.querySelector('h3');
-                var type=c.dataset.type;
-                h3.innerHTML='<i class="fa fa-'+(type==='director'?'user-tie':'file-signature')+'"></i> '+(type==='director'?'Director':'Subscriber')+' '+(i+1);
-                var rmBtn=c.querySelector('.remove-dyn-btn');
-                rmBtn.style.display=i===0?'none':'';
+
+        function reindexCards(containerId) {
+            var cards = document.querySelectorAll('#' + containerId + ' .dyn-card');
+            cards.forEach(function(c, i) {
+                c.dataset.index = i;
+                var h3 = c.querySelector('h3');
+                var type = c.dataset.type;
+                var icon = type === 'director' ? 'user-tie' : 'file-signature';
+                var label = type === 'director' ? 'Director' : 'Subscriber';
+                h3.innerHTML = '<i class="fa fa-' + icon + '"></i> ' + label + ' ' + (i + 1);
+                var rmBtn = c.querySelector('.remove-dyn-btn');
+                rmBtn.style.display = i === 0 ? 'none' : '';
             });
         }
 
         // --- Secretary Sync ---
-        window.handleSecCheck=function(dirIdx){
-            var cb=document.querySelector('.dyn-card[data-type="director"][data-index="'+dirIdx+'"] .is-sec-cb');
-            if(cb.checked){
-                secFromDir=dirIdx;
-                // Disable other director sec checkboxes
-                document.querySelectorAll('.is-sec-cb').forEach(function(c,i){if(i!==dirIdx){c.checked=false;c.disabled=true;c.closest('.role-check-label').style.opacity='0.4'}});
-            }else{
-                secFromDir=-1;
-                document.querySelectorAll('.is-sec-cb').forEach(function(c){c.disabled=false;c.closest('.role-check-label').style.opacity='1'});
+        window.handleSecCheck = function(dirIdx) {
+            var card = document.querySelector('.dyn-card[data-type="director"][data-index="' + dirIdx + '"]');
+            var cb = card.querySelector('.is-sec-cb');
+            if (cb.checked) {
+                secFromDir = dirIdx;
+                document.querySelectorAll('.is-sec-cb').forEach(function(c, i) {
+                    if (i !== dirIdx) { c.checked = false; c.disabled = true; c.closest('.role-check-label').style.opacity = '0.4'; }
+                });
+            } else {
+                secFromDir = -1;
+                document.querySelectorAll('.is-sec-cb').forEach(function(c) { c.disabled = false; c.closest('.role-check-label').style.opacity = '1'; });
             }
             applySecState();
             save();
         };
-        function applySecState(){
-            if(secFromDir>=0){
-                document.getElementById('secFields').style.display='none';
-                document.getElementById('secNote').style.display='flex';
-                document.getElementById('secNoteText').textContent='Secretary information is copied from Director '+(secFromDir+1)+'.';
-            }else{
-                document.getElementById('secFields').style.display='';
-                document.getElementById('secNote').style.display='none';
+
+        function applySecState() {
+            if (secFromDir >= 0) {
+                document.getElementById('secFields').style.display = 'none';
+                document.getElementById('secNote').style.display = 'flex';
+                document.getElementById('secNoteText').textContent = 'Secretary information is copied from Director ' + (secFromDir + 1) + '.';
+                // Clear any leftover error states on secretary fields
+                document.querySelectorAll('#secFields .form-group').forEach(function(g) {
+                    g.classList.remove('has-error', 'shake');
+                    var err = g.querySelector('.field-error');
+                    if (err) err.classList.remove('visible');
+                });
+            } else {
+                document.getElementById('secFields').style.display = '';
+                document.getElementById('secNote').style.display = 'none';
             }
         }
 
         // --- Subscriber Sync ---
-        window.handleSubCheck=function(dirIdx){
-            var card=document.querySelector('.dyn-card[data-type="director"][data-index="'+dirIdx+'"]');
-            var cb=card.querySelector('.is-sub-cb');
-            var shareBox=card.querySelector('.share-box');
-            shareBox.style.display=cb.checked?'block':'none';
-            if(cb.checked){
-                // Find or create linked subscriber
-                var existing=document.querySelector('.dyn-card[data-type="subscriber"][data-linked="'+dirIdx+'"]');
-                if(!existing){
-                    var dirData=getCardData(card);
-                    var sc=document.getElementById('subscribersContainer');
-                    var n=sc.querySelectorAll('.dyn-card').length;
-                    sc.innerHTML+=subHTML(n,dirData,dirIdx);
+        window.handleSubCheck = function(dirIdx) {
+            var card = document.querySelector('.dyn-card[data-type="director"][data-index="' + dirIdx + '"]');
+            var cb = card.querySelector('.is-sub-cb');
+            var shareBox = card.querySelector('.share-box');
+            shareBox.style.display = cb.checked ? 'block' : 'none';
+
+            if (cb.checked) {
+                var existing = document.querySelector('.dyn-card[data-type="subscriber"][data-linked="' + dirIdx + '"]');
+                if (!existing) {
+                    var dirData = getCardData(card);
+                    var sc = document.getElementById('subscribersContainer');
+                    var n = sc.querySelectorAll('.dyn-card').length;
+                    appendHTML(sc, subHTML(n, dirData, dirIdx));
                     attachListeners();
-                }else{
-                    // Update existing
-                    var dirData=getCardData(card);
-                    setCardData(existing,dirData);
+                } else {
+                    var dirData = getCardData(card);
+                    setCardData(existing, dirData);
                 }
-            }else{
-                // Unlink subscriber
-                var existing=document.querySelector('.dyn-card[data-type="subscriber"][data-linked="'+dirIdx+'"]');
-                if(existing){
-                    existing.dataset.linked='-1';
-                    var badge=existing.querySelector('.synced-badge');
-                    if(badge)badge.remove();
-                    existing.querySelectorAll('.dyn-field').forEach(function(inp){inp.readOnly=false;inp.style.background='';inp.style.color=''});
+            } else {
+                var existing = document.querySelector('.dyn-card[data-type="subscriber"][data-linked="' + dirIdx + '"]');
+                if (existing) {
+                    existing.dataset.linked = '-1';
+                    var badge = existing.querySelector('.synced-badge');
+                    if (badge) badge.remove();
+                    existing.querySelectorAll('.dyn-field').forEach(function(inp) {
+                        inp.readOnly = false;
+                        inp.style.background = '';
+                        inp.style.color = '';
+                        inp.style.cursor = '';
+                    });
+                    // Add error spans for now-editable required fields
+                    existing.querySelectorAll('.dyn-field[required]').forEach(function(inp) {
+                        var group = inp.closest('.form-group');
+                        if (group && !group.querySelector('.field-error')) {
+                            var lbl = subLabels[inp.dataset.f];
+                            if (lbl) {
+                                var txt = lbl.replace('*','').trim() + ' is required';
+                                var span = document.createElement('span');
+                                span.className = 'field-error';
+                                span.innerHTML = '<i class="fa fa-exclamation-circle"></i> <span>' + txt + '</span>';
+                                group.appendChild(span);
+                            }
+                        }
+                    });
                 }
             }
+            updateShareTotal();
             save();
         };
 
-        function getCardData(card){
-            var d={};
-            card.querySelectorAll('.dyn-field').forEach(function(inp){d[inp.dataset.f]=inp.value.trim()});
+        // --- Share Total ---
+        window.updateShareTotal = function() {
+            var inputs = document.querySelectorAll('.share-pct-input');
+            var total = 0;
+            var hasAny = false;
+            inputs.forEach(function(inp) {
+                var box = inp.closest('.share-box');
+                if (box && box.style.display !== 'none') {
+                    var v = parseFloat(inp.value);
+                    if (!isNaN(v)) total += v;
+                    hasAny = true;
+                }
+            });
+            var el = document.getElementById('shareTotal');
+            var valEl = document.getElementById('shareTotalVal');
+            if (hasAny) {
+                el.style.display = 'flex';
+                valEl.textContent = total.toFixed(2) + '%';
+                if (total > 100) { el.classList.add('over'); } else { el.classList.remove('over'); }
+            } else {
+                el.style.display = 'none';
+            }
+        };
+
+        function getCardData(card) {
+            var d = {};
+            card.querySelectorAll('.dyn-field').forEach(function(inp) { d[inp.dataset.f] = inp.value.trim(); });
             return d;
         }
-        function setCardData(card,d){
-            card.querySelectorAll('.dyn-field').forEach(function(inp){
-                if(d[inp.dataset.f]!==undefined){inp.value=d[inp.dataset.f]}
+        function setCardData(card, d) {
+            card.querySelectorAll('.dyn-field').forEach(function(inp) {
+                if (d[inp.dataset.f] !== undefined) inp.value = d[inp.dataset.f];
             });
         }
 
         // --- Collect All Data ---
-        function collectAll(){
-            var data={company:{},office:{},directors:[],secretary:{},subscribers:[],sec_from_director:secFromDir};
-            document.querySelectorAll('.static-field').forEach(function(inp){
-                var f=inp.dataset.f;
-                if(f.startsWith('off_'))data.office[f.replace('off_','')]=inp.value.trim();
-                else if(f.startsWith('sec_'))data.secretary[f.replace('sec_','')]=inp.value.trim();
-                else data.company[f]=inp.value.trim();
+        function collectAll() {
+            var data = { company: {}, office: {}, directors: [], secretary: {}, subscribers: [], sec_from_director: secFromDir };
+            document.querySelectorAll('.static-field').forEach(function(inp) {
+                var f = inp.dataset.f;
+                if (f.startsWith('off_')) data.office[f.replace('off_', '')] = inp.value.trim();
+                else if (f.startsWith('sec_')) data.secretary[f.replace('sec_', '')] = inp.value.trim();
+                else data.company[f] = inp.value.trim();
             });
-            document.querySelectorAll('#directorsContainer .dyn-card').forEach(function(card){
-                var d=getCardData(card);
-                d.is_subscriber=card.querySelector('.is-sub-cb').checked;
-                d.is_secretary=card.querySelector('.is-sec-cb').checked;
-                d.share_percent=card.querySelector('.share-box input').value;
+            document.querySelectorAll('#directorsContainer .dyn-card').forEach(function(card) {
+                var d = getCardData(card);
+                d.is_subscriber = card.querySelector('.is-sub-cb').checked;
+                d.is_secretary = card.querySelector('.is-sec-cb').checked;
+                d.share_percent = card.querySelector('.share-box input').value;
                 data.directors.push(d);
             });
-            document.querySelectorAll('#subscribersContainer .dyn-card').forEach(function(card){
-                var d=getCardData(card);
-                d._linked=parseInt(card.dataset.linked);
+            document.querySelectorAll('#subscribersContainer .dyn-card').forEach(function(card) {
+                var d = getCardData(card);
+                d._linked = parseInt(card.dataset.linked);
                 data.subscribers.push(d);
             });
             return data;
         }
 
         // --- LocalStorage ---
-        function save(){
-            try{localStorage.setItem(SKEY,JSON.stringify(collectAll()))}catch(e){}
+        function save() {
+            try { localStorage.setItem(SKEY, JSON.stringify(collectAll())); } catch(e) {}
         }
-        function attachListeners(){
-            document.querySelectorAll('#llcForm input').forEach(function(inp){
-                if(inp.type==='checkbox')return;
-                inp.removeEventListener('input',onInput);
-                inp.addEventListener('input',onInput);
+
+        function attachListeners() {
+            document.querySelectorAll('#llcForm input').forEach(function(inp) {
+                if (inp.type === 'checkbox') return;
+                inp.removeEventListener('input', onDynInput);
+                inp.addEventListener('input', onDynInput);
             });
         }
-        function onInput(){
-            // Live sync: if director field changes and is linked to subscriber, update subscriber
-            var card=this.closest('.dyn-card');
-            if(card&&card.dataset.type==='director'){
-                var idx=parseInt(card.dataset.index);
-                var linked=document.querySelector('.dyn-card[data-type="subscriber"][data-linked="'+idx+'"]');
-                if(linked){
-                    var f=this.dataset.f;
-                    var target=linked.querySelector('.dyn-field[data-f="'+f+'"]');
-                    if(target){target.value=this.value}
+
+        // Live sync: director → linked subscriber
+        function onDynInput() {
+            var card = this.closest('.dyn-card');
+            if (card && card.dataset.type === 'director') {
+                var idx = parseInt(card.dataset.index);
+                var linked = document.querySelector('.dyn-card[data-type="subscriber"][data-linked="' + idx + '"]');
+                if (linked) {
+                    var f = this.dataset.f;
+                    var target = linked.querySelector('.dyn-field[data-f="' + f + '"]');
+                    if (target) target.value = this.value;
                 }
             }
             save();
         }
 
+        // --- Clear error on input (delegated, capture phase) ---
+        document.getElementById('llcForm').addEventListener('input', function(e) {
+            var group = e.target.closest('.form-group');
+            if (group && group.classList.contains('has-error')) {
+                group.classList.remove('has-error', 'shake');
+                var err = group.querySelector('.field-error');
+                if (err) err.classList.remove('visible');
+            }
+        }, true);
+
+        // --- Clear error on focus (delegated, capture phase) ---
+        document.getElementById('llcForm').addEventListener('focus', function(e) {
+            var group = e.target.closest('.form-group');
+            if (group && group.classList.contains('has-error')) {
+                group.classList.remove('has-error', 'shake');
+                var err = group.querySelector('.field-error');
+                if (err) err.classList.remove('visible');
+            }
+        }, true);
+
         // --- Reset ---
-        document.getElementById('resetBtn').addEventListener('click',function(){
-            if(!confirm('Clear all fields? This cannot be undone.'))return;
-            try{localStorage.removeItem(SKEY)}catch(e){}
-            secFromDir=-1;
-            document.getElementById('directorsContainer').innerHTML=dirHTML(0);
-            document.getElementById('subscribersContainer').innerHTML=subHTML(0);
-            document.getElementById('secFields').style.display='';
-            document.getElementById('secNote').style.display='none';
-            document.querySelectorAll('.static-field').forEach(function(inp){inp.value='';if(inp.dataset.f==='sec_nationality'||inp.dataset.f==='sec_res_country')inp.value='Ghana'});
-            document.querySelectorAll('.is-sec-cb').forEach(function(c){c.disabled=false;c.closest('.role-check-label').style.opacity='1'});
+        document.getElementById('resetBtn').addEventListener('click', function() {
+            if (!confirm('Clear all fields? This cannot be undone.')) return;
+            try { localStorage.removeItem(SKEY); } catch(e) {}
+            secFromDir = -1;
+            document.getElementById('directorsContainer').innerHTML = '';
+            document.getElementById('subscribersContainer').innerHTML = '';
+            appendHTML(document.getElementById('directorsContainer'), dirHTML(0));
+            appendHTML(document.getElementById('subscribersContainer'), subHTML(0));
+            document.getElementById('secFields').style.display = '';
+            document.getElementById('secNote').style.display = 'none';
+            document.querySelectorAll('.static-field').forEach(function(inp) {
+                inp.value = '';
+                if (inp.dataset.f === 'sec_nationality' || inp.dataset.f === 'sec_res_country') inp.value = 'Ghana';
+            });
+            document.querySelectorAll('.is-sec-cb').forEach(function(c) { c.disabled = false; c.closest('.role-check-label').style.opacity = '1'; });
+            // Clear all errors
+            document.querySelectorAll('.form-group').forEach(function(g) { g.classList.remove('has-error', 'shake'); });
+            document.querySelectorAll('.field-error').forEach(function(e) { e.classList.remove('visible'); });
+            updateShareTotal();
             attachListeners();
         });
 
+        // --- VALIDATION ---
+        function validateForm(form) {
+            var valid = true;
+            var firstError = null;
+
+            // Clear all previous errors
+            form.querySelectorAll('.form-group').forEach(function(g) { g.classList.remove('has-error', 'shake'); });
+            form.querySelectorAll('.field-error').forEach(function(e) { e.classList.remove('visible'); });
+
+            // Check each required field
+            form.querySelectorAll('[required]').forEach(function(inp) {
+                var group = inp.closest('.form-group');
+                if (!group) return;
+
+                // Skip secretary fields when synced from a director
+                if (secFromDir >= 0 && inp.closest('#secFields')) return;
+
+                // Skip readonly linked subscriber fields (data comes from director)
+                var card = inp.closest('.dyn-card');
+                if (card && card.dataset.type === 'subscriber') {
+                    var linkedIdx = parseInt(card.dataset.linked);
+                    if (linkedIdx >= 0 && inp.readOnly) return;
+                }
+
+                // Skip hidden form groups
+                if (group.offsetParent === null) return;
+
+                if (!inp.value.trim()) {
+                    valid = false;
+                    group.classList.add('has-error');
+                    var errSpan = group.querySelector('.field-error');
+                    if (errSpan) errSpan.classList.add('visible');
+                    if (!firstError) firstError = inp;
+                }
+            });
+
+            // Validate email format for filled email fields
+            form.querySelectorAll('input[type="email"][required]').forEach(function(inp) {
+                var group = inp.closest('.form-group');
+                if (!group) return;
+                // Already marked as empty error
+                if (group.classList.contains('has-error')) return;
+                // Skip same conditions as above
+                if (secFromDir >= 0 && inp.closest('#secFields')) return;
+                var card = inp.closest('.dyn-card');
+                if (card && card.dataset.type === 'subscriber' && parseInt(card.dataset.linked) >= 0 && inp.readOnly) return;
+
+                if (inp.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim())) {
+                    valid = false;
+                    group.classList.add('has-error');
+                    var errSpan = group.querySelector('.field-error');
+                    if (errSpan) {
+                        errSpan.querySelector('span').textContent = 'Please enter a valid email address';
+                        errSpan.classList.add('visible');
+                    }
+                    if (!firstError) firstError = inp;
+                }
+            });
+
+            // Scroll to first error with shake
+            if (firstError) {
+                var errGroup = firstError.closest('.form-group');
+                errGroup.classList.add('shake');
+                setTimeout(function() { errGroup.classList.remove('shake'); }, 500);
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(function() {
+                    try { firstError.focus({ preventScroll: true }); } catch(e) { firstError.focus(); }
+                }, 450);
+            }
+
+            return valid;
+        }
+
         // --- Submit ---
-document.getElementById('llcForm').addEventListener('submit',function(e){
-    e.preventDefault();
-    var valid=true;
-    this.querySelectorAll('[required]').forEach(function(inp){
-        if(!inp.value.trim()){inp.style.borderColor='#fb5607';valid=false}else{inp.style.borderColor=''}
-    });
-    if(!valid){showToast('Please fill all required fields.','error');var fe=this.querySelector('[style*="border-color: rgb(251, 86, 7)"]');if(fe)fe.scrollIntoView({behavior:'smooth',block:'center'});return}
-    var data=collectAll();
-    var btn=document.getElementById('submitBtn');
-    btn.disabled=true;btn.innerHTML='<i class="fa fa-spinner fa-spin"></i> Submitting...';
-    fetch('https://elevater247.com/abms/api/submit-llc.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
-    .then(function(r){
-        if(!r.ok) return r.json().then(function(e){ throw new Error(e.message || 'Server error'); });
-        return r.json();
-    })
-    .then(function(r){
-        if(r.status==='success'){showToast('Registration submitted successfully! Ref: '+r.data.submission_ref,'success');try{localStorage.removeItem(SKEY)}catch(e){}document.getElementById('llcForm').reset();secFromDir=-1;document.getElementById('directorsContainer').innerHTML=dirHTML(0);document.getElementById('subscribersContainer').innerHTML=subHTML(0);document.getElementById('secFields').style.display='';document.getElementById('secNote').style.display='none';document.querySelectorAll('.is-sec-cb').forEach(function(c){c.disabled=false;c.closest('.role-check-label').style.opacity='1'});attachListeners()}
-        else{showToast(r.message||'Something went wrong.','error')}
-    })
-    .catch(function(err){showToast(err.message||'Network error. Check your connection.','error')})
-    .finally(function(){btn.disabled=false;btn.innerHTML='<i class="fa fa-paper-plane"></i> Submit Registration'});
-});
-        // Remove red border on focus
-        document.getElementById('llcForm').addEventListener('focus',function(e){if(e.target.style)e.target.style.borderColor=''},true);
+        document.getElementById('llcForm').addEventListener('submit', function(e) {
+            e.preventDefault();
 
-        function showToast(m,t){var t=document.getElementById('toast');t.textContent=m;t.className='toast '+t+' show';setTimeout(function(){t.classList.remove('show')},4000)}
+            if (!validateForm(this)) {
+                showToast('Please fill in all required fields before submitting.', 'error');
+                return;
+            }
 
+            var data = collectAll();
+            var btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Submitting...';
+
+            fetch('https://elevater247.com/abms/api/submit-llc.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(function(r) {
+                if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'Server error'); });
+                return r.json();
+            })
+            .then(function(r) {
+                if (r.status === 'success') {
+                    showToast('Registration submitted successfully! Ref: ' + r.data.submission_ref, 'success');
+                    try { localStorage.removeItem(SKEY); } catch(e) {}
+                    // Reset form
+                    secFromDir = -1;
+                    document.getElementById('directorsContainer').innerHTML = '';
+                    document.getElementById('subscribersContainer').innerHTML = '';
+                    appendHTML(document.getElementById('directorsContainer'), dirHTML(0));
+                    appendHTML(document.getElementById('subscribersContainer'), subHTML(0));
+                    document.getElementById('secFields').style.display = '';
+                    document.getElementById('secNote').style.display = 'none';
+                    document.querySelectorAll('.static-field').forEach(function(inp) {
+                        inp.value = '';
+                        if (inp.dataset.f === 'sec_nationality' || inp.dataset.f === 'sec_res_country') inp.value = 'Ghana';
+                    });
+                    document.querySelectorAll('.is-sec-cb').forEach(function(c) { c.disabled = false; c.closest('.role-check-label').style.opacity = '1'; });
+                    document.querySelectorAll('.form-group').forEach(function(g) { g.classList.remove('has-error', 'shake'); });
+                    document.querySelectorAll('.field-error').forEach(function(e) { e.classList.remove('visible'); });
+                    updateShareTotal();
+                    attachListeners();
+                } else {
+                    showToast(r.message || 'Something went wrong.', 'error');
+                }
+            })
+            .catch(function(err) {
+                showToast(err.message || 'Network error. Check your connection.', 'error');
+            })
+            .finally(function() {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa fa-paper-plane"></i> Submit Registration';
+            });
+        });
+
+        // --- Toast (FIXED: no more variable shadowing) ---
+        function showToast(message, type) {
+            var el = document.getElementById('toast');
+            el.innerHTML = '<i class="fa fa-' + (type === 'success' ? 'check-circle' : 'exclamation-triangle') + '"></i> ' + message;
+            el.className = 'toast ' + type + ' show';
+            clearTimeout(el._timer);
+            el._timer = setTimeout(function() { el.classList.remove('show'); }, 4500);
+        }
+
+        // --- Start ---
         init();
     })();
     </script>
