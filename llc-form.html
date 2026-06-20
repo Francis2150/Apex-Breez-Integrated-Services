@@ -1263,47 +1263,53 @@ document.getElementById('llcForm').addEventListener('submit', function(e) {
     });
 });
 
-        function collectFormData() {
-            var data = { company: {}, office: {}, directors: [], secretary: {}, subscribers: [] };
+       function collectFormData() {
+    var data = { company: {}, directors: [], secretary: {}, subscribers: [] };
 
-            // Company info
-            ['company_name','presented_by','presenter_tin','activities','stated_capital','estimated_revenue','employees'].forEach(function(k) {
-                var inp = document.querySelector('.static-field[data-f="' + k + '"]');
-                if (inp) data.company[k] = inp.value;
-            });
+    // Company info fields
+    var companyKeys = [
+        'company_name','presented_by','presenter_tin','activities',
+        'stated_capital','estimated_revenue','employees'
+    ];
 
-            // Office details
-            ['off_gps','off_landmark','off_building_no','off_town','off_street','off_city','off_district','off_region','off_postal_no','off_postal_town','off_postal_region','off_contact1','off_contact2','off_email'].forEach(function(k) {
-                var inp = document.querySelector('.static-field[data-f="' + k + '"]');
-                if (inp) data.office[k] = inp.value;
-            });
+    // Office detail fields — merged INTO company so PHP processes them together
+    var officeKeys = [
+        'off_gps','off_landmark','off_building_no','off_town','off_street',
+        'off_city','off_district','off_region','off_postal_no','off_postal_town',
+        'off_postal_region','off_contact1','off_contact2','off_email'
+    ];
 
-            // Directors
-            document.querySelectorAll('#directorsContainer .dyn-card').forEach(function(card) {
-                var d = getCardData(card);
-                d.is_subscriber = card.querySelector('.is-sub-cb').checked;
-                d.is_secretary = card.querySelector('.is-sec-cb').checked;
-                d.share_percent = card.querySelector('.share-pct-input').value || '';
-                data.directors.push(d);
-            });
+    // Write ALL of them into data.company
+    companyKeys.concat(officeKeys).forEach(function(k) {
+        var inp = document.querySelector('.static-field[data-f="' + k + '"]');
+        if (inp) data.company[k] = inp.value;
+    });
 
-            // Secretary
-            document.querySelectorAll('#secFields .static-field').forEach(function(inp) {
-                var key = inp.dataset.f.replace('sec_', '');
-                data.secretary[key] = inp.value;
-            });
-            data.secretary._linked_to_director = secFromDir;
+    // Directors
+    document.querySelectorAll('#directorsContainer .dyn-card').forEach(function(card) {
+        var d = getCardData(card);
+        d.is_subscriber = card.querySelector('.is-sub-cb').checked;
+        d.is_secretary = card.querySelector('.is-sec-cb').checked;
+        d.share_percent = card.querySelector('.share-pct-input').value || '';
+        data.directors.push(d);
+    });
 
-            // Subscribers
-            document.querySelectorAll('#subscribersContainer .dyn-card').forEach(function(card) {
-                var s = getCardData(card);
-                s._linked_to_director = parseInt(card.dataset.linked);
-                data.subscribers.push(s);
-            });
+    // Secretary
+    document.querySelectorAll('#secFields .static-field').forEach(function(inp) {
+        var key = inp.dataset.f.replace('sec_', '');
+        data.secretary[key] = inp.value;
+    });
+    data.secretary._linked_to_director = secFromDir;
 
-            return data;
-        }
+    // Subscribers
+    document.querySelectorAll('#subscribersContainer .dyn-card').forEach(function(card) {
+        var s = getCardData(card);
+        s._linked_to_director = parseInt(card.dataset.linked);
+        data.subscribers.push(s);
+    });
 
+    return data;
+}
         /* =============================================
            INITIALIZATION
         ============================================= */
