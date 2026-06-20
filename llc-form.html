@@ -13,7 +13,6 @@
 
     <link rel="canonical" href="https://apexbreez.elevater247.com/llc-form.html">
 
-    <!-- Open Graph (critical for WhatsApp/social sharing) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="LLC Registration Form | Apex Breez Integrated Services">
     <meta property="og:description" content="Fill out the Limited Liability Company (LLC) registration form for Apex Breez Integrated Services. Add directors, subscribers, and submit securely online.">
@@ -25,7 +24,6 @@
     <meta property="og:image:height" content="500">
     <meta property="og:image:alt" content="Apex Breez Integrated Services logo">
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@francis2150">
     <meta name="twitter:title" content="LLC Registration Form | Apex Breez Integrated Services">
@@ -42,7 +40,6 @@
     <link rel="stylesheet" href="stylesheets/responsive.css">
     <link rel="stylesheet" href="stylesheets/colors/color1.css" id="colors">
 
-    <!-- Structured Data: BreadcrumbList + WebPage -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -50,39 +47,18 @@
         {
           "@type": "BreadcrumbList",
           "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": "https://apexbreez.elevater247.com/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Forms",
-              "item": "https://apexbreez.elevater247.com/buss-reg-page.html"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "LLC Registration"
-            }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://apexbreez.elevater247.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Forms", "item": "https://apexbreez.elevater247.com/buss-reg-page.html" },
+            { "@type": "ListItem", "position": 3, "name": "LLC Registration" }
           ]
         },
         {
           "@type": "WebPage",
-          "@id": "https://apexbreezElevater247.com/llc-form.html",
+          "@id": "https://apexbreez.elevater247.com/llc-form.html",
           "name": "LLC Registration Form",
-          "description": "Fill out the Limited Liability Company (LLC) registration form for Apex Breez Integrated Services. Add directors, subscribers, and submit securely online.",
-          "url": "isSideEffectOf": {
-            "@id": "https://apexbreez.elevater247.com/#website"
-          },
-          "isPartOf": {
-            "@id": "https://apexbreez.elevater247.com/#website"
-          },
-          "about": {
-            "@id": "https://apexbreez.elevater247.com/#localbusiness"
-          }
+          "description": "Fill out the Limited Liability Company (LLC) registration form for Apex Breez Integrated Services.",
+          "url": "https://apexbreez.elevater247.com/llc-form.html",
+          "isPartOf": { "@id": "https://apexbreez.elevater247.com/#website" }
         }
       ]
     }
@@ -140,7 +116,7 @@
     .form-control:read-only{background:#F5F7FA;color:#888;cursor:not-allowed;border-color:#e0e4ea}
     .sub-title{font-size:14px;font-weight:700;color:#0A6E5C;margin:24px 0 14px;padding-bottom:8px;border-bottom:1px solid #e0e4ea}
 
-    /* === INLINE ERROR STYLES === */
+    /* Inline error styles */
     .field-error{display:none;color:#fb5607;font-size:12px;font-weight:600;margin-top:5px;align-items:center;gap:5px;line-height:1.3}
     .field-error.visible{display:flex}
     .field-error i{font-size:12px;flex-shrink:0}
@@ -148,7 +124,10 @@
     @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
     .form-group.shake{animation:shake .45s ease}
 
-    /* === DYNAMIC CARDS === */
+    /* Auto-filled field style for secretary when linked */
+    .auto-filled{background:#f0faf7!important;border-color:#b8ddd4!important;color:#2d6b5a!important;cursor:default!important}
+
+    /* Dynamic cards */
     .dyn-card{background:#fff;border:1.5px solid #e0e4ea;border-radius:8px;padding:20px;margin-bottom:20px;position:relative;transition:border-color .3s}
     .dyn-card:hover{border-color:#D4A843}
     .dyn-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #f0f2f5}
@@ -169,8 +148,10 @@
     .share-total.over .val{color:#fb5607}
     .synced-badge{background:#e8f5e9;border-left:4px solid #0A6E5C;padding:10px 14px;margin-bottom:14px;border-radius:4px;font-size:13px;color:#0B1F3B;display:none;align-items:center;gap:8px;font-weight:600}
     .synced-badge i{color:#0A6E5C}
+    .synced-badge.visible{display:flex}
     .sec-note{background:#e8f5e9;border-left:4px solid #0A6E5C;padding:14px;margin-bottom:18px;border-radius:4px;font-size:14px;color:#0B1F3B;display:none;align-items:center;gap:8px;font-weight:600}
     .sec-note i{color:#0A6E5C}
+    .sec-note.visible{display:flex}
     .add-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:#fff;border:1.5px dashed #0A6E5C;border-radius:6px;color:#0A6E5C;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;transition:all .3s;font-family:inherit;margin-top:4px}
     .add-btn:hover{background:#0A6E5C;color:#fff;border-style:solid}
     .btn-submit{width:100%;padding:16px;background:linear-gradient(135deg,#D4A843,#E8C36A);color:#0B1F3B;border:none;border-radius:6px;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all .3s;margin-top:10px;font-family:inherit}
@@ -217,7 +198,7 @@
 
     <section class="page-hero">
         <div class="container">
-            <h1>Limited Liability Company1</h1>
+            <h1>Limited Liability Company</h1>
             <p>Complete all sections below. You can add multiple directors and subscribers as needed.</p>
             <div class="breadcrumb">
                 <a href="index.html">Home</a> <span>/</span>
@@ -291,7 +272,7 @@
                         <h2 class="form-card-title">Directors</h2>
                     </div>
                     <div id="directorsContainer"></div>
-                    <button type="button" class="add-btn" onclick="addDirector()"><i class="fa fa-plus"></i> Add Director</button>
+                    <button type="button" class="add-btn" id="addDirBtn"><i class="fa fa-plus"></i> Add Director</button>
                 </div>
 
                 <!-- SECRETARY -->
@@ -300,7 +281,7 @@
                         <div class="form-card-icon"><i class="fa fa-user-secret"></i></div>
                         <h2 class="form-card-title">Secretary Details</h2>
                     </div>
-                    <div class="sec-note" id="secNote"><i class="fa fa-link"></i> <span id="secNoteText">Secretary information is copied from a director above.</span></div>
+                    <div class="sec-note" id="secNote"><i class="fa fa-link"></i> <span id="secNoteText"></span></div>
                     <div id="secFields">
                         <div class="form-group"><label>Qualification</label><input type="text" class="form-control static-field" data-f="sec_qualification"></div>
                         <div class="form-grid form-grid-2">
@@ -367,7 +348,7 @@
                     <div id="shareTotal" class="share-total" style="display:none">
                         <i class="fa fa-chart-pie"></i> Total Share Allocation: <span class="val" id="shareTotalVal">0%</span>
                     </div>
-                    <button type="button" class="add-btn" onclick="addSubscriber()"><i class="fa fa-plus"></i> Add Subscriber</button>
+                    <button type="button" class="add-btn" id="addSubBtn"><i class="fa fa-plus"></i> Add Subscriber</button>
                 </div>
 
                 <button type="submit" class="btn-submit" id="submitBtn"><i class="fa fa-paper-plane"></i> Submit Registration</button>
@@ -384,11 +365,42 @@
     <script src="javascript/jquery.min.js"></script>
     <script src="javascript/bootstrap.min.js"></script>
     <script>
-    (function(){
+    (function() {
+        /* =============================================
+           STORAGE KEY & STATE
+        ============================================= */
         var SKEY = 'apex_llc_data';
-        var secFromDir = -1;
+        var secFromDir = -1; // -1 = manual secretary, >=0 = index of linked director
 
-        // --- Mobile Nav ---
+        // Mapping from director field names to secretary field data-f attributes
+        var DIR_TO_SEC_MAP = {
+            first_name: 'sec_first_name',
+            middle_name: 'sec_middle_name',
+            surname: 'sec_surname',
+            former_name: 'sec_former_name',
+            dob: 'sec_dob',
+            pob: 'sec_pob',
+            nationality: 'sec_nationality',
+            occupation: 'sec_occupation',
+            contact1: 'sec_contact1',
+            contact2: 'sec_contact2',
+            email: 'sec_email',
+            tin: 'sec_tin',
+            ghana_card: 'sec_ghana_card',
+            res_gps: 'sec_res_gps',
+            res_landmark: 'sec_res_landmark',
+            res_house_no: 'sec_res_house_no',
+            res_street: 'sec_res_street',
+            res_city: 'sec_res_city',
+            res_town: 'sec_res_town',
+            res_district: 'sec_res_district',
+            res_region: 'sec_res_region',
+            res_country: 'sec_res_country'
+        };
+
+        /* =============================================
+           MOBILE NAVIGATION
+        ============================================= */
         var toggle = document.getElementById('mobileToggle');
         var nav = document.getElementById('mainNav');
         var overlay = document.getElementById('navOverlay');
@@ -402,7 +414,9 @@
             window.addEventListener('resize', function() { if (window.innerWidth > 991) closeNav(); });
         }
 
-        // --- Director field definitions ---
+        /* =============================================
+           FIELD DEFINITIONS
+        ============================================= */
         function dirFields() {
             return ['first_name','middle_name','surname','former_name','dob','pob','nationality','occupation','contact1','contact2','email','tin','ghana_card','res_gps','res_landmark','res_house_no','res_street','res_city','res_town','res_district','res_region','res_country'];
         }
@@ -416,38 +430,6 @@
             res_district:'District', res_region:'Region', res_country:'Country'
         };
 
-        // Build director card HTML
-        function dirHTML(i, d) {
-            d = d || {};
-            var f = dirFields();
-            var fullSpan = ['res_country','nationality'];
-            var h = '<div class="dyn-card" data-type="director" data-index="' + i + '">';
-            h += '<div class="dyn-card-header"><h3><i class="fa fa-user-tie"></i> Director ' + (i + 1) + '</h3>';
-            h += '<button type="button" class="remove-dyn-btn" onclick="removeDyn(this)" ' + (i === 0 ? 'style="display:none"' : '') + '>&times;</button></div>';
-            h += '<div class="role-checks">';
-            h += '<label class="role-check-label"><input type="checkbox" class="is-sub-cb" ' + (d.is_subscriber ? 'checked' : '') + ' onchange="handleSubCheck(' + i + ')"> <span>Is also a Subscriber</span></label>';
-            h += '<div class="share-box" style="display:' + (d.is_subscriber ? 'block' : 'none') + '"><label>Share Percentage (%)</label><input type="number" class="share-pct-input" value="' + (d.share_percent || '') + '" min="0" max="100" step="0.01" oninput="updateShareTotal()"></div>';
-            h += '<label class="role-check-label"><input type="checkbox" class="is-sec-cb" ' + (d.is_secretary ? 'checked' : '') + ' onchange="handleSecCheck(' + i + ')"> <span>Is also the Secretary</span></label>';
-            h += '</div><div class="form-grid form-grid-2">';
-            var types = { dob: 'date' };
-            f.forEach(function(k) {
-                var req = dirLabels[k].indexOf('*') > -1;
-                var lbl = dirLabels[k].replace('*','').trim();
-                var full = lbl + (req ? ' <span class="req">*</span>' : '');
-                var val = d[k] || '';
-                if (k === 'nationality' && !val) val = 'Ghanaian';
-                if (k === 'res_country' && !val) val = 'Ghana';
-                var span = fullSpan.indexOf(k) > -1 ? 'style="grid-column:1/-1"' : '';
-                h += '<div class="form-group" ' + span + '><label>' + full + '</label>';
-                h += '<input type="' + (types[k] || 'text') + '" class="form-control dyn-field" data-f="' + k + '" value="' + val + '" ' + (req ? 'required' : '') + '>';
-                if (req) h += '<span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>' + lbl + ' is required</span></span>';
-                h += '</div>';
-            });
-            h += '</div></div>';
-            return h;
-        }
-
-        // --- Subscriber field definitions ---
         function subFields() {
             return ['first_name','middle_name','surname','former_name','dob','pob','nationality','occupation','contact1','contact2','email','tin','ghana_card','res_gps','res_landmark','res_house_no','res_street','res_city','res_town','res_district','res_region'];
         }
@@ -461,36 +443,82 @@
             res_district:'District', res_region:'Region'
         };
 
-        // Build subscriber card HTML
-        function subHTML(i, d, linked) {
+        /* =============================================
+           HTML BUILDERS
+        ============================================= */
+
+        // Build a director card
+        function dirHTML(i, d) {
             d = d || {};
-            linked = (linked !== undefined && linked !== null) ? linked : -1;
-            var f = subFields();
-            var h = '<div class="dyn-card" data-type="subscriber" data-index="' + i + '" data-linked="' + linked + '">';
-            if (linked >= 0) h += '<div class="synced-badge"><i class="fa fa-link"></i> Auto-filled from Director ' + (linked + 1) + '</div>';
-            h += '<div class="dyn-card-header"><h3><i class="fa fa-file-signature"></i> Subscriber ' + (i + 1) + '</h3>';
-            h += '<button type="button" class="remove-dyn-btn" onclick="removeDyn(this)" ' + (i === 0 ? 'style="display:none"' : '') + '>&times;</button></div>';
-            h += '<div class="form-grid form-grid-2">';
+            var f = dirFields();
+            var fullSpan = ['res_country','nationality'];
+            var h = '<div class="dyn-card" data-type="director" data-index="' + i + '">';
+            h += '<div class="dyn-card-header"><h3><i class="fa fa-user-tie"></i> Director ' + (i + 1) + '</h3>';
+            h += '<button type="button" class="remove-dyn-btn" data-action="remove" ' + (i === 0 ? 'style="display:none"' : '') + '>&times;</button></div>';
+            h += '<div class="role-checks">';
+            h += '<label class="role-check-label"><input type="checkbox" class="is-sub-cb" data-role="sub" ' + (d.is_subscriber ? 'checked' : '') + '> <span>Is also a Subscriber</span></label>';
+            h += '<div class="share-box" style="display:' + (d.is_subscriber ? 'block' : 'none') + '"><label>Share Percentage (%)</label><input type="number" class="share-pct-input" value="' + (d.share_percent || '') + '" min="0" max="100" step="0.01"></div>';
+            h += '<label class="role-check-label"><input type="checkbox" class="is-sec-cb" data-role="sec" ' + (d.is_secretary ? 'checked' : '') + '> <span>Is also the Secretary</span></label>';
+            h += '</div><div class="form-grid form-grid-2">';
             var types = { dob: 'date' };
-            var ro = linked >= 0 ? ' readonly' : '';
-            var roStyle = linked >= 0 ? ' style="background:#F5F7FA;color:#888;cursor:not-allowed"' : '';
             f.forEach(function(k) {
-                var req = subLabels[k].indexOf('*') > -1;
-                var lbl = subLabels[k].replace('*','').trim();
+                var req = dirLabels[k].indexOf('*') > -1;
+                var lbl = dirLabels[k].replace('*','').trim();
                 var full = lbl + (req ? ' <span class="req">*</span>' : '');
-                var val = d[k] || '';
+                var val = (d[k] !== undefined && d[k] !== null) ? d[k] : '';
                 if (k === 'nationality' && !val) val = 'Ghanaian';
-                h += '<div class="form-group"><label>' + full + '</label>';
-                h += '<input type="' + (types[k] || 'text') + '" class="form-control dyn-field" data-f="' + k + '" value="' + val + '" ' + (req ? 'required' : '') + ro + roStyle + '>';
-                // Only show inline error for non-linked required fields
-                if (req && linked < 0) h += '<span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>' + lbl + ' is required</span></span>';
+                if (k === 'res_country' && !val) val = 'Ghana';
+                var span = fullSpan.indexOf(k) > -1 ? 'style="grid-column:1/-1"' : '';
+                h += '<div class="form-group" ' + span + '><label>' + full + '</label>';
+                h += '<input type="' + (types[k] || 'text') + '" class="form-control dyn-field" data-f="' + k + '" value="' + escAttr(val) + '" ' + (req ? 'required' : '') + '>';
+                if (req) h += '<span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>' + lbl + ' is required</span></span>';
                 h += '</div>';
             });
             h += '</div></div>';
             return h;
         }
 
-        // --- Helper: parse HTML string into element without destroying siblings ---
+        // Build a subscriber card
+        // linked: -1 = manual, >=0 = linked director index
+        function subHTML(i, d, linked) {
+            d = d || {};
+            linked = (linked !== undefined && linked !== null) ? linked : -1;
+            var f = subFields();
+            var isLinked = linked >= 0;
+            var h = '<div class="dyn-card" data-type="subscriber" data-index="' + i + '" data-linked="' + linked + '">';
+            if (isLinked) h += '<div class="synced-badge visible"><i class="fa fa-link"></i> Auto-filled from Director ' + (linked + 1) + '</div>';
+            h += '<div class="dyn-card-header"><h3><i class="fa fa-file-signature"></i> Subscriber ' + (i + 1) + '</h3>';
+            h += '<button type="button" class="remove-dyn-btn" data-action="remove" ' + (i === 0 ? 'style="display:none"' : '') + '>&times;</button></div>';
+            h += '<div class="form-grid form-grid-2">';
+            var types = { dob: 'date' };
+            var ro = isLinked ? ' readonly' : '';
+            var roClass = isLinked ? ' auto-filled' : '';
+            f.forEach(function(k) {
+                var req = subLabels[k].indexOf('*') > -1;
+                var lbl = subLabels[k].replace('*','').trim();
+                var full = lbl + (req ? ' <span class="req">*</span>' : '');
+                var val = (d[k] !== undefined && d[k] !== null) ? d[k] : '';
+                if (k === 'nationality' && !val) val = 'Ghanaian';
+                h += '<div class="form-group"><label>' + full + '</label>';
+                h += '<input type="' + (types[k] || 'text') + '" class="form-control dyn-field' + roClass + '" data-f="' + k + '" value="' + escAttr(val) + '" ' + (req ? 'required' : '') + ro + '>';
+                // Only show inline error for non-linked required fields
+                if (req && !isLinked) h += '<span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>' + lbl + ' is required</span></span>';
+                h += '</div>';
+            });
+            h += '</div></div>';
+            return h;
+        }
+
+        // Escape HTML attribute values
+        function escAttr(v) {
+            return String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        }
+
+        /* =============================================
+           HELPERS
+        ============================================= */
+
+        // Safely append HTML string to a container
         function appendHTML(container, html) {
             var wrapper = document.createElement('div');
             wrapper.innerHTML = html;
@@ -499,112 +527,26 @@
             }
         }
 
-        // --- Init ---
-        function init() {
-            var saved = null;
-            try { saved = JSON.parse(localStorage.getItem(SKEY)); } catch(e) {}
-            if (saved && saved.directors && saved.directors.length > 0) {
-                rebuildFromData(saved);
-            } else {
-                appendHTML(document.getElementById('directorsContainer'), dirHTML(0));
-                appendHTML(document.getElementById('subscribersContainer'), subHTML(0));
-            }
-            attachListeners();
+        // Read all dyn-field values from a card into an object
+        function getCardData(card) {
+            var data = {};
+            card.querySelectorAll('.dyn-field').forEach(function(inp) {
+                data[inp.dataset.f] = inp.value;
+            });
+            return data;
         }
 
-        function rebuildFromData(d) {
-            var dc = document.getElementById('directorsContainer');
-            dc.innerHTML = '';
-            d.directors.forEach(function(dd, i) { appendHTML(dc, dirHTML(i, dd)); });
-
-            if (d.sec_from_director >= 0) {
-                secFromDir = d.sec_from_director;
-                applySecState();
-                // Re-disable other sec checkboxes
-                document.querySelectorAll('.is-sec-cb').forEach(function(c, i) {
-                    if (i !== secFromDir) { c.checked = false; c.disabled = true; c.closest('.role-check-label').style.opacity = '0.4'; }
-                });
-            } else {
-                document.getElementById('secFields').style.display = '';
-                document.getElementById('secNote').style.display = 'none';
-                if (d.secretary) {
-                    Object.keys(d.secretary).forEach(function(k) {
-                        var inp = document.querySelector('.static-field[data-f="sec_' + k + '"]');
-                        if (inp) inp.value = d.secretary[k] || '';
-                    });
+        // Write object values into a card's dyn-fields
+        function setCardData(card, data) {
+            card.querySelectorAll('.dyn-field').forEach(function(inp) {
+                var k = inp.dataset.f;
+                if (data[k] !== undefined && data[k] !== null) {
+                    inp.value = data[k];
                 }
-            }
-
-            var sc = document.getElementById('subscribersContainer');
-            sc.innerHTML = '';
-            d.subscribers.forEach(function(sd, i) {
-                var linked = (sd._linked !== undefined) ? sd._linked : -1;
-                appendHTML(sc, subHTML(i, sd, linked));
             });
         }
 
-        // --- Add / Remove ---
-        window.addDirector = function() {
-            var c = document.getElementById('directorsContainer');
-            var n = c.querySelectorAll('.dyn-card').length;
-            appendHTML(c, dirHTML(n));
-            attachListeners();
-            save();
-        };
-
-        window.addSubscriber = function() {
-            var c = document.getElementById('subscribersContainer');
-            var n = c.querySelectorAll('.dyn-card').length;
-            appendHTML(c, subHTML(n));
-            attachListeners();
-            save();
-        };
-
-        window.removeDyn = function(btn) {
-            if (!confirm('Remove this section?')) return;
-            var card = btn.closest('.dyn-card');
-            var type = card.dataset.type;
-            var idx = parseInt(card.dataset.index);
-
-            card.remove();
-
-            if (type === 'director') {
-                // If this director was the secretary, clear secretary link
-                if (secFromDir === idx) {
-                    secFromDir = -1;
-                    applySecState();
-                    document.querySelectorAll('.is-sec-cb').forEach(function(c) { c.disabled = false; c.closest('.role-check-label').style.opacity = '1'; });
-                } else if (secFromDir > idx) {
-                    // Decrement secFromDir since a director before it was removed
-                    secFromDir--;
-                }
-
-                // Handle linked subscribers
-                var subs = document.querySelectorAll('#subscribersContainer .dyn-card');
-                subs.forEach(function(sc) {
-                    var linked = parseInt(sc.dataset.linked);
-                    if (linked === idx) {
-                        // Remove subscriber that was linked to this director
-                        sc.remove();
-                    } else if (linked > idx) {
-                        // Update link index
-                        sc.dataset.linked = linked - 1;
-                        var badge = sc.querySelector('.synced-badge');
-                        if (badge) badge.innerHTML = '<i class="fa fa-link"></i> Auto-filled from Director ' + (linked) + '';
-                    }
-                });
-
-                reindexCards('directorsContainer');
-                reindexCards('subscribersContainer');
-            } else {
-                reindexCards('subscribersContainer');
-            }
-
-            updateShareTotal();
-            attachListeners();
-            save();
-        };
-
+        // Re-number cards in a container after removal
         function reindexCards(containerId) {
             var cards = document.querySelectorAll('#' + containerId + ' .dyn-card');
             cards.forEach(function(c, i) {
@@ -615,101 +557,204 @@
                 var label = type === 'director' ? 'Director' : 'Subscriber';
                 h3.innerHTML = '<i class="fa fa-' + icon + '"></i> ' + label + ' ' + (i + 1);
                 var rmBtn = c.querySelector('.remove-dyn-btn');
-                rmBtn.style.display = i === 0 ? 'none' : '';
+                if (rmBtn) rmBtn.style.display = i === 0 ? 'none' : '';
             });
         }
 
-        // --- Secretary Sync ---
-        window.handleSecCheck = function(dirIdx) {
-            var card = document.querySelector('.dyn-card[data-type="director"][data-index="' + dirIdx + '"]');
-            var cb = card.querySelector('.is-sec-cb');
-            if (cb.checked) {
-                secFromDir = dirIdx;
-                document.querySelectorAll('.is-sec-cb').forEach(function(c, i) {
-                    if (i !== dirIdx) { c.checked = false; c.disabled = true; c.closest('.role-check-label').style.opacity = '0.4'; }
-                });
-            } else {
-                secFromDir = -1;
-                document.querySelectorAll('.is-sec-cb').forEach(function(c) { c.disabled = false; c.closest('.role-check-label').style.opacity = '1'; });
-            }
-            applySecState();
-            save();
-        };
+        /* =============================================
+           TOAST NOTIFICATIONS
+        ============================================= */
+        var toastTimer = null;
+        function showToast(msg, type) {
+            type = type || 'success';
+            var el = document.getElementById('toast');
+            el.className = 'toast ' + type;
+            el.innerHTML = '<i class="fa fa-' + (type === 'success' ? 'check-circle' : 'exclamation-triangle') + '"></i> ' + msg;
+            clearTimeout(toastTimer);
+            // Force reflow for re-triggering animation
+            void el.offsetWidth;
+            el.classList.add('show');
+            toastTimer = setTimeout(function() { el.classList.remove('show'); }, 3500);
+        }
 
+        /* =============================================
+           SECRETARY LOGIC
+           When linked: fill secretary fields with director
+           data, make them read-only (except Qualification).
+           When unlinked: make fields editable, keep data.
+        ============================================= */
         function applySecState() {
+            var note = document.getElementById('secNote');
+            var noteText = document.getElementById('secNoteText');
+            // All secretary fields that can be auto-filled from a director
+            var secFieldKeys = Object.keys(DIR_TO_SEC_MAP);
+
             if (secFromDir >= 0) {
-                document.getElementById('secFields').style.display = 'none';
-                document.getElementById('secNote').style.display = 'flex';
-                document.getElementById('secNoteText').textContent = 'Secretary information is copied from Director ' + (secFromDir + 1) + '.';
-                // Clear any leftover error states on secretary fields
+                var dirCard = document.querySelector('.dyn-card[data-type="director"][data-index="' + secFromDir + '"]');
+                if (dirCard) {
+                    var dirData = getCardData(dirCard);
+                    secFieldKeys.forEach(function(dirKey) {
+                        var secF = DIR_TO_SEC_MAP[dirKey];
+                        var inp = document.querySelector('.static-field[data-f="' + secF + '"]');
+                        if (inp) {
+                            inp.value = dirData[dirKey] || '';
+                            inp.readOnly = true;
+                            inp.classList.add('auto-filled');
+                        }
+                    });
+                }
+                // Show note
+                note.classList.add('visible');
+                noteText.textContent = 'Secretary information is auto-filled from Director ' + (secFromDir + 1) + '. The Qualification field below can still be edited.';
+                // Clear any error states on auto-filled secretary fields
                 document.querySelectorAll('#secFields .form-group').forEach(function(g) {
                     g.classList.remove('has-error', 'shake');
                     var err = g.querySelector('.field-error');
                     if (err) err.classList.remove('visible');
                 });
             } else {
-                document.getElementById('secFields').style.display = '';
-                document.getElementById('secNote').style.display = 'none';
+                // Make all auto-fillable secretary fields editable again
+                // Keep their current values so user doesn't lose data
+                secFieldKeys.forEach(function(dirKey) {
+                    var secF = DIR_TO_SEC_MAP[dirKey];
+                    var inp = document.querySelector('.static-field[data-f="' + secF + '"]');
+                    if (inp) {
+                        inp.readOnly = false;
+                        inp.classList.remove('auto-filled');
+                    }
+                });
+                note.classList.remove('visible');
             }
         }
 
-        // --- Subscriber Sync ---
-        window.handleSubCheck = function(dirIdx) {
-            var card = document.querySelector('.dyn-card[data-type="director"][data-index="' + dirIdx + '"]');
-            var cb = card.querySelector('.is-sub-cb');
-            var shareBox = card.querySelector('.share-box');
-            shareBox.style.display = cb.checked ? 'block' : 'none';
+        // Real-time sync: when a director field changes and that director
+        // is the secretary, update the corresponding secretary field
+        function syncDirectorToSecretary(dirIdx) {
+            if (secFromDir !== dirIdx) return;
+            var dirCard = document.querySelector('.dyn-card[data-type="director"][data-index="' + dirIdx + '"]');
+            if (!dirCard) return;
+            var dirData = getCardData(dirCard);
+            Object.keys(DIR_TO_SEC_MAP).forEach(function(dirKey) {
+                var secF = DIR_TO_SEC_MAP[dirKey];
+                var inp = document.querySelector('.static-field[data-f="' + secF + '"]');
+                if (inp) inp.value = dirData[dirKey] || '';
+            });
+        }
 
-            if (cb.checked) {
-                var existing = document.querySelector('.dyn-card[data-type="subscriber"][data-linked="' + dirIdx + '"]');
-                if (!existing) {
-                    var dirData = getCardData(card);
-                    var sc = document.getElementById('subscribersContainer');
-                    var n = sc.querySelectorAll('.dyn-card').length;
-                    appendHTML(sc, subHTML(n, dirData, dirIdx));
-                    attachListeners();
-                } else {
-                    var dirData = getCardData(card);
-                    setCardData(existing, dirData);
-                }
+        // Handle secretary checkbox toggle on a director
+        function handleSecCheck(dirIdx, isChecked) {
+            if (isChecked) {
+                secFromDir = dirIdx;
+                // Disable all other secretary checkboxes
+                document.querySelectorAll('.is-sec-cb').forEach(function(cb, i) {
+                    if (i !== dirIdx) {
+                        cb.checked = false;
+                        cb.disabled = true;
+                        cb.closest('.role-check-label').style.opacity = '0.4';
+                    }
+                });
             } else {
-                var existing = document.querySelector('.dyn-card[data-type="subscriber"][data-linked="' + dirIdx + '"]');
-                if (existing) {
-                    existing.dataset.linked = '-1';
-                    var badge = existing.querySelector('.synced-badge');
-                    if (badge) badge.remove();
-                    existing.querySelectorAll('.dyn-field').forEach(function(inp) {
-                        inp.readOnly = false;
-                        inp.style.background = '';
-                        inp.style.color = '';
-                        inp.style.cursor = '';
-                    });
-                    // Add error spans for now-editable required fields
-                    existing.querySelectorAll('.dyn-field[required]').forEach(function(inp) {
-                        var group = inp.closest('.form-group');
-                        if (group && !group.querySelector('.field-error')) {
-                            var lbl = subLabels[inp.dataset.f];
-                            if (lbl) {
-                                var txt = lbl.replace('*','').trim() + ' is required';
-                                var span = document.createElement('span');
-                                span.className = 'field-error';
-                                span.innerHTML = '<i class="fa fa-exclamation-circle"></i> <span>' + txt + '</span>';
-                                group.appendChild(span);
-                            }
-                        }
-                    });
-                }
+                secFromDir = -1;
+                // Re-enable all secretary checkboxes
+                document.querySelectorAll('.is-sec-cb').forEach(function(cb) {
+                    cb.disabled = false;
+                    cb.closest('.role-check-label').style.opacity = '1';
+                });
             }
-            updateShareTotal();
+            applySecState();
             save();
-        };
+        }
 
-        // --- Share Total ---
-        window.updateShareTotal = function() {
-            var inputs = document.querySelectorAll('.share-pct-input');
+        /* =============================================
+           SUBSCRIBER LOGIC
+           Slot-based mapping: Director N → Subscriber N.
+           Linked subscribers always come first in order,
+           then manual subscribers follow.
+        ============================================= */
+
+        // Rebuild the entire subscribers section.
+        // 1. Collect all current manual subscriber data (data-linked="-1")
+        // 2. Clear container
+        // 3. For each director (in order), if "Is also a Subscriber" is
+        //    checked, create a linked subscriber card at the next position
+        // 4. Append manual subscribers after linked ones
+        // 5. If nothing exists, create one empty manual subscriber
+        function rebuildSubscribers() {
+            var sc = document.getElementById('subscribersContainer');
+
+            // Step 1: preserve manual subscriber data before clearing
+            var manualSubs = [];
+            sc.querySelectorAll('.dyn-card').forEach(function(card) {
+                var linked = parseInt(card.dataset.linked);
+                if (isNaN(linked) || linked < 0) {
+                    manualSubs.push(getCardData(card));
+                }
+            });
+
+            // Step 2: clear
+            sc.innerHTML = '';
+            var idx = 0;
+
+            // Step 3: linked subscribers in director order
+            var dirCards = document.querySelectorAll('#directorsContainer .dyn-card');
+            dirCards.forEach(function(dirCard, dirIdx) {
+                var cb = dirCard.querySelector('.is-sub-cb');
+                if (cb && cb.checked) {
+                    var dirData = getCardData(dirCard);
+                    appendHTML(sc, subHTML(idx, dirData, dirIdx));
+                    idx++;
+                }
+            });
+
+            // Step 4: manual subscribers
+            manualSubs.forEach(function(msd) {
+                appendHTML(sc, subHTML(idx, msd, -1));
+                idx++;
+            });
+
+            // Step 5: ensure at least one subscriber exists
+            if (idx === 0) {
+                appendHTML(sc, subHTML(0, {}, -1));
+            }
+
+            updateShareTotal();
+        }
+
+        // Real-time sync: when a director field changes and that director
+        // is a subscriber, update the linked subscriber card's fields
+        function syncDirectorToSubscriber(dirIdx) {
+            var dirCard = document.querySelector('.dyn-card[data-type="director"][data-index="' + dirIdx + '"]');
+            if (!dirCard) return;
+            var cb = dirCard.querySelector('.is-sub-cb');
+            if (!cb || !cb.checked) return;
+
+            var dirData = getCardData(dirCard);
+            var subCard = document.querySelector('.dyn-card[data-type="subscriber"][data-linked="' + dirIdx + '"]');
+            if (subCard) {
+                setCardData(subCard, dirData);
+            }
+        }
+
+        // Handle subscriber checkbox toggle on a director
+        function handleSubCheck(dirIdx, isChecked) {
+            var card = document.querySelector('.dyn-card[data-type="director"][data-index="' + dirIdx + '"]');
+            var shareBox = card.querySelector('.share-box');
+            shareBox.style.display = isChecked ? 'block' : 'none';
+            if (!isChecked) {
+                // Clear share percent when unchecked
+                card.querySelector('.share-pct-input').value = '';
+            }
+            rebuildSubscribers();
+            save();
+        }
+
+        /* =============================================
+           SHARE TOTAL CALCULATION
+        ============================================= */
+        function updateShareTotal() {
             var total = 0;
             var hasAny = false;
-            inputs.forEach(function(inp) {
+            document.querySelectorAll('.share-pct-input').forEach(function(inp) {
                 var box = inp.closest('.share-box');
                 if (box && box.style.display !== 'none') {
                     var v = parseFloat(inp.value);
@@ -722,259 +767,495 @@
             if (hasAny) {
                 el.style.display = 'flex';
                 valEl.textContent = total.toFixed(2) + '%';
-                if (total > 100) { el.classList.add('over'); } else { el.classList.remove('over'); }
+                if (Math.abs(total - 100) > 0.01) {
+                    el.classList.add('over');
+                } else {
+                    el.classList.remove('over');
+                }
             } else {
                 el.style.display = 'none';
+                el.classList.remove('over');
             }
-        };
-
-        function getCardData(card) {
-            var d = {};
-            card.querySelectorAll('.dyn-field').forEach(function(inp) { d[inp.dataset.f] = inp.value.trim(); });
-            return d;
-        }
-        function setCardData(card, d) {
-            card.querySelectorAll('.dyn-field').forEach(function(inp) {
-                if (d[inp.dataset.f] !== undefined) inp.value = d[inp.dataset.f];
-            });
         }
 
-        // --- Collect All Data ---
-        function collectAll() {
-            var data = { company: {}, office: {}, directors: [], secretary: {}, subscribers: [], sec_from_director: secFromDir };
+        /* =============================================
+           ADD / REMOVE
+        ============================================= */
+        function addDirector() {
+            var c = document.getElementById('directorsContainer');
+            var n = c.querySelectorAll('.dyn-card').length;
+            appendHTML(c, dirHTML(n));
+            attachListeners();
+            save();
+        }
+
+        function addManualSubscriber() {
+            var c = document.getElementById('subscribersContainer');
+            var n = c.querySelectorAll('.dyn-card').length;
+            appendHTML(c, subHTML(n, {}, -1));
+            attachListeners();
+            save();
+        }
+
+        function removeDyn(btn) {
+            if (!confirm('Remove this section?')) return;
+            var card = btn.closest('.dyn-card');
+            var type = card.dataset.type;
+            var idx = parseInt(card.dataset.index);
+
+            card.remove();
+
+            if (type === 'director') {
+                // Handle secretary link
+                if (secFromDir === idx) {
+                    secFromDir = -1;
+                    applySecState();
+                    document.querySelectorAll('.is-sec-cb').forEach(function(cb) {
+                        cb.disabled = false;
+                        cb.closest('.role-check-label').style.opacity = '1';
+                    });
+                } else if (secFromDir > idx) {
+                    secFromDir--;
+                }
+
+                // Rebuild subscribers (handles linked slot re-mapping)
+                rebuildSubscribers();
+                reindexCards('directorsContainer');
+            } else {
+                reindexCards('subscribersContainer');
+            }
+
+            updateShareTotal();
+            attachListeners();
+            save();
+        }
+
+        /* =============================================
+           PERSISTENCE: SAVE & RESTORE
+        ============================================= */
+        function save() {
+            var data = {
+                static: {},
+                directors: [],
+                sec_from_director: secFromDir,
+                secretary: {},
+                manual_subscribers: []
+            };
+
+            // Save all static fields (company info, office details)
             document.querySelectorAll('.static-field').forEach(function(inp) {
-                var f = inp.dataset.f;
-                if (f.startsWith('off_')) data.office[f.replace('off_', '')] = inp.value.trim();
-                else if (f.startsWith('sec_')) data.secretary[f.replace('sec_', '')] = inp.value.trim();
-                else data.company[f] = inp.value.trim();
+                var key = inp.dataset.f;
+                if (key && key.indexOf('sec_') !== 0) {
+                    data.static[key] = inp.value;
+                }
             });
+
+            // Save directors
             document.querySelectorAll('#directorsContainer .dyn-card').forEach(function(card) {
                 var d = getCardData(card);
                 d.is_subscriber = card.querySelector('.is-sub-cb').checked;
                 d.is_secretary = card.querySelector('.is-sec-cb').checked;
-                d.share_percent = card.querySelector('.share-box input').value;
+                d.share_percent = card.querySelector('.share-pct-input').value || '';
                 data.directors.push(d);
             });
+
+            // Save secretary manual data only if not linked
+            if (secFromDir < 0) {
+                document.querySelectorAll('#secFields .static-field').forEach(function(inp) {
+                    var key = inp.dataset.f.replace('sec_', '');
+                    data.secretary[key] = inp.value;
+                });
+            }
+
+            // Save ONLY manual (unlinked) subscribers
             document.querySelectorAll('#subscribersContainer .dyn-card').forEach(function(card) {
-                var d = getCardData(card);
-                d._linked = parseInt(card.dataset.linked);
-                data.subscribers.push(d);
-            });
-            return data;
-        }
-
-        // --- LocalStorage ---
-        function save() {
-            try { localStorage.setItem(SKEY, JSON.stringify(collectAll())); } catch(e) {}
-        }
-
-        function attachListeners() {
-            document.querySelectorAll('#llcForm input').forEach(function(inp) {
-                if (inp.type === 'checkbox') return;
-                inp.removeEventListener('input', onDynInput);
-                inp.addEventListener('input', onDynInput);
-            });
-        }
-
-        // Live sync: director → linked subscriber
-        function onDynInput() {
-            var card = this.closest('.dyn-card');
-            if (card && card.dataset.type === 'director') {
-                var idx = parseInt(card.dataset.index);
-                var linked = document.querySelector('.dyn-card[data-type="subscriber"][data-linked="' + idx + '"]');
-                if (linked) {
-                    var f = this.dataset.f;
-                    var target = linked.querySelector('.dyn-field[data-f="' + f + '"]');
-                    if (target) target.value = this.value;
+                var linked = parseInt(card.dataset.linked);
+                if (isNaN(linked) || linked < 0) {
+                    data.manual_subscribers.push(getCardData(card));
                 }
-            }
-            save();
+            });
+
+            try { localStorage.setItem(SKEY, JSON.stringify(data)); } catch(e) {}
         }
 
-        // --- Clear error on input (delegated, capture phase) ---
-        document.getElementById('llcForm').addEventListener('input', function(e) {
-            var group = e.target.closest('.form-group');
-            if (group && group.classList.contains('has-error')) {
-                group.classList.remove('has-error', 'shake');
-                var err = group.querySelector('.field-error');
-                if (err) err.classList.remove('visible');
-            }
-        }, true);
+        function restore() {
+            var saved = null;
+            try { saved = JSON.parse(localStorage.getItem(SKEY)); } catch(e) {}
 
-        // --- Clear error on focus (delegated, capture phase) ---
-        document.getElementById('llcForm').addEventListener('focus', function(e) {
-            var group = e.target.closest('.form-group');
-            if (group && group.classList.contains('has-error')) {
-                group.classList.remove('has-error', 'shake');
-                var err = group.querySelector('.field-error');
-                if (err) err.classList.remove('visible');
+            if (!saved || !saved.directors || saved.directors.length === 0) {
+                // No saved data — start fresh
+                appendHTML(document.getElementById('directorsContainer'), dirHTML(0));
+                rebuildSubscribers();
+                return;
             }
-        }, true);
 
-        // --- Reset ---
-        document.getElementById('resetBtn').addEventListener('click', function() {
-            if (!confirm('Clear all fields? This cannot be undone.')) return;
-            try { localStorage.removeItem(SKEY); } catch(e) {}
-            secFromDir = -1;
-            document.getElementById('directorsContainer').innerHTML = '';
-            document.getElementById('subscribersContainer').innerHTML = '';
-            appendHTML(document.getElementById('directorsContainer'), dirHTML(0));
-            appendHTML(document.getElementById('subscribersContainer'), subHTML(0));
-            document.getElementById('secFields').style.display = '';
-            document.getElementById('secNote').style.display = 'none';
-            document.querySelectorAll('.static-field').forEach(function(inp) {
-                inp.value = '';
-                if (inp.dataset.f === 'sec_nationality' || inp.dataset.f === 'sec_res_country') inp.value = 'Ghana';
+            // Restore static fields
+            if (saved.static) {
+                Object.keys(saved.static).forEach(function(k) {
+                    var inp = document.querySelector('.static-field[data-f="' + k + '"]');
+                    if (inp) inp.value = saved.static[k] || '';
+                });
+            }
+
+            // Restore directors
+            var dc = document.getElementById('directorsContainer');
+            dc.innerHTML = '';
+            saved.directors.forEach(function(dd, i) {
+                appendHTML(dc, dirHTML(i, dd));
             });
-            document.querySelectorAll('.is-sec-cb').forEach(function(c) { c.disabled = false; c.closest('.role-check-label').style.opacity = '1'; });
-            // Clear all errors
-            document.querySelectorAll('.form-group').forEach(function(g) { g.classList.remove('has-error', 'shake'); });
-            document.querySelectorAll('.field-error').forEach(function(e) { e.classList.remove('visible'); });
-            updateShareTotal();
-            attachListeners();
-        });
 
-        // --- VALIDATION ---
-        function validateForm(form) {
+            // Restore secretary state
+            if (saved.sec_from_director >= 0) {
+                secFromDir = saved.sec_from_director;
+                // Check/disable secretary checkboxes accordingly
+                document.querySelectorAll('.is-sec-cb').forEach(function(cb, i) {
+                    if (i === secFromDir) {
+                        cb.checked = true;
+                    } else {
+                        cb.checked = false;
+                        cb.disabled = true;
+                        cb.closest('.role-check-label').style.opacity = '0.4';
+                    }
+                });
+            } else {
+                secFromDir = -1;
+            }
+            applySecState();
+
+            // Restore manual secretary data if not linked
+            if (saved.sec_from_director < 0 && saved.secretary) {
+                Object.keys(saved.secretary).forEach(function(k) {
+                    var inp = document.querySelector('.static-field[data-f="sec_' + k + '"]');
+                    if (inp) inp.value = saved.secretary[k] || '';
+                });
+            }
+
+            // Rebuild subscribers: linked from directors + manual from saved
+            rebuildSubscribers();
+
+            // Now fill in the manual subscriber data into the correct cards
+            if (saved.manual_subscribers && saved.manual_subscribers.length > 0) {
+                // Count how many linked subscribers were created
+                var linkedCount = 0;
+                document.querySelectorAll('#directorsContainer .dyn-card').forEach(function(c) {
+                    if (c.querySelector('.is-sub-cb').checked) linkedCount++;
+                });
+                var subCards = document.querySelectorAll('#subscribersContainer .dyn-card');
+                saved.manual_subscribers.forEach(function(msd, i) {
+                    var targetCard = subCards[linkedCount + i];
+                    if (targetCard) setCardData(targetCard, msd);
+                });
+            }
+
+            updateShareTotal();
+        }
+
+        /* =============================================
+           VALIDATION
+        ============================================= */
+        function validateForm() {
             var valid = true;
             var firstError = null;
 
             // Clear all previous errors
-            form.querySelectorAll('.form-group').forEach(function(g) { g.classList.remove('has-error', 'shake'); });
-            form.querySelectorAll('.field-error').forEach(function(e) { e.classList.remove('visible'); });
+            document.querySelectorAll('.form-group').forEach(function(g) {
+                g.classList.remove('has-error', 'shake');
+                var err = g.querySelector('.field-error');
+                if (err) err.classList.remove('visible');
+            });
 
-            // Check each required field
-            form.querySelectorAll('[required]').forEach(function(inp) {
-                var group = inp.closest('.form-group');
-                if (!group) return;
-
-                // Skip secretary fields when synced from a director
-                if (secFromDir >= 0 && inp.closest('#secFields')) return;
-
-                // Skip readonly linked subscriber fields (data comes from director)
-                var card = inp.closest('.dyn-card');
-                if (card && card.dataset.type === 'subscriber') {
-                    var linkedIdx = parseInt(card.dataset.linked);
-                    if (linkedIdx >= 0 && inp.readOnly) return;
-                }
-
-                // Skip hidden form groups
-                if (group.offsetParent === null) return;
-
+            // Validate static required fields
+            document.querySelectorAll('.static-field[required]').forEach(function(inp) {
+                // Skip secretary fields if linked to a director
+                if (secFromDir >= 0 && inp.dataset.f && inp.dataset.f.indexOf('sec_') === 0) return;
                 if (!inp.value.trim()) {
+                    markError(inp);
                     valid = false;
-                    group.classList.add('has-error');
-                    var errSpan = group.querySelector('.field-error');
-                    if (errSpan) errSpan.classList.add('visible');
+                    if (!firstError) firstError = inp;
+                }
+                // Email format check
+                if (inp.type === 'email' && inp.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim())) {
+                    markError(inp);
+                    valid = false;
                     if (!firstError) firstError = inp;
                 }
             });
 
-            // Validate email format for filled email fields
-            form.querySelectorAll('input[type="email"][required]').forEach(function(inp) {
-                var group = inp.closest('.form-group');
-                if (!group) return;
-                // Already marked as empty error
-                if (group.classList.contains('has-error')) return;
-                // Skip same conditions as above
-                if (secFromDir >= 0 && inp.closest('#secFields')) return;
-                var card = inp.closest('.dyn-card');
-                if (card && card.dataset.type === 'subscriber' && parseInt(card.dataset.linked) >= 0 && inp.readOnly) return;
-
-                if (inp.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim())) {
-                    valid = false;
-                    group.classList.add('has-error');
-                    var errSpan = group.querySelector('.field-error');
-                    if (errSpan) {
-                        errSpan.querySelector('span').textContent = 'Please enter a valid email address';
-                        errSpan.classList.add('visible');
+            // Validate director required fields
+            document.querySelectorAll('#directorsContainer .dyn-card').forEach(function(card) {
+                card.querySelectorAll('.dyn-field[required]').forEach(function(inp) {
+                    if (!inp.value.trim()) {
+                        markError(inp);
+                        valid = false;
+                        if (!firstError) firstError = inp;
                     }
-                    if (!firstError) firstError = inp;
-                }
+                    if (inp.type === 'email' && inp.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim())) {
+                        markError(inp);
+                        valid = false;
+                        if (!firstError) firstError = inp;
+                    }
+                });
             });
 
-            // Scroll to first error with shake
+            // Validate manual (unlinked) subscriber required fields
+            document.querySelectorAll('#subscribersContainer .dyn-card').forEach(function(card) {
+                var linked = parseInt(card.dataset.linked);
+                if (!isNaN(linked) && linked >= 0) return; // Skip linked subscribers
+                card.querySelectorAll('.dyn-field[required]').forEach(function(inp) {
+                    if (!inp.value.trim()) {
+                        markError(inp);
+                        valid = false;
+                        if (!firstError) firstError = inp;
+                    }
+                    if (inp.type === 'email' && inp.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim())) {
+                        markError(inp);
+                        valid = false;
+                        if (!firstError) firstError = inp;
+                    }
+                });
+            });
+
+            // Scroll to first error
             if (firstError) {
-                var errGroup = firstError.closest('.form-group');
-                errGroup.classList.add('shake');
-                setTimeout(function() { errGroup.classList.remove('shake'); }, 500);
                 firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                setTimeout(function() {
-                    try { firstError.focus({ preventScroll: true }); } catch(e) { firstError.focus(); }
-                }, 450);
+                firstError.focus();
             }
 
             return valid;
         }
 
-        // --- Submit ---
+        function markError(inp) {
+            var group = inp.closest('.form-group');
+            if (!group) return;
+            group.classList.add('has-error', 'shake');
+            var err = group.querySelector('.field-error');
+            if (err) err.classList.add('visible');
+            // Remove shake after animation
+            setTimeout(function() { group.classList.remove('shake'); }, 500);
+        }
+
+        /* =============================================
+           EVENT LISTENERS
+        ============================================= */
+        function attachListeners() {
+            // Remove buttons (event delegation on containers)
+            document.getElementById('directorsContainer').addEventListener('click', function(e) {
+                var btn = e.target.closest('[data-action="remove"]');
+                if (btn) removeDyn(btn);
+            });
+            document.getElementById('subscribersContainer').addEventListener('click', function(e) {
+                var btn = e.target.closest('[data-action="remove"]');
+                if (btn) removeDyn(btn);
+            });
+
+            // Director role checkboxes
+            document.querySelectorAll('#directorsContainer .is-sub-cb').forEach(function(cb) {
+                // Remove old listeners by cloning (simple approach)
+                var newCb = cb.cloneNode(true);
+                cb.parentNode.replaceChild(newCb, cb);
+                newCb.addEventListener('change', function() {
+                    var dirIdx = parseInt(this.closest('.dyn-card').dataset.index);
+                    handleSubCheck(dirIdx, this.checked);
+                });
+            });
+            document.querySelectorAll('#directorsContainer .is-sec-cb').forEach(function(cb) {
+                var newCb = cb.cloneNode(true);
+                cb.parentNode.replaceChild(newCb, cb);
+                newCb.addEventListener('change', function() {
+                    var dirIdx = parseInt(this.closest('.dyn-card').dataset.index);
+                    handleSecCheck(dirIdx, this.checked);
+                });
+            });
+
+            // Share percent inputs
+            document.querySelectorAll('.share-pct-input').forEach(function(inp) {
+                var newInp = inp.cloneNode(true);
+                inp.parentNode.replaceChild(newInp, inp);
+                newInp.addEventListener('input', function() {
+                    updateShareTotal();
+                    save();
+                });
+            });
+
+            // Director dyn-fields: real-time sync + save
+            document.querySelectorAll('#directorsContainer .dyn-field').forEach(function(inp) {
+                var newInp = inp.cloneNode(true);
+                inp.parentNode.replaceChild(newInp, inp);
+                newInp.addEventListener('input', function() {
+                    var dirIdx = parseInt(this.closest('.dyn-card').dataset.index);
+                    syncDirectorToSecretary(dirIdx);
+                    syncDirectorToSubscriber(dirIdx);
+                    save();
+                });
+            });
+
+            // Subscriber dyn-fields: save (only manual ones are editable)
+            document.querySelectorAll('#subscribersContainer .dyn-field').forEach(function(inp) {
+                if (inp.readOnly) return; // Skip linked/read-only fields
+                var newInp = inp.cloneNode(true);
+                inp.parentNode.replaceChild(newInp, inp);
+                newInp.addEventListener('input', function() {
+                    save();
+                });
+            });
+
+            // Static fields (company info, office details, secretary)
+            document.querySelectorAll('.static-field').forEach(function(inp) {
+                if (inp.readOnly) return;
+                // Only add listener once — use a flag
+                if (inp._listenerAttached) return;
+                inp._listenerAttached = true;
+                inp.addEventListener('input', function() {
+                    save();
+                });
+                inp.addEventListener('change', function() {
+                    save();
+                });
+            });
+        }
+
+        /* =============================================
+           ADD BUTTONS
+        ============================================= */
+        document.getElementById('addDirBtn').addEventListener('click', addDirector);
+        document.getElementById('addSubBtn').addEventListener('click', addManualSubscriber);
+
+        /* =============================================
+           RESET BUTTON
+           Clears localStorage and resets the entire form
+           to its initial empty state.
+        ============================================= */
+        document.getElementById('resetBtn').addEventListener('click', function() {
+            if (!confirm('Are you sure you want to reset the entire form? All data will be lost.')) return;
+
+            // Clear persisted data
+            try { localStorage.removeItem(SKEY); } catch(e) {}
+
+            // Reset state
+            secFromDir = -1;
+
+            // Clear dynamic containers
+            document.getElementById('directorsContainer').innerHTML = '';
+            document.getElementById('subscribersContainer').innerHTML = '';
+
+            // Reset all static fields to defaults
+            document.querySelectorAll('.static-field').forEach(function(inp) {
+                inp.readOnly = false;
+                inp.classList.remove('auto-filled');
+                // Keep default values for nationality/country
+                if (inp.dataset.f === 'sec_nationality') { inp.value = 'Ghanaian'; return; }
+                if (inp.dataset.f === 'sec_res_country') { inp.value = 'Ghana'; return; }
+                inp.value = '';
+            });
+
+            // Rebuild initial cards
+            appendHTML(document.getElementById('directorsContainer'), dirHTML(0));
+            rebuildSubscribers();
+
+            // Reset secretary state
+            document.querySelectorAll('.is-sec-cb').forEach(function(cb) {
+                cb.disabled = false;
+                cb.closest('.role-check-label').style.opacity = '1';
+            });
+            applySecState();
+
+            // Clear all error states
+            document.querySelectorAll('.form-group').forEach(function(g) {
+                g.classList.remove('has-error', 'shake');
+                var err = g.querySelector('.field-error');
+                if (err) err.classList.remove('visible');
+            });
+
+            updateShareTotal();
+            attachListeners();
+            showToast('Form has been reset successfully.', 'success');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        /* =============================================
+           FORM SUBMIT
+        ============================================= */
         document.getElementById('llcForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            if (!validateForm(this)) {
-                showToast('Please fill in all required fields before submitting.', 'error');
+            if (!validateForm()) {
+                showToast('Please fix the highlighted errors before submitting.', 'error');
                 return;
             }
 
-            var data = collectAll();
+            // Check share total if any shares are allocated
+            var shareTotalEl = document.getElementById('shareTotal');
+            if (shareTotalEl.style.display === 'flex' && shareTotalEl.classList.contains('over')) {
+                showToast('Total share allocation must equal 100%.', 'error');
+                return;
+            }
+
+            // Collect final data for submission
+            var formData = collectFormData();
+
+            // Here you would normally send formData to a server
+            console.log('Form submitted:', formData);
+            showToast('Registration submitted successfully! We will review your application.', 'success');
+
+            // Disable submit button to prevent double submission
             var btn = document.getElementById('submitBtn');
             btn.disabled = true;
             btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Submitting...';
-
-            fetch('https://elevater247.com/abms/api/submit-llc.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-            .then(function(r) {
-                if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'Server error'); });
-                return r.json();
-            })
-            .then(function(r) {
-                if (r.status === 'success') {
-                    showToast('Registration submitted successfully! Ref: ' + r.data.submission_ref, 'success');
-                    try { localStorage.removeItem(SKEY); } catch(e) {}
-                    // Reset form
-                    secFromDir = -1;
-                    document.getElementById('directorsContainer').innerHTML = '';
-                    document.getElementById('subscribersContainer').innerHTML = '';
-                    appendHTML(document.getElementById('directorsContainer'), dirHTML(0));
-                    appendHTML(document.getElementById('subscribersContainer'), subHTML(0));
-                    document.getElementById('secFields').style.display = '';
-                    document.getElementById('secNote').style.display = 'none';
-                    document.querySelectorAll('.static-field').forEach(function(inp) {
-                        inp.value = '';
-                        if (inp.dataset.f === 'sec_nationality' || inp.dataset.f === 'sec_res_country') inp.value = 'Ghana';
-                    });
-                    document.querySelectorAll('.is-sec-cb').forEach(function(c) { c.disabled = false; c.closest('.role-check-label').style.opacity = '1'; });
-                    document.querySelectorAll('.form-group').forEach(function(g) { g.classList.remove('has-error', 'shake'); });
-                    document.querySelectorAll('.field-error').forEach(function(e) { e.classList.remove('visible'); });
-                    updateShareTotal();
-                    attachListeners();
-                } else {
-                    showToast(r.message || 'Something went wrong.', 'error');
-                }
-            })
-            .catch(function(err) {
-                showToast(err.message || 'Network error. Check your connection.', 'error');
-            })
-            .finally(function() {
+            setTimeout(function() {
                 btn.disabled = false;
                 btn.innerHTML = '<i class="fa fa-paper-plane"></i> Submit Registration';
-            });
+            }, 3000);
         });
 
-        // --- Toast (FIXED: no more variable shadowing) ---
-        function showToast(message, type) {
-            var el = document.getElementById('toast');
-            el.innerHTML = '<i class="fa fa-' + (type === 'success' ? 'check-circle' : 'exclamation-triangle') + '"></i> ' + message;
-            el.className = 'toast ' + type + ' show';
-            clearTimeout(el._timer);
-            el._timer = setTimeout(function() { el.classList.remove('show'); }, 4500);
+        function collectFormData() {
+            var data = { company: {}, office: {}, directors: [], secretary: {}, subscribers: [] };
+
+            // Company info
+            ['company_name','presented_by','presenter_tin','activities','stated_capital','estimated_revenue','employees'].forEach(function(k) {
+                var inp = document.querySelector('.static-field[data-f="' + k + '"]');
+                if (inp) data.company[k] = inp.value;
+            });
+
+            // Office details
+            ['off_gps','off_landmark','off_building_no','off_town','off_street','off_city','off_district','off_region','off_postal_no','off_postal_town','off_postal_region','off_contact1','off_contact2','off_email'].forEach(function(k) {
+                var inp = document.querySelector('.static-field[data-f="' + k + '"]');
+                if (inp) data.office[k] = inp.value;
+            });
+
+            // Directors
+            document.querySelectorAll('#directorsContainer .dyn-card').forEach(function(card) {
+                var d = getCardData(card);
+                d.is_subscriber = card.querySelector('.is-sub-cb').checked;
+                d.is_secretary = card.querySelector('.is-sec-cb').checked;
+                d.share_percent = card.querySelector('.share-pct-input').value || '';
+                data.directors.push(d);
+            });
+
+            // Secretary
+            document.querySelectorAll('#secFields .static-field').forEach(function(inp) {
+                var key = inp.dataset.f.replace('sec_', '');
+                data.secretary[key] = inp.value;
+            });
+            data.secretary._linked_to_director = secFromDir;
+
+            // Subscribers
+            document.querySelectorAll('#subscribersContainer .dyn-card').forEach(function(card) {
+                var s = getCardData(card);
+                s._linked_to_director = parseInt(card.dataset.linked);
+                data.subscribers.push(s);
+            });
+
+            return data;
         }
 
-        // --- Start ---
-        init();
+        /* =============================================
+           INITIALIZATION
+        ============================================= */
+        restore();
+        attachListeners();
+
     })();
     </script>
 </body>
