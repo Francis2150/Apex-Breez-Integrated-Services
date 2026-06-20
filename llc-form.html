@@ -1174,40 +1174,94 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        /* =============================================
-           FORM SUBMIT
-        ============================================= */
-        document.getElementById('llcForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+      /* =============================================
+   FORM SUBMIT
+============================================= */
+document.getElementById('llcForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-            if (!validateForm()) {
-                showToast('Please fix the highlighted errors before submitting.', 'error');
-                return;
-            }
+    if (!validateForm()) {
+        showToast('Please fill in all required fields before submitting.', 'error');
+        return;
+    }
 
-            // Check share total if any shares are allocated
-            var shareTotalEl = document.getElementById('shareTotal');
-            if (shareTotalEl.style.display === 'flex' && shareTotalEl.classList.contains('over')) {
-                showToast('Total share allocation must equal 100%.', 'error');
-                return;
-            }
+    // Check share total if any shares are allocated
+    var shareTotalEl = document.getElementById('shareTotal');
+    if (shareTotalEl.style.display === 'flex' && shareTotalEl.classList.contains('over')) {
+        showToast('Total share allocation must equal 100%.', 'error');
+        return;
+    }
 
-            // Collect final data for submission
-            var formData = collectFormData();
+    var data = collectFormData();
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Submitting...';
 
-            // Here you would normally send formData to a server
-            console.log('Form submitted:', formData);
-            showToast('Registration submitted successfully! We will review your application.', 'success');
+    fetch('https://elevater247.com/abms/api/submit-llc.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+    .then(function(r) {
+        if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'Server error'); });
+        return r.json();
+    })
+    .then(function(r) {
+        if (r.status === 'success') {
+            showToast('Registration submitted successfully! Ref: ' + r.data.submission_ref, 'success');
 
-            // Disable submit button to prevent double submission
-            var btn = document.getElementById('submitBtn');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Submitting...';
-            setTimeout(function() {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fa fa-paper-plane"></i> Submit Registration';
-            }, 3000);
-        });
+            // Clear saved data
+            try { localStorage.removeItem(SKEY); } catch(e) {}
+
+            // Reset state
+            secFromDir = -1;
+
+            // Clear dynamic containers
+            document.getElementById('directorsContainer').innerHTML = '';
+            document.getElementById('subscribersContainer').innerHTML = '';
+
+            // Rebuild initial empty cards
+            appendHTML(document.getElementById('directorsContainer'), dirHTML(0));
+            rebuildSubscribers();
+
+            // Reset all static fields
+            document.querySelectorAll('.static-field').forEach(function(inp) {
+                inp.readOnly = false;
+                inp.classList.remove('auto-filled');
+                if (inp.dataset.f === 'sec_nationality') { inp.value = 'Ghanaian'; return; }
+                if (inp.dataset.f === 'sec_res_country') { inp.value = 'Ghana'; return; }
+                inp.value = '';
+            });
+
+            // Re-enable all secretary checkboxes
+            document.querySelectorAll('.is-sec-cb').forEach(function(cb) {
+                cb.disabled = false;
+                cb.closest('.role-check-label').style.opacity = '1';
+            });
+            applySecState();
+
+            // Clear all error states
+            document.querySelectorAll('.form-group').forEach(function(g) {
+                g.classList.remove('has-error', 'shake');
+            });
+            document.querySelectorAll('.field-error').forEach(function(e) {
+                e.classList.remove('visible');
+            });
+
+            updateShareTotal();
+            attachListeners();
+        } else {
+            showToast(r.message || 'Something went wrong.', 'error');
+        }
+    })
+    .catch(function(err) {
+        showToast(err.message || 'Network error. Check your connection.', 'error');
+    })
+    .finally(function() {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa fa-paper-plane"></i> Submit Registration';
+    });
+});
 
         function collectFormData() {
             var data = { company: {}, office: {}, directors: [], secretary: {}, subscribers: [] };
