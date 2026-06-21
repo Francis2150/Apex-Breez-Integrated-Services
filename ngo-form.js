@@ -31,6 +31,18 @@
         res_country: 'sec_res_country'
     };
 
+    // Mapping from office static field names to director residential address field names
+    var OFF_TO_DIR_RES_MAP = {
+        'off_gps': 'res_gps',
+        'off_landmark': 'res_landmark',
+        'off_building_no': 'res_house_no',
+        'off_town': 'res_town',
+        'off_street': 'res_street',
+        'off_city': 'res_city',
+        'off_district': 'res_district',
+        'off_region': 'res_region'
+    };
+
     /* =============================================
        MOBILE NAVIGATION
     ============================================= */
@@ -89,6 +101,7 @@
         h += '<div class="dyn-card-header"><h3><i class="fa fa-user-tie"></i> Director ' + (i + 1) + '</h3>';
         h += '<button type="button" class="remove-dyn-btn" data-action="remove" ' + (i === 0 ? 'style="display:none"' : '') + '>&times;</button></div>';
         h += '<div class="role-checks">';
+        h += '<label class="role-check-label"><input type="checkbox" class="is-off-addr-cb" ' + (d.is_office_addr ? 'checked' : '') + '> <span>Use Office Address as Residential Address</span></label>';
         h += '<label class="role-check-label"><input type="checkbox" class="is-sub-cb" data-role="sub" ' + (d.is_subscriber ? 'checked' : '') + '> <span>Is also a Subscriber</span></label>';
         h += '<div class="vote-box" style="display:' + (d.is_subscriber ? 'block' : 'none') + '"><label>Voting Rights</label><select class="vote-rights-select"><option value="Yes"' + (d.voting_rights === 'Yes' ? ' selected' : '') + '>Yes</option><option value="No"' + (d.voting_rights === 'No' ? ' selected' : '') + '>No</option></select></div>';
         h += '<label class="role-check-label"><input type="checkbox" class="is-sec-cb" data-role="sec" ' + (d.is_secretary ? 'checked' : '') + '> <span>Is also the Secretary</span></label>';
@@ -112,7 +125,6 @@
     }
 
     // Build a subscriber card
-    // linked: -1 = manual, >=0 = linked director index
     function subHTML(i, d, linked) {
         d = d || {};
         linked = (linked !== undefined && linked !== null) ? linked : -1;
@@ -134,7 +146,6 @@
             if (k === 'nationality' && !val) val = 'Ghanaian';
             h += '<div class="form-group"><label>' + full + '</label>';
             h += '<input type="' + (types[k] || 'text') + '" class="form-control dyn-field' + roClass + '" data-f="' + k + '" value="' + escAttr(val) + '" ' + (req ? 'required' : '') + ro + '>';
-            // Only show inline error for non-linked required fields
             if (req && !isLinked) h += '<span class="field-error"><i class="fa fa-exclamation-circle"></i> <span>' + lbl + ' is required</span></span>';
             h += '</div>';
         });
@@ -204,10 +215,58 @@
         el.className = 'toast ' + type;
         el.innerHTML = '<i class="fa fa-' + (type === 'success' ? 'check-circle' : 'exclamation-triangle') + '"></i> ' + msg;
         clearTimeout(toastTimer);
-        // Force reflow for re-triggering animation
         void el.offsetWidth;
         el.classList.add('show');
         toastTimer = setTimeout(function() { el.classList.remove('show'); }, 3500);
+    }
+
+    /* =============================================
+       OFFICE TO DIRECTOR ADDRESS LOGIC
+       When checked: copy office location details into
+       the director's residential address fields.
+       When unchecked: make fields editable again.
+    ============================================= */
+    function applyOffAddrState(dirIdx, isChecked) {
+        var dirCard = document.querySelector('.dyn-card[data-type="director"][data-index="' + dirIdx + '"]');
+        if (!dirCard) return;
+
+        if (isChecked) {
+            Object.keys(OFF_TO_DIR_RES_MAP).forEach(function(offKey) {
+                var offInp = document.querySelector('.static-field[data-f="' + offKey + '"]');
+                var resKey = OFF_TO_DIR_RES_MAP[offKey];
+                var resInp = dirCard.querySelector('.dyn-field[data-f="' + resKey + '"]');
+                if (offInp && resInp) {
+                    resInp.value = offInp.value;
+                    resInp.readOnly = true;
+                    resInp.classList.add('auto-filled');
+                }
+            });
+        } else {
+            Object.keys(OFF_TO_DIR_RES_MAP).forEach(function(offKey) {
+                var resKey = OFF_TO_DIR_RES_MAP[offKey];
+                var resInp = dirCard.querySelector('.dyn-field[data-f="' + resKey + '"]');
+                if (resInp) {
+                    resInp.readOnly = false;
+                    resInp.classList.remove('auto-filled');
+                }
+            });
+        }
+    }
+
+    // Real-time sync: when an office field changes, update all linked directors
+    function syncOfficeToDirectors() {
+        document.querySelectorAll('#directorsContainer .dyn-card').forEach(function(card) {
+            var cb = card.querySelector('.is-off-addr-cb');
+            if (cb && cb.checked) {
+                var dirIdx = parseInt(card.dataset.index);
+                applyOffAddrState(dirIdx, true);
+            }
+        });
+    }
+
+    function handleOffAddrCheck(dirIdx, isChecked) {
+        applyOffAddrState(dirIdx, isChecked);
+        save();
     }
 
     /* =============================================
@@ -219,7 +278,6 @@
     function applySecState() {
         var note = document.getElementById('secNote');
         var noteText = document.getElementById('secNoteText');
-        // All secretary fields that can be auto-filled from a director
         var secFieldKeys = Object.keys(DIR_TO_SEC_MAP);
 
         if (secFromDir >= 0) {
@@ -236,18 +294,14 @@
                     }
                 });
             }
-            // Show note
             note.style.display = 'flex';
             noteText.textContent = 'Secretary information is auto-filled from Director ' + (secFromDir + 1) + '. The Qualification field below can still be edited.';
-            // Clear any error states on auto-filled secretary fields
             document.querySelectorAll('#secFields .form-group').forEach(function(g) {
                 g.classList.remove('has-error', 'shake');
                 var err = g.querySelector('.field-error');
                 if (err) err.style.display = 'none';
             });
         } else {
-            // Make all auto-fillable secretary fields editable again
-            // Keep their current values so user doesn't lose data
             secFieldKeys.forEach(function(dirKey) {
                 var secF = DIR_TO_SEC_MAP[dirKey];
                 var inp = document.querySelector('.static-field[data-f="' + secF + '"]');
@@ -260,8 +314,6 @@
         }
     }
 
-    // Real-time sync: when a director field changes and that director
-    // is the secretary, update the corresponding secretary field
     function syncDirectorToSecretary(dirIdx) {
         if (secFromDir !== dirIdx) return;
         var dirCard = document.querySelector('.dyn-card[data-type="director"][data-index="' + dirIdx + '"]');
@@ -274,11 +326,9 @@
         });
     }
 
-    // Handle secretary checkbox toggle on a director
     function handleSecCheck(dirIdx, isChecked) {
         if (isChecked) {
             secFromDir = dirIdx;
-            // Disable all other secretary checkboxes
             document.querySelectorAll('.is-sec-cb').forEach(function(cb, i) {
                 if (i !== dirIdx) {
                     cb.checked = false;
@@ -288,7 +338,6 @@
             });
         } else {
             secFromDir = -1;
-            // Re-enable all secretary checkboxes
             document.querySelectorAll('.is-sec-cb').forEach(function(cb) {
                 cb.disabled = false;
                 cb.closest('.role-check-label').style.opacity = '1';
@@ -300,22 +349,9 @@
 
     /* =============================================
        SUBSCRIBER LOGIC (LLC Rebuild Pattern)
-       Slot-based mapping: Director N -> Subscriber N.
-       Linked subscribers always come first in order,
-       then manual subscribers follow.
     ============================================= */
-
-    // Rebuild the entire subscribers section.
-    // 1. Collect all current manual subscriber data (data-linked="-1")
-    // 2. Clear container
-    // 3. For each director (in order), if "Is also a Subscriber" is
-    //    checked, create a linked subscriber card at the next position
-    // 4. Append manual subscribers after linked ones
-    // 5. If nothing exists, create one empty manual subscriber
     function rebuildSubscribers() {
         var sc = document.getElementById('subscribersContainer');
-
-        // Step 1: preserve manual subscriber data before clearing
         var manualSubs = [];
         sc.querySelectorAll('.dyn-card').forEach(function(card) {
             var linked = parseInt(card.dataset.linked);
@@ -323,12 +359,8 @@
                 manualSubs.push(getCardData(card));
             }
         });
-
-        // Step 2: clear
         sc.innerHTML = '';
         var idx = 0;
-
-        // Step 3: linked subscribers in director order
         var dirCards = document.querySelectorAll('#directorsContainer .dyn-card');
         dirCards.forEach(function(dirCard, dirIdx) {
             var cb = dirCard.querySelector('.is-sub-cb');
@@ -338,27 +370,20 @@
                 idx++;
             }
         });
-
-        // Step 4: manual subscribers
         manualSubs.forEach(function(msd) {
             appendHTML(sc, subHTML(idx, msd, -1));
             idx++;
         });
-
-        // Step 5: ensure at least one subscriber exists
         if (idx === 0) {
             appendHTML(sc, subHTML(0, {}, -1));
         }
     }
 
-    // Real-time sync: when a director field changes and that director
-    // is a subscriber, update the linked subscriber card's fields
     function syncDirectorToSubscriber(dirIdx) {
         var dirCard = document.querySelector('.dyn-card[data-type="director"][data-index="' + dirIdx + '"]');
         if (!dirCard) return;
         var cb = dirCard.querySelector('.is-sub-cb');
         if (!cb || !cb.checked) return;
-
         var dirData = getCardData(dirCard);
         var subCard = document.querySelector('.dyn-card[data-type="subscriber"][data-linked="' + dirIdx + '"]');
         if (subCard) {
@@ -366,7 +391,6 @@
         }
     }
 
-    // Handle subscriber checkbox toggle on a director
     function handleSubCheck(dirIdx, isChecked) {
         var card = document.querySelector('.dyn-card[data-type="director"][data-index="' + dirIdx + '"]');
         var voteBox = card.querySelector('.vote-box');
@@ -399,34 +423,20 @@
         var card = btn.closest('.dyn-card');
         var type = card.dataset.type;
         var idx = parseInt(card.dataset.index);
-
         card.remove();
-
         if (type === 'director') {
-            // Handle secretary link
             if (secFromDir === idx) {
                 secFromDir = -1;
                 applySecState();
-                document.querySelectorAll('.is-sec-cb').forEach(function(cb) {
-                    cb.disabled = false;
-                    cb.closest('.role-check-label').style.opacity = '1';
-                });
-            } else if (secFromDir > idx) {
-                secFromDir--;
-            }
-
-            // Rebuild subscribers (handles linked slot re-mapping)
+                document.querySelectorAll('.is-sec-cb').forEach(function(cb) { cb.disabled = false; cb.closest('.role-check-label').style.opacity = '1'; });
+            } else if (secFromDir > idx) { secFromDir--; }
             rebuildSubscribers();
             reindexCards('directorsContainer');
-        } else {
-            reindexCards('subscribersContainer');
-        }
-
+        } else { reindexCards('subscribersContainer'); }
         attachListeners();
         save();
     }
 
-    // Global references for HTML onclick attributes
     window.addDirector = addDirector;
     window.addSubscriber = addManualSubscriber;
 
@@ -434,117 +444,74 @@
        PERSISTENCE: SAVE & RESTORE
     ============================================= */
     function save() {
-        var data = {
-            static: {},
-            directors: [],
-            sec_from_director: secFromDir,
-            secretary: {},
-            manual_subscribers: []
-        };
-
-        // Save all static fields (org info, office details) — skip secretary fields
+        var data = { static: {}, directors: [], sec_from_director: secFromDir, secretary: {}, manual_subscribers: [] };
         document.querySelectorAll('.static-field').forEach(function(inp) {
             var key = inp.dataset.f;
-            if (key && key.indexOf('sec_') !== 0) {
-                data.static[key] = inp.value;
-            }
+            if (key && key.indexOf('sec_') !== 0) { data.static[key] = inp.value; }
         });
-
-        // Save directors
         document.querySelectorAll('#directorsContainer .dyn-card').forEach(function(card) {
             var d = getCardData(card);
+            d.is_office_addr = card.querySelector('.is-off-addr-cb').checked;
             d.is_subscriber = card.querySelector('.is-sub-cb').checked;
             d.is_secretary = card.querySelector('.is-sec-cb').checked;
             d.voting_rights = card.querySelector('.vote-rights-select').value || '';
             data.directors.push(d);
         });
-
-        // Save secretary manual data only if not linked
         if (secFromDir < 0) {
             document.querySelectorAll('#secFields .static-field').forEach(function(inp) {
                 var key = inp.dataset.f.replace('sec_', '');
                 data.secretary[key] = inp.value;
             });
         }
-
-        // Save ONLY manual (unlinked) subscribers
         document.querySelectorAll('#subscribersContainer .dyn-card').forEach(function(card) {
             var linked = parseInt(card.dataset.linked);
-            if (isNaN(linked) || linked < 0) {
-                data.manual_subscribers.push(getCardData(card));
-            }
+            if (isNaN(linked) || linked < 0) { data.manual_subscribers.push(getCardData(card)); }
         });
-
         try { localStorage.setItem(SKEY, JSON.stringify(data)); } catch(e) {}
     }
 
     function restore() {
         var saved = null;
         try { saved = JSON.parse(localStorage.getItem(SKEY)); } catch(e) {}
-
         if (!saved || !saved.directors || saved.directors.length === 0) {
-            // No saved data — start fresh
             appendHTML(document.getElementById('directorsContainer'), dirHTML(0));
             rebuildSubscribers();
             return;
         }
-
-        // Restore static fields
         if (saved.static) {
             Object.keys(saved.static).forEach(function(k) {
                 var inp = document.querySelector('.static-field[data-f="' + k + '"]');
                 if (inp) inp.value = saved.static[k] || '';
             });
         }
-
-        // Restore directors
         var dc = document.getElementById('directorsContainer');
         dc.innerHTML = '';
+        saved.directors.forEach(function(dd, i) { appendHTML(dc, dirHTML(i, dd)); });
+
+        // Apply office address sync state after directors are built
         saved.directors.forEach(function(dd, i) {
-            appendHTML(dc, dirHTML(i, dd));
+            if (dd.is_office_addr) { applyOffAddrState(i, true); }
         });
 
-        // Restore secretary state
         if (saved.sec_from_director >= 0) {
             secFromDir = saved.sec_from_director;
-            // Check/disable secretary checkboxes accordingly
             document.querySelectorAll('.is-sec-cb').forEach(function(cb, i) {
-                if (i === secFromDir) {
-                    cb.checked = true;
-                } else {
-                    cb.checked = false;
-                    cb.disabled = true;
-                    cb.closest('.role-check-label').style.opacity = '0.4';
-                }
+                if (i === secFromDir) { cb.checked = true; } else { cb.checked = false; cb.disabled = true; cb.closest('.role-check-label').style.opacity = '0.4'; }
             });
-        } else {
-            secFromDir = -1;
-        }
+        } else { secFromDir = -1; }
         applySecState();
-
-        // Restore manual secretary data if not linked
         if (saved.sec_from_director < 0 && saved.secretary) {
             Object.keys(saved.secretary).forEach(function(k) {
                 var inp = document.querySelector('.static-field[data-f="sec_' + k + '"]');
                 if (inp) inp.value = saved.secretary[k] || '';
             });
         }
-
-        // Rebuild subscribers: linked from directors + manual from saved
         rebuildSubscribers();
-
-        // Now fill in the manual subscriber data into the correct cards
         if (saved.manual_subscribers && saved.manual_subscribers.length > 0) {
-            // Count how many linked subscribers were created
             var linkedCount = 0;
-            document.querySelectorAll('#directorsContainer .dyn-card').forEach(function(c) {
-                if (c.querySelector('.is-sub-cb').checked) linkedCount++;
-            });
+            document.querySelectorAll('#directorsContainer .dyn-card').forEach(function(c) { if (c.querySelector('.is-sub-cb').checked) linkedCount++; });
             var subCards = document.querySelectorAll('#subscribersContainer .dyn-card');
-            saved.manual_subscribers.forEach(function(msd, i) {
-                var targetCard = subCards[linkedCount + i];
-                if (targetCard) setCardData(targetCard, msd);
-            });
+            saved.manual_subscribers.forEach(function(msd, i) { var targetCard = subCards[linkedCount + i]; if (targetCard) setCardData(targetCard, msd); });
         }
     }
 
@@ -552,83 +519,33 @@
        VALIDATION
     ============================================= */
     function validateForm() {
-        var valid = true;
-        var firstError = null;
-
-        // Clear all previous errors
-        document.querySelectorAll('.form-group').forEach(function(g) {
-            g.classList.remove('has-error', 'shake');
-            var err = g.querySelector('.field-error');
-            if (err) err.style.display = 'none';
-        });
-
-        // Validate static required fields
+        var valid = true; var firstError = null;
+        document.querySelectorAll('.form-group').forEach(function(g) { g.classList.remove('has-error', 'shake'); var err = g.querySelector('.field-error'); if (err) err.style.display = 'none'; });
         document.querySelectorAll('.static-field[required]').forEach(function(inp) {
-            // Skip secretary fields if linked to a director
             if (secFromDir >= 0 && inp.dataset.f && inp.dataset.f.indexOf('sec_') === 0) return;
-            if (!inp.value.trim()) {
-                markError(inp);
-                valid = false;
-                if (!firstError) firstError = inp;
-            }
-            // Email format check
-            if (inp.type === 'email' && inp.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim())) {
-                markError(inp);
-                valid = false;
-                if (!firstError) firstError = inp;
-            }
+            if (!inp.value.trim()) { markError(inp); valid = false; if (!firstError) firstError = inp; }
+            if (inp.type === 'email' && inp.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim())) { markError(inp); valid = false; if (!firstError) firstError = inp; }
         });
-
-        // Validate director required fields
         document.querySelectorAll('#directorsContainer .dyn-card').forEach(function(card) {
             card.querySelectorAll('.dyn-field[required]').forEach(function(inp) {
-                if (!inp.value.trim()) {
-                    markError(inp);
-                    valid = false;
-                    if (!firstError) firstError = inp;
-                }
-                if (inp.type === 'email' && inp.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim())) {
-                    markError(inp);
-                    valid = false;
-                    if (!firstError) firstError = inp;
-                }
+                if (!inp.value.trim()) { markError(inp); valid = false; if (!firstError) firstError = inp; }
+                if (inp.type === 'email' && inp.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim())) { markError(inp); valid = false; if (!firstError) firstError = inp; }
             });
         });
-
-        // Validate manual (unlinked) subscriber required fields
         document.querySelectorAll('#subscribersContainer .dyn-card').forEach(function(card) {
-            var linked = parseInt(card.dataset.linked);
-            if (!isNaN(linked) && linked >= 0) return; // Skip linked subscribers
+            var linked = parseInt(card.dataset.linked); if (!isNaN(linked) && linked >= 0) return;
             card.querySelectorAll('.dyn-field[required]').forEach(function(inp) {
-                if (!inp.value.trim()) {
-                    markError(inp);
-                    valid = false;
-                    if (!firstError) firstError = inp;
-                }
-                if (inp.type === 'email' && inp.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim())) {
-                    markError(inp);
-                    valid = false;
-                    if (!firstError) firstError = inp;
-                }
+                if (!inp.value.trim()) { markError(inp); valid = false; if (!firstError) firstError = inp; }
+                if (inp.type === 'email' && inp.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim())) { markError(inp); valid = false; if (!firstError) firstError = inp; }
             });
         });
-
-        // Scroll to first error
-        if (firstError) {
-            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            firstError.focus();
-        }
-
+        if (firstError) { firstError.scrollIntoView({ behavior: 'smooth', block: 'center' }); firstError.focus(); }
         return valid;
     }
 
     function markError(inp) {
-        var group = inp.closest('.form-group');
-        if (!group) return;
-        group.classList.add('has-error', 'shake');
-        var err = group.querySelector('.field-error');
-        if (err) err.style.display = 'block';
-        // Remove shake after animation
+        var group = inp.closest('.form-group'); if (!group) return;
+        group.classList.add('has-error', 'shake'); var err = group.querySelector('.field-error'); if (err) err.style.display = 'block';
         setTimeout(function() { group.classList.remove('shake'); }, 500);
     }
 
@@ -636,132 +553,62 @@
        EVENT LISTENERS
     ============================================= */
     function attachListeners() {
-        // Remove buttons (event delegation on containers)
-        document.getElementById('directorsContainer').addEventListener('click', function(e) {
-            var btn = e.target.closest('[data-action="remove"]');
-            if (btn) removeDyn(btn);
-        });
-        document.getElementById('subscribersContainer').addEventListener('click', function(e) {
-            var btn = e.target.closest('[data-action="remove"]');
-            if (btn) removeDyn(btn);
-        });
+        document.getElementById('directorsContainer').addEventListener('click', function(e) { var btn = e.target.closest('[data-action="remove"]'); if (btn) removeDyn(btn); });
+        document.getElementById('subscribersContainer').addEventListener('click', function(e) { var btn = e.target.closest('[data-action="remove"]'); if (btn) removeDyn(btn); });
 
-        // Director role checkboxes
+        document.querySelectorAll('#directorsContainer .is-off-addr-cb').forEach(function(cb) {
+            var newCb = cb.cloneNode(true); cb.parentNode.replaceChild(newCb, cb);
+            newCb.addEventListener('change', function() { var dirIdx = parseInt(this.closest('.dyn-card').dataset.index); handleOffAddrCheck(dirIdx, this.checked); });
+        });
         document.querySelectorAll('#directorsContainer .is-sub-cb').forEach(function(cb) {
-            // Remove old listeners by cloning (simple approach)
-            var newCb = cb.cloneNode(true);
-            cb.parentNode.replaceChild(newCb, cb);
-            newCb.addEventListener('change', function() {
-                var dirIdx = parseInt(this.closest('.dyn-card').dataset.index);
-                handleSubCheck(dirIdx, this.checked);
-            });
+            var newCb = cb.cloneNode(true); cb.parentNode.replaceChild(newCb, cb);
+            newCb.addEventListener('change', function() { var dirIdx = parseInt(this.closest('.dyn-card').dataset.index); handleSubCheck(dirIdx, this.checked); });
         });
         document.querySelectorAll('#directorsContainer .is-sec-cb').forEach(function(cb) {
-            var newCb = cb.cloneNode(true);
-            cb.parentNode.replaceChild(newCb, cb);
-            newCb.addEventListener('change', function() {
-                var dirIdx = parseInt(this.closest('.dyn-card').dataset.index);
-                handleSecCheck(dirIdx, this.checked);
-            });
+            var newCb = cb.cloneNode(true); cb.parentNode.replaceChild(newCb, cb);
+            newCb.addEventListener('change', function() { var dirIdx = parseInt(this.closest('.dyn-card').dataset.index); handleSecCheck(dirIdx, this.checked); });
         });
 
-        // Voting rights selects
         document.querySelectorAll('.vote-rights-select').forEach(function(sel) {
-            var newSel = sel.cloneNode(true);
-            sel.parentNode.replaceChild(newSel, sel);
-            newSel.addEventListener('change', function() {
-                save();
-            });
+            var newSel = sel.cloneNode(true); sel.parentNode.replaceChild(newSel, sel);
+            newSel.addEventListener('change', function() { save(); });
         });
 
-        // Director dyn-fields: real-time sync + save
         document.querySelectorAll('#directorsContainer .dyn-field').forEach(function(inp) {
-            var newInp = inp.cloneNode(true);
-            inp.parentNode.replaceChild(newInp, inp);
-            newInp.addEventListener('input', function() {
-                var dirIdx = parseInt(this.closest('.dyn-card').dataset.index);
-                syncDirectorToSecretary(dirIdx);
-                syncDirectorToSubscriber(dirIdx);
-                save();
-            });
+            var newInp = inp.cloneNode(true); inp.parentNode.replaceChild(newInp, inp);
+            newInp.addEventListener('input', function() { var dirIdx = parseInt(this.closest('.dyn-card').dataset.index); syncDirectorToSecretary(dirIdx); syncDirectorToSubscriber(dirIdx); save(); });
         });
 
-        // Subscriber dyn-fields: save (only manual ones are editable)
         document.querySelectorAll('#subscribersContainer .dyn-field').forEach(function(inp) {
-            if (inp.readOnly) return; // Skip linked/read-only fields
-            var newInp = inp.cloneNode(true);
-            inp.parentNode.replaceChild(newInp, inp);
-            newInp.addEventListener('input', function() {
-                save();
-            });
+            if (inp.readOnly) return;
+            var newInp = inp.cloneNode(true); inp.parentNode.replaceChild(newInp, inp);
+            newInp.addEventListener('input', function() { save(); });
         });
 
-        // Static fields (org info, office details, secretary)
         document.querySelectorAll('.static-field').forEach(function(inp) {
             if (inp.readOnly) return;
-            // Only add listener once — use a flag
-            if (inp._listenerAttached) return;
-            inp._listenerAttached = true;
-            inp.addEventListener('input', function() {
-                save();
-            });
-            inp.addEventListener('change', function() {
-                save();
-            });
+            if (inp._listenerAttached) return; inp._listenerAttached = true;
+            inp.addEventListener('input', function() { if (this.dataset.f && this.dataset.f.indexOf('off_') === 0) { syncOfficeToDirectors(); } save(); });
+            inp.addEventListener('change', function() { if (this.dataset.f && this.dataset.f.indexOf('off_') === 0) { syncOfficeToDirectors(); } save(); });
         });
     }
 
     /* =============================================
        RESET BUTTON
-       Clears localStorage and resets the entire form
-       to its initial empty state.
     ============================================= */
     document.getElementById('resetBtn').addEventListener('click', function() {
         if (!confirm('Are you sure you want to reset the entire form? All data will be lost.')) return;
-
-        // Clear persisted data
         try { localStorage.removeItem(SKEY); } catch(e) {}
-
-        // Reset state
         secFromDir = -1;
-
-        // Clear dynamic containers
         document.getElementById('directorsContainer').innerHTML = '';
         document.getElementById('subscribersContainer').innerHTML = '';
-
-        // Reset all static fields to defaults
-        document.querySelectorAll('.static-field').forEach(function(inp) {
-            inp.readOnly = false;
-            inp.classList.remove('auto-filled');
-            // Keep default values for nationality/country
-            if (inp.dataset.f === 'sec_nationality') { inp.value = 'Ghanaian'; return; }
-            if (inp.dataset.f === 'sec_res_country') { inp.value = 'Ghana'; return; }
-            inp.value = '';
-        });
-
-        // Rebuild initial cards
+        document.querySelectorAll('.static-field').forEach(function(inp) { inp.readOnly = false; inp.classList.remove('auto-filled'); if (inp.dataset.f === 'sec_nationality') { inp.value = 'Ghanaian'; return; } if (inp.dataset.f === 'sec_res_country') { inp.value = 'Ghana'; return; } inp.value = ''; });
         appendHTML(document.getElementById('directorsContainer'), dirHTML(0));
         rebuildSubscribers();
-
-        // Reset secretary state
-        document.querySelectorAll('.is-sec-cb').forEach(function(cb) {
-            cb.disabled = false;
-            cb.closest('.role-check-label').style.opacity = '1';
-        });
+        document.querySelectorAll('.is-sec-cb').forEach(function(cb) { cb.disabled = false; cb.closest('.role-check-label').style.opacity = '1'; });
         applySecState();
-
-        // Clear all error states
-        document.querySelectorAll('.form-group').forEach(function(g) {
-            g.classList.remove('has-error', 'shake');
-            var err = g.querySelector('.field-error');
-            if (err) err.style.display = 'none';
-        });
-
-        attachListeners();
-        showToast('Form has been reset successfully.', 'success');
-
-        // Scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.form-group').forEach(function(g) { g.classList.remove('has-error', 'shake'); var err = g.querySelector('.field-error'); if (err) err.style.display = 'none'; });
+        attachListeners(); showToast('Form has been reset successfully.', 'success'); window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     /* =============================================
@@ -769,135 +616,47 @@
     ============================================= */
     document.getElementById('ngoForm').addEventListener('submit', function(e) {
         e.preventDefault();
-
-        if (!validateForm()) {
-            showToast('Please fill in all required fields before submitting.', 'error');
-            return;
-        }
-
-        var data = collectFormData();
-        var btn = document.getElementById('submitBtn');
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Submitting...';
-
-        fetch('https://elevater247.com/abms/api/submit-ngo.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        })
-        .then(function(r) {
-            if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'Server error'); });
-            return r.json();
-        })
+        if (!validateForm()) { showToast('Please fill in all required fields before submitting.', 'error'); return; }
+        var data = collectFormData(); var btn = document.getElementById('submitBtn');
+        btn.disabled = true; btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Submitting...';
+        fetch('https://elevater247.com/abms/api/submit-ngo.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+        .then(function(r) { if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'Server error'); }); return r.json(); })
         .then(function(r) {
             if (r.status === 'success') {
                 showToast('Registration submitted successfully! Ref: ' + r.data.submission_ref, 'success');
-
-                // Clear saved data
-                try { localStorage.removeItem(SKEY); } catch(e) {}
-
-                // Reset state
-                secFromDir = -1;
-
-                // Clear dynamic containers
-                document.getElementById('directorsContainer').innerHTML = '';
-                document.getElementById('subscribersContainer').innerHTML = '';
-
-                // Rebuild initial empty cards
-                appendHTML(document.getElementById('directorsContainer'), dirHTML(0));
-                rebuildSubscribers();
-
-                // Reset all static fields
-                document.querySelectorAll('.static-field').forEach(function(inp) {
-                    inp.readOnly = false;
-                    inp.classList.remove('auto-filled');
-                    if (inp.dataset.f === 'sec_nationality') { inp.value = 'Ghanaian'; return; }
-                    if (inp.dataset.f === 'sec_res_country') { inp.value = 'Ghana'; return; }
-                    inp.value = '';
-                });
-
-                // Re-enable all secretary checkboxes
-                document.querySelectorAll('.is-sec-cb').forEach(function(cb) {
-                    cb.disabled = false;
-                    cb.closest('.role-check-label').style.opacity = '1';
-                });
-                applySecState();
-
-                // Clear all error states
-                document.querySelectorAll('.form-group').forEach(function(g) {
-                    g.classList.remove('has-error', 'shake');
-                });
-                document.querySelectorAll('.field-error').forEach(function(e) {
-                    e.style.display = 'none';
-                });
-
+                try { localStorage.removeItem(SKEY); } catch(e) {} secFromDir = -1;
+                document.getElementById('directorsContainer').innerHTML = ''; document.getElementById('subscribersContainer').innerHTML = '';
+                appendHTML(document.getElementById('directorsContainer'), dirHTML(0)); rebuildSubscribers();
+                document.querySelectorAll('.static-field').forEach(function(inp) { inp.readOnly = false; inp.classList.remove('auto-filled'); if (inp.dataset.f === 'sec_nationality') { inp.value = 'Ghanaian'; return; } if (inp.dataset.f === 'sec_res_country') { inp.value = 'Ghana'; return; } inp.value = ''; });
+                document.querySelectorAll('.is-sec-cb').forEach(function(cb) { cb.disabled = false; cb.closest('.role-check-label').style.opacity = '1'; }); applySecState();
+                document.querySelectorAll('.form-group').forEach(function(g) { g.classList.remove('has-error', 'shake'); }); document.querySelectorAll('.field-error').forEach(function(e) { e.style.display = 'none'; });
                 attachListeners();
-            } else {
-                showToast(r.message || 'Something went wrong.', 'error');
-            }
+            } else { showToast(r.message || 'Something went wrong.', 'error'); }
         })
-        .catch(function(err) {
-            showToast(err.message || 'Network error. Check your connection.', 'error');
-        })
-        .finally(function() {
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fa fa-paper-plane"></i> Submit Registration';
-        });
+        .catch(function(err) { showToast(err.message || 'Network error. Check your connection.', 'error'); })
+        .finally(function() { btn.disabled = false; btn.innerHTML = '<i class="fa fa-paper-plane"></i> Submit Registration'; });
     });
 
     /* =============================================
-       COLLECT FORM DATA (Structured for PHP)
+       COLLECT FORM DATA
     ============================================= */
     function collectFormData() {
         var data = { org: {}, office: {}, directors: [], secretary: {}, subscribers: [] };
-
-        // Organization info fields
-        var orgKeys = [
-            'org_name','presented_by','presenter_tin','activities','employees'
-        ];
-
-        // Office detail fields
-        var officeKeys = [
-            'off_gps','off_landmark','off_building_no','off_town','off_street',
-            'off_city','off_district','off_region','off_postal_no','off_postal_town',
-            'off_postal_region','off_contact1','off_contact2','off_email'
-        ];
-
-        // Write org fields into data.org
-        orgKeys.forEach(function(k) {
-            var inp = document.querySelector('.static-field[data-f="' + k + '"]');
-            if (inp) data.org[k] = inp.value;
-        });
-
-        // Write office fields into data.office — strip the "off_" prefix
-        officeKeys.forEach(function(k) {
-            var inp = document.querySelector('.static-field[data-f="' + k + '"]');
-            if (inp) data.office[k.replace('off_', '')] = inp.value;
-        });
-
-        // Directors
+        var orgKeys = ['org_name','presented_by','presenter_tin','activities','employees'];
+        var officeKeys = ['off_gps','off_landmark','off_building_no','off_town','off_street','off_city','off_district','off_region','off_postal_no','off_postal_town','off_postal_region','off_contact1','off_contact2','off_email'];
+        orgKeys.forEach(function(k) { var inp = document.querySelector('.static-field[data-f="' + k + '"]'); if (inp) data.org[k] = inp.value; });
+        officeKeys.forEach(function(k) { var inp = document.querySelector('.static-field[data-f="' + k + '"]'); if (inp) data.office[k.replace('off_', '')] = inp.value; });
         document.querySelectorAll('#directorsContainer .dyn-card').forEach(function(card) {
             var d = getCardData(card);
+            d.is_office_addr = card.querySelector('.is-off-addr-cb').checked;
             d.is_subscriber = card.querySelector('.is-sub-cb').checked;
             d.is_secretary = card.querySelector('.is-sec-cb').checked;
             d.voting_rights = card.querySelector('.vote-rights-select').value || '';
             data.directors.push(d);
         });
-
-        // Secretary
-        document.querySelectorAll('#secFields .static-field').forEach(function(inp) {
-            var key = inp.dataset.f.replace('sec_', '');
-            data.secretary[key] = inp.value;
-        });
+        document.querySelectorAll('#secFields .static-field').forEach(function(inp) { var key = inp.dataset.f.replace('sec_', ''); data.secretary[key] = inp.value; });
         data.secretary._linked_to_director = secFromDir;
-
-        // Subscribers
-        document.querySelectorAll('#subscribersContainer .dyn-card').forEach(function(card) {
-            var s = getCardData(card);
-            s._linked_to_director = parseInt(card.dataset.linked);
-            data.subscribers.push(s);
-        });
-
+        document.querySelectorAll('#subscribersContainer .dyn-card').forEach(function(card) { var s = getCardData(card); s._linked_to_director = parseInt(card.dataset.linked); data.subscribers.push(s); });
         return data;
     }
 
@@ -906,5 +665,4 @@
     ============================================= */
     restore();
     attachListeners();
-
 })();
