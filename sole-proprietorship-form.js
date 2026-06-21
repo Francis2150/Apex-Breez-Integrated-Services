@@ -1,4 +1,3 @@
-
 (function() {
     var STORAGE_KEY = 'apex_sole_prop_data';
 
@@ -16,23 +15,43 @@
         window.addEventListener('resize', function() { if (window.innerWidth > 991) closeNav(); });
     }
 
-    // --- Address Sync Logic ---
+    // --- Address Sync Logic (name-based mapping) ---
     var sameAddressCb = document.getElementById('sameAddress');
     var resFields = document.querySelectorAll('.res-addr');
     var bizFields = document.querySelectorAll('.biz-addr');
 
+    // Explicit name-to-name mapping — no more fragile index matching
+    var addrMap = {
+        'res_gps':      'biz_gps',
+        'res_landmark': 'biz_landmark',
+        'res_house_no': 'biz_house_no',
+        'res_street':   'biz_street',
+        'res_city':     'biz_city',
+        'res_town':     'biz_town',
+        'res_district': 'biz_district',
+        'res_region':   'biz_region'
+        // res_country has no business counterpart — intentionally excluded
+    };
+
     function handleSyncCheckbox() {
+        // Start by unlocking every biz-addr field
+        bizFields.forEach(function(bizInput) {
+            bizInput.readOnly = false;
+        });
+
         if (sameAddressCb.checked) {
-            resFields.forEach(function(resInput, index) {
-                if (bizFields[index]) {
-                    bizFields[index].value = resInput.value;
-                    bizFields[index].readOnly = true;
+            // Copy only the fields that have a matching pair
+            Object.keys(addrMap).forEach(function(resName) {
+                var bizName = addrMap[resName];
+                var resInput = document.querySelector('#solePropForm input[name="' + resName + '"]');
+                var bizInput = document.querySelector('#solePropForm input[name="' + bizName + '"]');
+                if (resInput && bizInput) {
+                    bizInput.value = resInput.value;
+                    bizInput.readOnly = true;
                 }
             });
-        } else {
-            bizFields.forEach(function(bizInput) {
-                bizInput.readOnly = false;
-            });
+            // biz_postal_no, biz_postal_town, biz_postal_region, biz_contact,
+            // and biz_email remain editable — they have no residential equivalent
         }
         saveToStorage();
     }
@@ -120,7 +139,7 @@
         });
     }
 
-        // --- Form Submission ---
+    // --- Form Submission ---
     var form = document.getElementById('solePropForm');
     var submitBtn = document.getElementById('submitBtn');
 
@@ -176,6 +195,7 @@
             submitBtn.innerHTML = '<i class="fa fa-paper-plane"></i> Submit Registration';
         });
     });
+
     // Remove red border on focus
     form.querySelectorAll('input').forEach(function(inp) {
         inp.addEventListener('focus', function() {
