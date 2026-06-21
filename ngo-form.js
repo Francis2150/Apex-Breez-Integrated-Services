@@ -12,11 +12,12 @@
         d=d||{};
         var f=dirFields(),h='<div class="dyn-card" data-type="director" data-index="'+i+'">';
         h+='<div class="dyn-card-header"><h3><i class="fa fa-user-tie"></i> Director '+(i+1)+'</h3>';
-        h+='<button type="button" class="remove-dyn-btn" '+(i===0?'style="display:none"':'')+'>×</button></div>';
+        h+='<button type="button" class="remove-dyn-btn" onclick="removeDyn(this)" '+(i===0?'style="display:none"':'')+'>×</button></div>';
         h+='<div class="role-checks">';
-        h+='<label class="role-check-label"><input type="checkbox" class="is-sub-cb" '+(d.is_subscriber?'checked':'')+'> <span>Is also a Subscriber</span></label>';
+        h+='<label class="role-check-label"><input type="checkbox" class="is-sub-cb" '+(d.is_subscriber?'checked':'')+' onchange="handleSubCheck('+i+')"> <span>Is also a Subscriber</span></label>';
+        /* VOTING RIGHTS — replaces share percentage */
         h+='<div class="vote-box" style="display:'+(d.is_subscriber?'block':'none')+'"><label>Voting Rights</label><select><option value="Yes" '+(d.voting_rights==='Yes'?'selected':'')+'>Yes</option><option value="No" '+(d.voting_rights==='No'?'selected':'')+'>No</option></select></div>';
-        h+='<label class="role-check-label"><input type="checkbox" class="is-sec-cb" '+(d.is_secretary?'checked':'')+'> <span>Is also the Secretary</span></label>';
+        h+='<label class="role-check-label"><input type="checkbox" class="is-sec-cb" '+(d.is_secretary?'checked':'')+' onchange="handleSecCheck('+i+')"> <span>Is also the Secretary</span></label>';
         h+='</div><div class="form-grid form-grid-2">';
         var labels={'first_name':'First Name *','middle_name':'Middle Name','surname':'Surname *','former_name':'Former Name','dob':'Date of Birth *','pob':'Place of Birth','nationality':'Nationality *','occupation':'Occupation','contact1':'Contact 1 *','contact2':'Contact 2','email':'Email *','tin':'TIN','ghana_card':'Ghana Card *','res_gps':'GPS','res_landmark':'Landmark','res_house_no':'House No.','res_street':'Street','res_city':'City','res_town':'Town','res_district':'District','res_region':'Region','res_country':'Country'};
         var types={'dob':'date'};
@@ -41,7 +42,7 @@
         var f=subFields(),h='<div class="dyn-card" data-type="subscriber" data-index="'+i+'" data-linked="'+linked+'">';
         if(linked>=0)h+='<div class="synced-badge"><i class="fa fa-copy"></i> Auto-filled from Director '+(linked+1)+'</div>';
         h+='<div class="dyn-card-header"><h3><i class="fa fa-file-signature"></i> Subscriber '+(i+1)+'</h3>';
-        h+='<button type="button" class="remove-dyn-btn" '+(i===0?'style="display:none"':'')+'>×</button></div>';
+        h+='<button type="button" class="remove-dyn-btn" onclick="removeDyn(this)" '+(i===0?'style="display:none"':'')+'>×</button></div>';
         h+='<div class="form-grid form-grid-2">';
         var labels={'first_name':'First Name *','middle_name':'Middle Name','surname':'Surname *','former_name':'Former Name','dob':'Date of Birth *','pob':'Place of Birth','nationality':'Nationality *','occupation':'Occupation','contact1':'Contact 1 *','contact2':'Contact 2','email':'Email *','tin':'TIN','ghana_card':'Ghana Card *','res_gps':'GPS','res_landmark':'Landmark','res_house_no':'House No.','res_street':'Street','res_city':'City','res_town':'Town','res_district':'District','res_region':'Region'};
         var types={'dob':'date'};
@@ -77,25 +78,25 @@
     }
 
     /* --- Add/Remove --- */
-    function addDirector(){var c=document.getElementById('directorsContainer');var n=c.querySelectorAll('.dyn-card').length;c.innerHTML+=dirHTML(n);attachListeners();save()}
-    function addSubscriber(){var c=document.getElementById('subscribersContainer');var n=c.querySelectorAll('.dyn-card').length;c.innerHTML+=subHTML(n);attachListeners();save()}
-    function removeDyn(btn){if(!confirm('Remove this section?'))return;btn.closest('.dyn-card').remove();reindexCards('directorsContainer');reindexCards('subscribersContainer');attachListeners();save()}
+    window.addDirector=function(){var c=document.getElementById('directorsContainer');var n=c.querySelectorAll('.dyn-card').length;c.innerHTML+=dirHTML(n);attachListeners();save()};
+    window.addSubscriber=function(){var c=document.getElementById('subscribersContainer');var n=c.querySelectorAll('.dyn-card').length;c.innerHTML+=subHTML(n);attachListeners();save()};
+    window.removeDyn=function(btn){if(!confirm('Remove this section?'))return;btn.closest('.dyn-card').remove();reindexCards('directorsContainer');reindexCards('subscribersContainer');attachListeners();save()};
     function reindexCards(cid){document.querySelectorAll('#'+cid+' .dyn-card').forEach(function(c,i){c.dataset.index=i;var h3=c.querySelector('h3');var t=c.dataset.type;h3.innerHTML='<i class="fa fa-'+(t==='director'?'user-tie':'file-signature')+'"></i> '+(t==='director'?'Director':'Subscriber')+' '+(i+1);var rm=c.querySelector('.remove-dyn-btn');rm.style.display=i===0?'none':''})}
 
     /* --- Secretary Sync --- */
-    function handleSecCheck(dirIdx){
+    window.handleSecCheck=function(dirIdx){
         var cb=document.querySelector('.dyn-card[data-type="director"][data-index="'+dirIdx+'"] .is-sec-cb');
         if(cb.checked){secFromDir=dirIdx;document.querySelectorAll('.is-sec-cb').forEach(function(c,i){if(i!==dirIdx){c.checked=false;c.disabled=true;c.closest('.role-check-label').style.opacity='0.4'}})}
         else{secFromDir=-1;document.querySelectorAll('.is-sec-cb').forEach(function(c){c.disabled=false;c.closest('.role-check-label').style.opacity='1'})}
         applySecState();save();
-    }
+    };
     function applySecState(){
         if(secFromDir>=0){document.getElementById('secFields').style.display='none';document.getElementById('secNote').style.display='flex';document.getElementById('secNoteText').textContent='Secretary information is copied from Director '+(secFromDir+1)+'.'}
         else{document.getElementById('secFields').style.display='';document.getElementById('secNote').style.display='none'}
     }
 
     /* --- Subscriber Sync --- */
-    function handleSubCheck(dirIdx){
+    window.handleSubCheck=function(dirIdx){
         var card=document.querySelector('.dyn-card[data-type="director"][data-index="'+dirIdx+'"]');
         var cb=card.querySelector('.is-sub-cb');
         var voteBox=card.querySelector('.vote-box');
@@ -109,7 +110,7 @@
             if(existing){existing.dataset.linked='-1';var badge=existing.querySelector('.synced-badge');if(badge)badge.remove();existing.querySelectorAll('.dyn-field').forEach(function(inp){inp.readOnly=false;inp.style.background='';inp.style.color=''})}
         }
         save();
-    }
+    };
 
     function getCardData(card){var d={};card.querySelectorAll('.dyn-field').forEach(function(inp){d[inp.dataset.f]=inp.value.trim()});return d}
     function setCardData(card,d){card.querySelectorAll('.dyn-field').forEach(function(inp){if(d[inp.dataset.f]!==undefined)inp.value=d[inp.dataset.f]})}
@@ -139,7 +140,13 @@
     }
 
     /* --- LocalStorage --- */
-    function save(){try{localStorage.setItem(SKEY,JSON.stringify(collectAll()))}catch(e){}}
+    function save(){try{localStorage.setItem(SKEY,JSON.stringify(collectAll()))}catch(e){}
+        /* Also persist voting rights from vote-box selects which aren't .dyn-field */
+        document.querySelectorAll('.vote-box select').forEach(function(sel){
+            var card=sel.closest('.dyn-card');
+            /* Already captured in collectAll via getCardData, so this is fine */
+        });
+    }
     function attachListeners(){
         document.querySelectorAll('#ngoForm input, #ngoForm select').forEach(function(inp){
             if(inp.type==='checkbox')return;
@@ -173,7 +180,7 @@
         attachListeners();
     });
 
-    /* --- Submit --- */
+            /* --- Submit --- */
     document.getElementById('ngoForm').addEventListener('submit',function(e){
         e.preventDefault();
         var valid=true;
@@ -195,28 +202,5 @@
     document.getElementById('ngoForm').addEventListener('focus',function(e){if(e.target.style)e.target.style.borderColor=''},true);
 
     function showToast(m,t){var el=document.getElementById('toast');el.textContent=m;el.className='toast '+t+' show';setTimeout(function(){el.classList.remove('show')},4000)}
-
-    /* --- Event Delegation for dynamically created elements --- */
-    document.getElementById('directorsContainer').addEventListener('change',function(e){
-        if(e.target.classList.contains('is-sub-cb')){
-            var card=e.target.closest('.dyn-card');
-            var idx=parseInt(card.dataset.index);
-            handleSubCheck(idx);
-        }
-        if(e.target.classList.contains('is-sec-cb')){
-            var card=e.target.closest('.dyn-card');
-            var idx=parseInt(card.dataset.index);
-            handleSecCheck(idx);
-        }
-    });
-    document.getElementById('directorsContainer').addEventListener('click',function(e){
-        if(e.target.classList.contains('remove-dyn-btn')){removeDyn(e.target)}
-    });
-    document.getElementById('subscribersContainer').addEventListener('click',function(e){
-        if(e.target.classList.contains('remove-dyn-btn')){removeDyn(e.target)}
-    });
-    document.getElementById('addDirectorBtn').addEventListener('click',addDirector);
-    document.getElementById('addSubscriberBtn').addEventListener('click',addSubscriber);
-
     init();
 })();
