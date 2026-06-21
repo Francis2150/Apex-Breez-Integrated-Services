@@ -10,9 +10,14 @@
         
         var text = (e.clipboardData || window.clipboardData).getData('text');
         
-        // Only intercept if the pasted content contains tabs (tabular data).
-        // Standard single-cell copies without tabs will paste normally.
-        if (!text || text.indexOf('\t') === -1) return;
+        // Only intercept if the pasted content contains tabs (multiple columns) 
+        // OR newlines (multiple rows copied from a single column).
+        // Standard single-cell copies will just be plain text without tabs or newlines, 
+        // allowing them to paste normally into a single field.
+        var hasTabs = text.indexOf('\t') !== -1;
+        var hasNewlines = text.indexOf('\n') !== -1;
+
+        if (!hasTabs && !hasNewlines) return;
 
         // Prevent the default behavior of dumping everything into one input
         e.preventDefault();
@@ -65,6 +70,8 @@
             // Skip completely empty rows to maintain alignment
             if (rows[r].trim() === '') continue; 
             
+            // If there are tabs, split by tab (multiple columns). 
+            // If no tabs (single column copy), the whole row is one value.
             var cols = rows[r].split('\t');
             for (var c = 0; c < cols.length; c++) {
                 values.push(cols[c]);
