@@ -140,8 +140,8 @@
                             <input type="number" name="biz_annual_revenue" class="form-control" placeholder="e.g. 50000">
                         </div>
                         <div class="form-group">
-                            <label>Number of Employees</label>
-                            <input type="number" name="biz_employees" class="form-control" placeholder="e.g. 3">
+                            <label>Number of Employees Expected</label>
+                            <input type="number" name="biz_employees" class="form-control" placeholder="e.g. 10">
                         </div>
                     </div>
                 </div>
@@ -155,27 +155,27 @@
                     <div class="form-grid form-grid-2">
                         <div class="form-group">
                             <label>First Name <span class="req">*</span></label>
-                            <input type="text" name="own_first_name" class="form-control" required autocomplete="given-name" placeholder="e.g. Kwame">
+                            <input type="text" name="own_first_name" class="form-control" required autocomplete="given-name" placeholder="e.g. Francis">
                         </div>
                         <div class="form-group">
                             <label>Middle Name</label>
-                            <input type="text" name="own_middle_name" class="form-control" autocomplete="additional-name" placeholder="e.g. Atta">
+                            <input type="text" name="own_middle_name" class="form-control" autocomplete="additional-name" placeholder="e.g. Kwame">
                         </div>
                         <div class="form-group">
                             <label>Surname <span class="req">*</span></label>
-                            <input type="text" name="own_surname" class="form-control" required autocomplete="family-name" placeholder="e.g. Mensah">
+                            <input type="text" name="own_surname" class="form-control" required autocomplete="family-name" placeholder="e.g. Ofosu">
                         </div>
                         <div class="form-group">
                             <label>Former Name</label>
-                            <input type="text" name="own_former_name" class="form-control" placeholder="e.g. Kwaku Mensah (if changed)">
+                            <input type="text" name="own_former_name" class="form-control" placeholder="e.g. Kwaku Mensah (any name changed )">
                         </div>
                         <div class="form-group">
-                            <label>Date of Birth <span class="req">*</span></label>
-                            <input type="date" name="own_dob" class="form-control" required>
+                            <label>Date of Birth <span class="req" placeholder="e.g. 20/05/2002">*</span></label>
+                            <input type="text" name="own_dob" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Place of Birth</label>
-                            <input type="text" name="own_pob" class="form-control" autocomplete="birth-place" placeholder="e.g. Accra, Greater Accra">
+                            <input type="text" name="own_pob" class="form-control" autocomplete="birth-place" placeholder="e.g. Madina">
                         </div>
                         <div class="form-group">
                             <label>Nationality <span class="req">*</span></label>
@@ -195,7 +195,7 @@
                         </div>
                         <div class="form-group">
                             <label>Email Address <span class="req">*</span></label>
-                            <input type="email" name="own_email" class="form-control" required autocomplete="email" placeholder="e.g. kwame.mensah@email.com">
+                            <input type="email" name="own_email" class="form-control" required autocomplete="email" placeholder="e.g. kwamemensah@email.com">
                         </div>
                         <div class="form-group">
                             <label>Mother's Name <span class="req">*</span></label>
@@ -203,7 +203,7 @@
                         </div>
                         <div class="form-group">
                             <label>TIN (Tax Number)</label>
-                            <input type="text" name="own_tin" class="form-control" placeholder="e.g. C0000000000">
+                            <input type="text" name="own_tin" class="form-control" placeholder="e.g. p0045565678">
                         </div>
                         <div class="form-group">
                             <label>Ghana Card ID <span class="req">*</span></label>
@@ -224,19 +224,25 @@
                         </div>
                         <div class="form-group">
                             <label>House No.</label>
-                            <input type="text" name="res_house_no" class="form-control res-addr" autocomplete="house-number" placeholder="e.g. No. 24">
+                            <input type="text" name="res_house_no" class="form-control res-addr" autocomplete="house-number" placeholder="e.g. no. 24 or unnumbered house">
                         </div>
                         <div class="form-group">
                             <label>Street Name</label>
-                            <input type="text" name="res_street" class="form-control res-addr" autocomplete="address-line1" placeholder="e.g. Oxford Street">
+                            <input type="text" name="res_street" class="form-control res-addr" autocomplete="address-line1" placeholder="e.g. dodoo Street">
                         </div>
+
                         <div class="form-group">
-                            <label>City / Town</label>
-                            <input type="text" name="res_city" class="form-control res-addr" autocomplete="address-level2" placeholder="e.g. Osu">
+                            <label>City</label>
+                            <input type="text" name="res_city" class="form-control res-addr" autocomplete="address-level2" placeholder="e.g. accra">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Town</label>
+                            <input type="text" name="res_city" class="form-control res-addr" autocomplete="address-level2" placeholder="e.g. Osu or Madina">
                         </div>
                         <div class="form-group">
                             <label>District</label>
-                            <input type="text" name="res_district" class="form-control res-addr" placeholder="e.g. Korle Klottey">
+                            <input type="text" name="res_district" class="form-control res-addr" placeholder="e.g. Ayawaso North">
                         </div>
                         <div class="form-group">
                             <label>Region <span class="req">*</span></label>
@@ -273,7 +279,7 @@
                         </div>
                         <div class="form-group">
                             <label>House No.</label>
-                            <input type="text" name="biz_house_no" class="form-control biz-addr" placeholder="e.g. No. 12">
+                            <input type="text" name="biz_house_no" class="form-control biz-addr" placeholder="e.g. No. 12 or unnumbered house">
                         </div>
                         <div class="form-group">
                             <label>Street Name</label>
@@ -296,12 +302,12 @@
                             <input type="text" name="biz_region" class="form-control biz-addr" placeholder="e.g. Greater Accra">
                         </div>
                         <div class="form-group">
-                            <label>Postal Number</label>
-                            <input type="text" name="biz_postal_no" class="form-control biz-addr" placeholder="e.g. GA-123">
+                            <label>Postal Number (box no.)</label>
+                            <input type="text" name="biz_postal_no" class="form-control biz-addr" placeholder="e.g. 554">
                         </div>
                         <div class="form-group">
-                            <label>Postal Town</label>
-                            <input type="text" name="biz_postal_town" class="form-control biz-addr" placeholder="e.g. Accra">
+                            <label>Postal Town (box town)</label>
+                            <input type="text" name="biz_postal_town" class="form-control biz-addr" placeholder="e.g. Osu">
                         </div>
                         <div class="form-group">
                             <label>Postal Region</label>
@@ -313,7 +319,7 @@
                         </div>
                         <div class="form-group" style="grid-column: 1 / -1;">
                             <label>Business Email</label>
-                            <input type="email" name="biz_email" class="form-control biz-addr" placeholder="e.g. info@mybusiness.com">
+                            <input type="email" name="biz_email" class="form-control biz-addr" placeholder="e.g. Mybusiness@gmail.com">
                         </div>
                     </div>
                 </div>
