@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
 *,*::before,*::after{box-sizing:border-box}
 body{font-family:'Inter',sans-serif;background:#F5F7FA;color:#444;margin:0;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
 .main-header{background:#fff;border-bottom:1px solid #E8C36A;position:sticky;top:0;z-index:1000}
@@ -80,23 +79,6 @@ body{font-family:'Inter',sans-serif;background:#F5F7FA;color:#444;margin:0;font-
 .footer-bottom{border-top:1px solid #0A6E5C;margin-top:30px;padding:20px 0;text-align:center;background:#085A4B;font-size:13px}
 .footer-bottom a{color:#fff;text-decoration:none}
 .footer-bottom a:hover{color:#E8C36A}
-
-@media(min-width:768px){
-    .form-grid-2{grid-template-columns:1fr 1fr}
-    .form-card{padding:32px}
-}
-
-@media(max-width:991px){
-    .mobile-toggle{display:flex}
-    .main-nav{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:#fff;box-shadow:-5px 0 30px rgba(11,31,59,.15);z-index:2000;transition:right .35s ease;overflow-y:auto;padding:24px 0;display:block!important}
-    .main-nav.open{right:0}
-    .main-nav>ul{flex-direction:column;align-items:stretch}
-    .main-nav>ul>li>a{padding:14px 24px;border-bottom:1px solid #F0F2F5;justify-content:flex-start;font-size:13px}
-    .main-nav .nav-dropdown{display:none!important}
-    .main-nav>ul>li>a .fa-chevron-down{display:none}
-}
-
-@media(max-width:767px){
-    .vote-box select{max-width:100%}
-    .role-checks{padding:12px}
-}
+@media(min-width:768px){.form-grid-2{grid-template-columns:1fr 1fr}.form-card{padding:32px}}
+@media(max-width:991px){.mobile-toggle{display:flex}.main-nav{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:#fff;box-shadow:-5px 0 30px rgba(11,31,59,.15);z-index:2000;transition:right .35s ease;overflow-y:auto;padding:24px 0;display:block!important}.main-nav.open{right:0}.main-nav>ul{flex-direction:column;align-items:stretch}.main-nav>ul>li>a{padding:14px 24px;border-bottom:1px solid #F0F2F5;justify-content:flex-start;font-size:13px}.main-nav .nav-dropdown{display:none!important}.main-nav>ul>li>a .fa-chevron-down{display:none}}
+@media(max-width:767px){.vote-box select{max-width:100%}.role-checks{padding:12px}}
