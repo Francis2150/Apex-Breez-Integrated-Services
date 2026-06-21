@@ -896,8 +896,9 @@ document.getElementById('llcForm').addEventListener('submit', function(e) {
     });
 });
 
-       function collectFormData() {
-    var data = { company: {}, directors: [], secretary: {}, subscribers: [] };
+ 
+function collectFormData() {
+    var data = { company: {}, office: {}, directors: [], secretary: {}, subscribers: [] };
 
     // Company info fields
     var companyKeys = [
@@ -905,17 +906,23 @@ document.getElementById('llcForm').addEventListener('submit', function(e) {
         'stated_capital','estimated_revenue','employees'
     ];
 
-    // Office detail fields — merged INTO company so PHP processes them together
+    // Office detail fields
     var officeKeys = [
         'off_gps','off_landmark','off_building_no','off_town','off_street',
         'off_city','off_district','off_region','off_postal_no','off_postal_town',
         'off_postal_region','off_contact1','off_contact2','off_email'
     ];
 
-    // Write ALL of them into data.company
-    companyKeys.concat(officeKeys).forEach(function(k) {
+    // Write company fields into data.company
+    companyKeys.forEach(function(k) {
         var inp = document.querySelector('.static-field[data-f="' + k + '"]');
         if (inp) data.company[k] = inp.value;
+    });
+
+    // Write office fields into data.office — strip the "off_" prefix
+    officeKeys.forEach(function(k) {
+        var inp = document.querySelector('.static-field[data-f="' + k + '"]');
+        if (inp) data.office[k.replace('off_', '')] = inp.value;
     });
 
     // Directors
