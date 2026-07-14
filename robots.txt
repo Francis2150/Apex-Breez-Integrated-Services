@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://apexbreez.elevater247.com/sitemap.xml
+Sitemap: https://apexbreez.com/sitemap.xml
