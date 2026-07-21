@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
     *, *::before, *::after { box-sizing: border-box; }
 
@@ -100,13 +101,9 @@
     .logo {
         overflow: hidden;
         max-width: 250px;
-        flex-shrink: 0;
     }
 
-    /* --- Navigation: Desktop (sits beside logo inside header) --- */
-    .main-nav {
-        flex-shrink: 0;
-    }
+    /* --- Navigation: Desktop --- */
     .main-nav ul {
         list-style: none;
         margin: 0;
@@ -203,7 +200,6 @@
         padding: 8px;
         flex-direction: column;
         gap: 5px;
-        flex-shrink: 0;
     }
     .mobile-toggle span {
         display: block;
@@ -318,7 +314,7 @@
         margin: 18px auto 0;
     }
 
-    /* --- Service Cards --- */
+    /* --- Services --- */
     .service-card {
         background: #FFFFFF;
         border-radius: 6px;
@@ -391,6 +387,12 @@
     .learn-more:hover { gap: 10px; color: #0B1F3B; }
 
     /* --- Trust/Process Items --- */
+    .trust-item {
+        text-align: center;
+        padding: 24px 16px;
+        transition: transform 0.3s;
+    }
+    .trust-item:hover { transform: translateY(-4px); }
     .trust-icon {
         width: 64px;
         height: 64px;
@@ -410,12 +412,6 @@
         color: #0B1F3B;
         border-color: #D4A843;
     }
-    .trust-item {
-        text-align: center;
-        padding: 24px 16px;
-        transition: transform 0.3s;
-    }
-    .trust-item:hover { transform: translateY(-4px); }
     .trust-item h4 {
         font-weight: 700;
         color: #0B1F3B;
@@ -429,109 +425,7 @@
         margin: 0;
     }
 
-    /* --- VM/Pricing Cards (legacy, kept for other pages) --- */
-    .vm-card {
-        background: #FFFFFF;
-        border: 1px solid #E8C36A;
-        border-radius: 6px;
-        padding: 40px 30px;
-        height: 100%;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.4s ease;
-    }
-    .vm-card::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #D4A843, #E8C36A);
-    }
-    .vm-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 40px rgba(11,31,59,0.08);
-        border-color: #D4A843;
-    }
-    .vm-icon {
-        width: 64px;
-        height: 64px;
-        border-radius: 50%;
-        background: rgba(212,168,67,0.06);
-        border: 1.5px solid #D4A843;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 22px;
-        font-size: 24px;
-        color: #D4A843;
-        transition: all 0.3s;
-    }
-    .vm-card:hover .vm-icon {
-        background: #D4A843;
-        color: #0B1F3B;
-        border-color: #D4A843;
-    }
-    .vm-card h3 {
-        font-size: 20px;
-        font-weight: 700;
-        color: #0B1F3B;
-        margin-bottom: 14px;
-    }
-    .vm-card p {
-        color: #444444;
-        font-size: 14px;
-        line-height: 1.8;
-        margin: 0;
-    }
-
-    /* --- Buttons --- */
-    .btn-gold {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: linear-gradient(135deg, #D4A843, #E8C36A);
-        color: #0B1F3B;
-        padding: 15px 36px;
-        border-radius: 4px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 14px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        transition: all 0.3s;
-    }
-    .btn-gold:hover {
-        background: linear-gradient(135deg, #c49938, #D4A843);
-        color: #0B1F3B;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(212,168,67,0.4);
-    }
-
-    .btn-teal {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: transparent;
-        color: #0A6E5C;
-        padding: 15px 36px;
-        border-radius: 4px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 14px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        border: 1.5px solid #0A6E5C;
-        transition: all 0.3s;
-    }
-    .btn-teal:hover {
-        background: linear-gradient(135deg, #085A4B, #0A6E5C);
-        color: #FFFFFF;
-        border-color: #085A4B;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(10,110,92,0.3);
-    }
-
-    /* --- CTA Box --- */
+    /* --- CTA --- */
     .cta-box {
         background: #0B1F3B;
         border-radius: 6px;
@@ -563,6 +457,51 @@
         max-width: 520px;
         position: relative;
         line-height: 1.8;
+    }
+    .btn-gold {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #D4A843, #E8C36A);
+        color: #0B1F3B;
+        padding: 15px 38px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s;
+        position: relative;
+    }
+    .btn-gold:hover {
+        background: linear-gradient(135deg, #c49938, #D4A843);
+        color: #0B1F3B;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(212,168,67,0.35);
+    }
+    .btn-teal {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        color: #0A6E5C;
+        padding: 15px 36px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border: 1.5px solid #0A6E5C;
+        transition: all 0.3s;
+    }
+    .btn-teal:hover {
+        background: linear-gradient(135deg, #085A4B, #0A6E5C);
+        color: #FFFFFF;
+        border-color: #085A4B;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(10,110,92,0.3);
     }
 
     /* --- Footer --- */
@@ -694,241 +633,12 @@
     .go-top:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(212,168,67,0.4); }
 
     /* =============================================
-       EXPERTISE SECTION — Text + Image Layout
-       ============================================= */
-    .expertise-intro {
-        display: flex;
-        align-items: center;
-        gap: 50px;
-        margin-bottom: 55px;
-    }
-
-    /* Text column: left-aligned, overrides centered section-header */
-    .expertise-text {
-        flex: 1 1 0%;
-        min-width: 0;
-        text-align: left;
-    }
-
-    /* Override the centered divider margin */
-    .expertise-text .section-divider {
-        margin-left: 0;
-    }
-
-    /* Image column: fixed max-width, shrinks on smaller screens */
-    .expertise-image {
-        flex: 0 1 440px;
-        max-width: 440px;
-    }
-
-    .expertise-image img {
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-        box-shadow: 0 12px 40px rgba(11,31,59,0.1);
-        display: block;
-    }
-
-    /* =============================================
-       PRICING CARDS — Grid & Card Styles
-       ============================================= */
-
-    /* 4-column grid */
-    .pricing-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 24px;
-        align-items: stretch;
-    }
-
-    /* Individual pricing card */
-    .pricing-card {
-        background: #FFFFFF;
-        border: 1px solid #E8C36A;
-        border-radius: 6px;
-        padding: 36px 26px 32px;
-        position: relative;
-        overflow: visible;
-        transition: all 0.4s ease;
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* Gold top accent bar */
-    .pricing-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #D4A843, #E8C36A);
-        border-radius: 6px 6px 0 0;
-    }
-
-    /* Hover effect */
-    .pricing-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 16px 48px rgba(11,31,59,0.1);
-        border-color: #D4A843;
-    }
-
-    /* Featured card (Standard) — stands out */
-    .pricing-card.featured {
-        border-color: #0A6E5C;
-        box-shadow: 0 8px 32px rgba(10,110,92,0.12);
-        transform: scale(1.03);
-        z-index: 2;
-    }
-
-    /* Teal accent bar for featured card */
-    .pricing-card.featured::before {
-        background: linear-gradient(90deg, #085A4B, #0A6E5C);
-    }
-
-    /* Featured card hover — keep scale, add lift */
-    .pricing-card.featured:hover {
-        transform: scale(1.03) translateY(-6px);
-        box-shadow: 0 20px 56px rgba(10,110,92,0.18);
-        border-color: #0A6E5C;
-    }
-
-    /* "Most Popular" badge */
-    .pricing-badge {
-        position: absolute;
-        top: -14px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: linear-gradient(135deg, #085A4B, #0A6E5C);
-        color: #FFFFFF;
-        padding: 5px 20px;
-        border-radius: 20px;
-        font-size: 11px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        white-space: nowrap;
-        box-shadow: 0 4px 12px rgba(8,90,75,0.3);
-    }
-
-    /* Card header area */
-    .pricing-card-header {
-        text-align: center;
-        margin-bottom: 24px;
-        padding-top: 8px;
-    }
-
-    /* Package name */
-    .pricing-card-name {
-        font-size: 18px;
-        font-weight: 700;
-        color: #0B1F3B;
-        margin: 0 0 12px;
-    }
-
-    /* Price display */
-    .pricing-card-price {
-        font-size: 34px;
-        font-weight: 800;
-        color: #0A6E5C;
-        margin: 0 0 8px;
-        line-height: 1.2;
-    }
-
-    /* Short description */
-    .pricing-card-desc {
-        font-size: 13px;
-        color: #444444;
-        line-height: 1.7;
-        margin: 0;
-    }
-
-    /* Feature list */
-    .pricing-features {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 28px 0;
-        flex-grow: 1;
-    }
-
-    .pricing-features li {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 9px 0;
-        border-bottom: 1px solid #F5F7FA;
-        font-size: 13px;
-        color: #444444;
-        line-height: 1.5;
-    }
-
-    .pricing-features li:last-child {
-        border-bottom: none;
-    }
-
-    /* Feature icons — teal, fixed width for alignment */
-    .pricing-features li i {
-        color: #0A6E5C;
-        font-size: 13px;
-        margin-top: 3px;
-        flex-shrink: 0;
-        width: 16px;
-        text-align: center;
-    }
-
-    /* Pricing buttons */
-    .pricing-card .btn-pricing {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        width: 100%;
-        padding: 14px 24px;
-        border-radius: 4px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 13px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        transition: all 0.3s;
-    }
-
-    /* Teal outline button */
-    .pricing-card .btn-pricing.teal {
-        background: transparent;
-        color: #0A6E5C;
-        border: 1.5px solid #0A6E5C;
-    }
-
-    .pricing-card .btn-pricing.teal:hover {
-        background: linear-gradient(135deg, #085A4B, #0A6E5C);
-        color: #FFFFFF;
-        border-color: #085A4B;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(10,110,92,0.3);
-    }
-
-    /* Gold filled button (featured card) */
-    .pricing-card .btn-pricing.gold {
-        background: linear-gradient(135deg, #D4A843, #E8C36A);
-        color: #0B1F3B;
-        border: 1.5px solid transparent;
-    }
-
-    .pricing-card .btn-pricing.gold:hover {
-        background: linear-gradient(135deg, #c49938, #D4A843);
-        color: #0B1F3B;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(212,168,67,0.4);
-    }
-
-    /* =============================================
        MOBILE NAVIGATION (≤991px)
        ============================================= */
     @media (max-width: 991px) {
         .mobile-toggle { display: flex; }
 
-        /* Nav becomes a slide-in panel on mobile */
+        /* Slide-in panel */
         .main-nav {
             position: fixed;
             top: 0;
@@ -964,7 +674,7 @@
             align-items: center;
         }
 
-        /* Hide dropdowns on mobile */
+        /* COMPLETELY hide dropdowns on mobile */
         .main-nav .nav-dropdown {
             display: none !important;
         }
@@ -977,42 +687,6 @@
         .page-hero h1 { font-size: 30px; }
         .page-hero .hero-accent { display: none; }
         .section-header h2 { font-size: 28px; }
-        .cta-box { padding: 40px 25px; }
-        .cta-box h2 { font-size: 24px; }
-
-        /* --- Expertise image: stack below text on tablet --- */
-        .expertise-intro {
-            flex-direction: column;
-            gap: 30px;
-            text-align: center;
-        }
-        .expertise-text {
-            text-align: center;
-        }
-        .expertise-text .section-divider {
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .expertise-image {
-            flex: 0 1 auto;
-            max-width: 400px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        /* --- Pricing: 2 columns on tablet --- */
-        .pricing-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        /* Remove scale on featured card at this breakpoint */
-        .pricing-card.featured {
-            transform: none;
-        }
-        .pricing-card.featured:hover {
-            transform: translateY(-6px);
-        }
     }
 
     @media (max-width: 767px) {
@@ -1025,17 +699,5 @@
         .section-header h2 { font-size: 24px; }
         .cta-box { padding: 35px 22px; }
         .cta-box h2 { font-size: 22px; }
-        .btn-gold, .btn-teal { width: 100%; justify-content: center; }
-
-        /* Expertise image: full width on mobile */
-        .expertise-image {
-            max-width: 100%;
-        }
     }
-
-    /* --- Pricing: single column on small phones --- */
-    @media (max-width: 575px) {
-        .pricing-grid {
-            grid-template-columns: 1fr;
-        }
-    }
+  

@@ -121,10 +121,12 @@
 
 <body>
 
-    <!-- ========== MAIN HEADER ========== -->
+    <!-- ========== MAIN HEADER (Nav + Overlay inside to share stacking context) ========== -->
     <header class="main-header" id="mainHeader">
         <div class="container">
             <div class="header-inner">
+
+                <!-- Logo -->
                 <div class="logo">
                     <a href="index.html" aria-label="Apex Breez Integrated Services Home">
                        <span class="marquee-text">
@@ -133,52 +135,54 @@
                     </a>
                 </div>
 
+                <!-- Desktop Navigation (sits beside logo) -->
+                <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                    <ul>
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+
+                        <li>
+                            <a href="About-Us.html" class="has-dropdown">
+                                About Us <i class="fa fa-chevron-down"></i>
+                            </a>
+                            <ul class="nav-dropdown">
+                                <li><a href="About-Us.html"><i class="fa fa-building"></i> Who We Are</a></li>
+                                <li><a href="About-Us.html#mission"><i class="fa fa-bullseye"></i> Our Mission</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="active">
+                            <a href="business-registration.html" class="has-dropdown">
+                                Services <i class="fa fa-chevron-down"></i>
+                            </a>
+                            <ul class="nav-dropdown">
+                                <li><a href="business-registration.html"><i class="fa fa-file-text-o"></i> Business Registration</a></li>
+                                <li><a href="business-advisory.html"><i class="fa fa-lightbulb-o"></i> Business Advisory</a></li>
+                                <li><a href="accounts.html"><i class="fa fa-calculator"></i> Accounting Systems</a></li>
+                                <li><a href="websiteDev.html"><i class="fa fa-laptop"></i> Website Development</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="contact.html">Contact Us</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Mobile Hamburger -->
                 <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
+
             </div>
         </div>
+
+        <!-- Overlay MUST be inside header so it shares the same stacking context as the nav on mobile -->
+        <div class="nav-overlay" id="navOverlay"></div>
     </header>
-
-    <!-- MOBILE NAVIGATION (Placed outside sticky header to fix mobile click bug) -->
-    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
-        <ul>
-            <li>
-                <a href="index.html">Home</a>
-            </li>
-
-            <li>
-                <a href="About-Us.html" class="has-dropdown">
-                    About Us <i class="fa fa-chevron-down"></i>
-                </a>
-                <ul class="nav-dropdown">
-                    <li><a href="About-Us.html"><i class="fa fa-building"></i> Who We Are</a></li>
-                    <li><a href="About-Us.html#mission"><i class="fa fa-bullseye"></i> Our Mission</a></li>
-                </ul>
-            </li>
-
-            <li class="active">
-                <a href="business-registration.html" class="has-dropdown">
-                    Services <i class="fa fa-chevron-down"></i>
-                </a>
-                <ul class="nav-dropdown">
-                    <li><a href="business-registration.html"><i class="fa fa-file-text-o"></i> Business Registration</a></li>
-                    <li><a href="business-advisory.html"><i class="fa fa-lightbulb-o"></i> Business Advisory</a></li>
-                    <li><a href="accounts.html"><i class="fa fa-calculator"></i> Accounting Systems</a></li>
-                    <li><a href="websiteDev.html"><i class="fa fa-laptop"></i> Website Development</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="contact.html">Contact Us</a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- Mobile Nav Overlay -->
-    <div class="nav-overlay" id="navOverlay"></div>
 
     <!-- ========== PAGE HERO ========== -->
     <section class="page-hero">
@@ -186,18 +190,22 @@
         <div class="container">
             <h1>Website Development Services in Ghana for Businesses and Startups</h1>
             <p>Professional, mobile-friendly websites that establish your online presence and attract customers.</p>
-           
         </div>
     </section>
 
     <!-- ========== WHAT WE BUILD ========== -->
     <section class="section-padding" style="background: #FFFFFF;">
         <div class="container">
-            <div class="section-header">
-                <div class="section-label">Our Expertise</div>
-                <h2>Types of Websites We Build</h2>
-                <p>From simple landing pages to complex e-commerce platforms — we deliver websites that perform.</p>
-                <div class="section-divider"></div>
+            <div class="expertise-intro">
+                <div class="expertise-text">
+                    <div class="section-label">Our Expertise</div>
+                    <h2>Types of Websites We Build</h2>
+                    <p>From simple landing pages to complex e-commerce platforms <br> we deliver websites that perform.</p>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="expertise-image">
+                    <img src="images/websitemage1.png" alt="Modern responsive website development on multiple devices" loading="lazy" width="560" height="380">
+                </div>
             </div>
 
             <div class="row">
@@ -361,63 +369,93 @@
                 <div class="section-divider"></div>
             </div>
 
-            <div class="row">
-                <div class="col-md-4 col-sm-6" style="margin-bottom: 30px;">
-                    <div class="vm-card" style="text-align: center;">
-                        <div class="vm-icon" style="margin: 0 auto 22px auto;">
-                            <i class="fa fa-globe"></i>
-                        </div>
-                        <h3>Domain & Hosting</h3>
-                        <p style="font-size: 32px; font-weight: 800; color: #0A6E5C; margin: 15px 0 5px;">GH₵ 1,000</p>
-                        <p style="color: #444444; font-size: 14px; margin-bottom: 25px;">Get your domain name registered and professional hosting set up.</p>
-                        <ul style="list-style: none; padding: 0; margin: 0 0 30px 0; text-align: left;">
-                            <li style="padding: 10px 0; border-bottom: 1px solid #F5F7FA; color: #444444; font-size: 14px;"><i class="fa fa-check" style="color: #0A6E5C; margin-right: 10px;"></i>.com or .gh domain registration</li>
-                            <li style="padding: 10px 0; border-bottom: 1px solid #F5F7FA; color: #444444; font-size: 14px;"><i class="fa fa-check" style="color: #0A6E5C; margin-right: 10px;"></i>1 year hosting included</li>
-                            <li style="padding: 10px 0; border-bottom: 1px solid #F5F7FA; color: #444444; font-size: 14px;"><i class="fa fa-check" style="color: #0A6E5C; margin-right: 10px;"></i>SSL certificate setup</li>
-                            <li style="padding: 10px 0; color: #444444; font-size: 14px;"><i class="fa fa-check" style="color: #0A6E5C; margin-right: 10px;"></i>Email accounts (up to 5)</li>
-                        </ul>
-                        <a href="contact.html" class="btn-teal" style="width: 100%; justify-content: center;">Get Started</a>
+            <div class="pricing-grid">
+
+                <!-- Starter Website -->
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <h3 class="pricing-card-name">Starter Website</h3>
+                        <div class="pricing-card-price">GH₵800</div>
+                        <p class="pricing-card-desc">Perfect for startups, freelancers, churches, and individuals.</p>
                     </div>
+                    <ul class="pricing-features">
+                        <li><i class="fa fa-file-o"></i> Up to 3 Pages</li>
+                        <li><i class="fa fa-mobile"></i> Mobile Responsive</li>
+                        <li><i class="fa fa-envelope"></i> Contact Form</li>
+                        <li><i class="fa fa-whatsapp"></i> WhatsApp Chat</li>
+                        <li><i class="fa fa-search"></i> Basic SEO</li>
+                        <li><i class="fa fa-lock"></i> SSL Setup</li>
+                        <li><i class="fa fa-share-alt"></i> Social Media Integration</li>
+                        <li><i class="fa fa-headset"></i> 7 Days Support</li>
+                    </ul>
+                    <a href="contact.html" class="btn-pricing teal">Get Started</a>
                 </div>
 
-                <div class="col-md-4 col-sm-6" style="margin-bottom: 30px;">
-                    <div class="vm-card" style="text-align: center; border-color: #0A6E5C; position: relative; overflow: visible;">
-                        <div style="position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #085A4B, #0A6E5C); color: #FFFFFF; padding: 5px 20px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Popular</div>
-                        <div class="vm-icon" style="margin: 10px auto 22px auto; background: rgba(10,110,92,0.1); border-color: #0A6E5C; color: #0A6E5C;">
-                            <i class="fa fa-laptop"></i>
-                        </div>
-                        <h3>Basic Website</h3>
-                        <p style="font-size: 32px; font-weight: 800; color: #0A6E5C; margin: 15px 0 5px;">GH₵ 1000</p>
-                        <p style="color: #444444; font-size: 14px; margin-bottom: 25px;">A professional 5-page website perfect for small businesses and startups.</p>
-                        <ul style="list-style: none; padding: 0; margin: 0 0 30px 0; text-align: left;">
-                            <li style="padding: 10px 0; border-bottom: 1px solid #F5F7FA; color: #444444; font-size: 14px;"><i class="fa fa-check" style="color: #0A6E5C; margin-right: 10px;"></i>Up to 5 pages</li>
-                            <li style="padding: 10px 0; border-bottom: 1px solid #F5F7FA; color: #444444; font-size: 14px;"><i class="fa fa-check" style="color: #0A6E5C; margin-right: 10px;"></i>Mobile responsive design</li>
-                            <li style="padding: 10px 0; border-bottom: 1px solid #F5F7FA; color: #444444; font-size: 14px;"><i class="fa fa-check" style="color: #0A6E5C; margin-right: 10px;"></i>Contact form integration</li>
-                            <li style="padding: 10px 0; border-bottom: 1px solid #F5F7FA; color: #444444; font-size: 14px;"><i class="fa fa-check" style="color: #0A6E5C; margin-right: 10px;"></i>Basic SEO setup</li>
-                            <li style="padding: 10px 0; color: #444444; font-size: 14px;"><i class="fa fa-check" style="color: #0A6E5C; margin-right: 10px;"></i>1 revision round</li>
-                        </ul>
-                        <a href="contact.html" class="btn-gold" style="width: 100%; justify-content: center;">Get Started</a>
+                <!-- Standard Website (Featured) -->
+                <div class="pricing-card featured">
+                    <span class="pricing-badge">Most Popular</span>
+                    <div class="pricing-card-header">
+                        <h3 class="pricing-card-name">Standard Website</h3>
+                        <div class="pricing-card-price">GH₵1,200</div>
+                        <p class="pricing-card-desc">Perfect for growing businesses.</p>
                     </div>
+                    <ul class="pricing-features">
+                        <li><i class="fa fa-files-o"></i> Up to 6 Pages</li>
+                        <li><i class="fa fa-check-double"></i> Everything in Starter</li>
+                        <li><i class="fa fa-globe"></i> FREE Domain Name (1 Year)</li>
+                        <li><i class="fa fa-server"></i> FREE Hosting (1 Year)</li>
+                        <li><i class="fa fa-at"></i> 1 Business Email</li>
+                        <li><i class="fa fa-map-marker"></i> Google Maps</li>
+                        <li><i class="fa fa-image"></i> Image Gallery</li>
+                        <li><i class="fa fa-tachometer"></i> Basic Speed Optimization</li>
+                        <li><i class="fa fa-headset"></i> 30 Days Support</li>
+                    </ul>
+                    <a href="contact.html" class="btn-pricing gold">Get Started</a>
                 </div>
 
-                <div class="col-md-4 col-sm-6 col-sm-offset-3 col-md-offset-0" style="margin-bottom: 30px;">
-                    <div class="vm-card" style="text-align: center;">
-                        <div class="vm-icon" style="margin: 0 auto 22px auto;">
-                            <i class="fa fa-cogs"></i>
-                        </div>
-                        <h3>Advanced Website</h3>
-                        <p style="font-size: 32px; font-weight: 800; color: #0A6E5C; margin: 15px 0 5px;">GH₵ 1,500</p>
-                        <p style="color: #444444; font-size: 14px; margin-bottom: 25px;">Feature-rich website with CMS, custom functionality, and advanced features.</p>
-                        <ul style="list-style: none; padding: 0; margin: 0 0 30px 0; text-align: left;">
-                            <li style="padding: 10px 0; border-bottom: 1px solid #F5F7FA; color: #444444; font-size: 14px;"><i class="fa fa-check" style="color: #0A6E5C; margin-right: 10px;"></i>Everything in Basic</li>
-                            <li style="padding: 10px 0; border-bottom: 1px solid #F5F7FA; color: #444444; font-size: 14px;"><i class="fa fa-check" style="color: #0A6E5C; margin-right: 10px;"></i>CMS (WordPress/custom)</li>
-                            <li style="padding: 10px 0; border-bottom: 1px solid #F5F7FA; color: #444444; font-size: 14px;"><i class="fa fa-check" style="color: #0A6E5C; margin-right: 10px;"></i>E-commerce functionality</li>
-                            <li style="padding: 10px 0; border-bottom: 1px solid #F5F7FA; color: #444444; font-size: 14px;"><i class="fa fa-check" style="color: #0A6E5C; margin-right: 10px;"></i>Advanced SEO & analytics</li>
-                            <li style="padding: 10px 0; color: #444444; font-size: 14px;"><i class="fa fa-check" style="color: #0A6E5C; margin-right: 10px;"></i>3 revision rounds + 30-day support</li>
-                        </ul>
-                        <a href="contact.html" class="btn-teal" style="width: 100%; justify-content: center;">Get Started</a>
+                <!-- Professional Website -->
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <h3 class="pricing-card-name">Professional Website</h3>
+                        <div class="pricing-card-price">GH₵2,000</div>
+                        <p class="pricing-card-desc">Ideal for established businesses.</p>
                     </div>
+                    <ul class="pricing-features">
+                        <li><i class="fa fa-copy"></i> Up to 10 Pages</li>
+                        <li><i class="fa fa-check-double"></i> Everything in Standard</li>
+                        <li><i class="fa fa-rss"></i> Blog</li>
+                        <li><i class="fa fa-th-large"></i> CMS</li>
+                        <li><i class="fa fa-credit-card"></i> Payment Integration</li>
+                        <li><i class="fa fa-calendar-check-o"></i> Booking Form</li>
+                        <li><i class="fa fa-line-chart"></i> Advanced SEO</li>
+                        <li><i class="fa fa-at"></i> 3 Business Emails</li>
+                        <li><i class="fa fa-bolt"></i> Speed Optimization</li>
+                        <li><i class="fa fa-headset"></i> 90 Days Support</li>
+                    </ul>
+                    <a href="contact.html" class="btn-pricing teal">Get Started</a>
                 </div>
+
+                <!-- Enterprise Website -->
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <h3 class="pricing-card-name">Enterprise Website</h3>
+                        <div class="pricing-card-price">From GH₵5,000</div>
+                        <p class="pricing-card-desc">For companies requiring custom web applications and advanced functionality.</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fa fa-infinity"></i> Unlimited Pages</li>
+                        <li><i class="fa fa-dashboard"></i> Custom Dashboard</li>
+                        <li><i class="fa fa-cogs"></i> ERP Systems</li>
+                        <li><i class="fa fa-sign-in"></i> Client Portal</li>
+                        <li><i class="fa fa-barcode"></i> Inventory Systems</li>
+                        <li><i class="fa fa-plug"></i> API Integrations</li>
+                        <li><i class="fa fa-shield"></i> Premium Security</li>
+                        <li><i class="fa fa-refresh"></i> Unlimited Revisions <span style="font-size:11px;color:#888;">(within scope)</span></li>
+                        <li><i class="fa fa-user-circle"></i> Dedicated Support</li>
+                    </ul>
+                    <a href="contact.html" class="btn-pricing teal">Request Quote</a>
+                </div>
+
             </div>
         </div>
     </section>
@@ -565,9 +603,9 @@
 <script>
 (function () {
 
-    const toggle = document.getElementById('mobileToggle');
-    const nav = document.getElementById('mainNav');
-    const overlay = document.getElementById('navOverlay');
+    var toggle = document.getElementById('mobileToggle');
+    var nav = document.getElementById('mainNav');
+    var overlay = document.getElementById('navOverlay');
 
     if (!toggle || !nav || !overlay) return;
 
@@ -602,18 +640,17 @@
         closeNav();
     });
 
-    /* Mobile Navigation Links */
-    const navLinks = nav.querySelectorAll('a');
-
-    navLinks.forEach(function(link) {
-        link.addEventListener('click', function () {
+    /* Mobile Navigation Links — close panel on tap */
+    var navLinks = nav.querySelectorAll('a');
+    for (var i = 0; i < navLinks.length; i++) {
+        navLinks[i].addEventListener('click', function () {
             if (window.innerWidth <= 991) {
                 closeNav();
             }
         });
-    });
+    }
 
-    /* ESC Key */
+    /* ESC Key to close */
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && nav.classList.contains('open')) {
             closeNav();
@@ -621,7 +658,7 @@
         }
     });
 
-    /* Desktop Resize */
+    /* Reset on desktop resize */
     window.addEventListener('resize', function () {
         if (window.innerWidth > 991) {
             closeNav();

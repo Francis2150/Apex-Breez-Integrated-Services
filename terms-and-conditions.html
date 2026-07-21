@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="stylesheets/responsive.css">
     <link rel="stylesheet" href="stylesheets/colors/color1.css" id="colors">
 
+    <!-- External CSS file (separated from inline styles) -->
+    <link rel="stylesheet" href="css/terms-and-conditions.css">
+
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Terms & Conditions | Apex Breez Integrated Services">
@@ -62,692 +65,15 @@
     }
     </script>
 
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
-    *, *::before, *::after { box-sizing: border-box; }
-
-    body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        background: #F5F7FA;
-        color: #444444;
-        overflow-x: hidden;
-        margin: 0;
-        font-size: 15px;
-        line-height: 1.75;
-        -webkit-font-smoothing: antialiased;
-    }
-
-    a { transition: color 0.3s, opacity 0.3s, background 0.3s, border-color 0.3s; }
-    img { max-width: 100%; height: auto; }
-    h1, h2, h3, h4, h5, h6 { color: #0B1F3B; margin: 0; font-weight: 700; }
-
-    /* --- Top Bar --- */
-    .top-bar {
-        background: #0B1F3B;
-        color: #FFFFFF;
-        font-size: 13px;
-        padding: 10px 0;
-        border-bottom: 2px solid #0A6E5C;
-    }
-    .top-bar a { color: #FFFFFF; text-decoration: none; font-weight: 500; }
-    .top-bar a:hover { color: #E8C36A; }
-    .top-left {
-        display: flex;
-        align-items: center;
-        gap: 24px;
-        flex-wrap: wrap;
-    }
-    .top-left span {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-    }
-    .top-left span i { color: #D4A843; font-size: 13px; }
-    .top-right {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    .top-right a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.08);
-        color: #FFFFFF;
-        font-size: 12px;
-    }
-    .top-right a:hover { background: #D4A843; color: #0B1F3B; }
-    .top-right .wa-btn { background: #0A6E5C !important; color: #FFFFFF !important; }
-    .top-right .wa-btn:hover { background: #D4A843 !important; color: #0B1F3B !important; }
-
-    /* --- Main Header --- */
-    .main-header {
-        background: #FFFFFF;
-        border-bottom: 1px solid #E8C36A;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
-    .header-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0;
-    }
-    .logo img { height: 50px; width: auto; }
-
-    .marquee-text {
-        display: inline-block;
-        white-space: nowrap;
-        font-weight: 700;
-        font-size: 18px;
-        background: linear-gradient(90deg, red, gold, green, gold, red);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: moveLeft 12s linear infinite, blink 1.2s ease-in-out infinite;
-        text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-    }
-
-    @keyframes moveLeft {
-        0% { transform: translateX(100%); }
-        100% { transform: translateX(-100%); }
-    }
-
-    @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.4; }
-    }
-
-    .logo {
-        overflow: hidden;
-        max-width: 250px;
-    }
-
-    /* --- Navigation: Desktop --- */
-    .main-nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-    }
-    .main-nav > ul > li { position: relative; }
-    .main-nav > ul > li > a {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 10px 20px;
-        color: #0B1F3B;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.6px;
-    }
-    .main-nav > ul > li > a:hover,
-    .main-nav > ul > li.active > a { color: #D4A843; }
-    .main-nav .fa-chevron-down {
-        font-size: 9px;
-        transition: transform 0.3s;
-    }
-    .main-nav > ul > li:hover > a .fa-chevron-down { transform: rotate(180deg); }
-
-    /* --- Desktop dropdown (vertical) --- */
-    .main-nav .nav-dropdown {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: #FFFFFF;
-        min-width: 280px;
-        box-shadow: 0 12px 40px rgba(11,31,59,0.1);
-        border: 1px solid #F5F7FA;
-        border-top: 3px solid #D4A843;
-        border-radius: 0 0 8px 8px;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(8px);
-        transition: all 0.3s ease;
-        z-index: 100;
-        padding: 8px 0;
-        list-style: none;
-        margin: 0;
-        display: block;
-        flex-direction: column;
-    }
-    .main-nav .nav-dropdown li {
-        display: block;
-        width: 100%;
-    }
-    .main-nav > ul > li:hover > .nav-dropdown,
-    .main-nav > ul > li:focus-within > .nav-dropdown {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-    .nav-dropdown li a {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 12px 22px;
-        color: #444444;
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 500;
-        text-transform: none;
-        letter-spacing: 0;
-        transition: all 0.3s;
-        white-space: nowrap;
-    }
-    .nav-dropdown li a:hover {
-        background: #F5F7FA;
-        color: #0B1F3B;
-        padding-left: 26px;
-    }
-    .nav-dropdown li a i {
-        width: 18px;
-        text-align: center;
-        color: #0A6E5C;
-        font-size: 14px;
-        flex-shrink: 0;
-    }
-
-    /* --- Mobile Toggle Button --- */
-    .mobile-toggle {
-        display: none;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 8px;
-        flex-direction: column;
-        gap: 5px;
-    }
-    .mobile-toggle span {
-        display: block;
-        width: 24px;
-        height: 2.5px;
-        background: #0B1F3B;
-        border-radius: 2px;
-        transition: all 0.3s;
-        transform-origin: center;
-    }
-    .mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .mobile-toggle.active span:nth-child(2) { opacity: 0; }
-    .mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-    /* --- Mobile Overlay --- */
-    .nav-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(11,31,59,0.5);
-        z-index: 1998;
-        transition: opacity 0.3s;
-    }
-    .nav-overlay.active { display: block; }
-
-    /* --- Page Hero Banner --- */
-    .page-hero {
-        background: #0B1F3B;
-        padding: 60px 0 55px;
-        position: relative;
-        overflow: hidden;
-    }
-    .page-hero::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: #D4A843;
-    }
-    .page-hero .hero-accent {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 40%;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(10,110,92,0.12), rgba(8,90,75,0.04));
-        clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-    }
-    .page-hero h1 {
-        color: #FFFFFF;
-        font-size: 38px;
-        font-weight: 800;
-        margin: 0 0 12px;
-        position: relative;
-        z-index: 2;
-    }
-    .page-hero p {
-        color: #FFFFFF;
-        font-size: 16px;
-        max-width: 550px;
-        line-height: 1.75;
-        margin: 0;
-        position: relative;
-        z-index: 2;
-    }
-    .page-hero .breadcrumb {
-        position: relative;
-        z-index: 2;
-        margin-top: 18px;
-        font-size: 13px;
-    }
-    .page-hero .breadcrumb a {
-        color: #E8C36A;
-        text-decoration: none;
-    }
-    .page-hero .breadcrumb a:hover { color: #FFFFFF; }
-    .page-hero .breadcrumb span { color: #FFFFFF; margin: 0 8px; }
-    .page-hero .breadcrumb .current { color: rgba(255,255,255,0.6); }
-
-    /* --- Section Common --- */
-    .section-padding { padding: 90px 0; }
-    .section-header { text-align: center; margin-bottom: 55px; }
-    .section-label {
-        display: inline-block;
-        color: #D4A843;
-        font-size: 11px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        margin-bottom: 12px;
-    }
-    .section-header h2 {
-        font-size: 36px;
-        font-weight: 800;
-        color: #0B1F3B;
-        margin: 0 0 14px;
-        line-height: 1.2;
-    }
-    .section-header p {
-        color: #444444;
-        font-size: 15px;
-        max-width: 580px;
-        margin: 0 auto;
-        line-height: 1.8;
-    }
-    .section-divider {
-        width: 50px;
-        height: 3px;
-        background: #D4A843;
-        margin: 18px auto 0;
-    }
-
-    /* --- Legal Content (Page-Specific) --- */
-    .legal-content {
-        background: #FFFFFF;
-        border: 1px solid #D8DDE4;
-        border-radius: 6px;
-        padding: 45px 50px;
-    }
-    .legal-content h3 {
-        color: #0B1F3B;
-        font-size: 18px;
-        font-weight: 700;
-        margin: 35px 0 15px;
-        padding-bottom: 10px;
-        border-bottom: 2px solid #E8C36A;
-    }
-    .legal-content h3:first-child {
-        margin-top: 0;
-    }
-    .legal-content p {
-        color: #444444;
-        font-size: 15px;
-        line-height: 1.8;
-        margin: 0 0 15px;
-    }
-    .legal-content ul {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 15px;
-    }
-    .legal-content ul li {
-        padding: 8px 0 8px 28px;
-        color: #444444;
-        font-size: 15px;
-        line-height: 1.7;
-        position: relative;
-    }
-    .legal-content ul li::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 16px;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #0A6E5C;
-    }
-    .legal-content strong {
-        color: #0B1F3B;
-    }
-    .legal-content a {
-        color: #0A6E5C;
-        text-decoration: none;
-        font-weight: 500;
-    }
-    .legal-content a:hover {
-        color: #D4A843;
-    }
-    .legal-toc {
-        background: #F5F7FA;
-        border: 1px solid #D8DDE4;
-        border-radius: 6px;
-        padding: 25px 30px;
-        margin-bottom: 40px;
-    }
-    .legal-toc h4 {
-        color: #0B1F3B;
-        font-size: 16px;
-        font-weight: 700;
-        margin: 0 0 15px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    .legal-toc h4 i {
-        color: #D4A843;
-    }
-    .legal-toc ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-    }
-    .legal-toc ul li a {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 8px 12px;
-        color: #444444;
-        text-decoration: none;
-        font-size: 14px;
-        border-radius: 4px;
-        transition: all 0.2s;
-    }
-    .legal-toc ul li a:hover {
-        background: #FFFFFF;
-        color: #0A6E5C;
-    }
-    .legal-toc ul li a::before {
-        content: '\f105';
-        font-family: 'FontAwesome';
-        font-size: 10px;
-        color: #D4A843;
-    }
-    .legal-toc ul li.active a {
-        color: #0A6E5C;
-        background: #FFFFFF;
-        font-weight: 600;
-    }
-    .legal-meta {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: #444444;
-        font-size: 14px;
-        margin-bottom: 30px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid #D8DDE4;
-    }
-    .legal-meta i {
-        color: #0A6E5C;
-    }
-    .legal-contact-box {
-        background: #F5F7FA;
-        border-left: 4px solid #D4A843;
-        border-radius: 0 6px 6px 0;
-        padding: 25px 30px;
-        margin-top: 35px;
-    }
-    .legal-contact-box h4 {
-        color: #0B1F3B;
-        font-size: 16px;
-        font-weight: 700;
-        margin: 0 0 15px;
-    }
-    .legal-contact-box p {
-        margin: 0 0 8px;
-        font-size: 14px;
-        color: #444444;
-    }
-    .legal-contact-box a {
-        color: #0A6E5C;
-        text-decoration: none;
-        font-weight: 500;
-    }
-    .legal-contact-box a:hover {
-        color: #D4A843;
-    }
-    .legal-highlight {
-        background: #F5F7FA;
-        border: 1px solid #E8C36A;
-        border-radius: 6px;
-        padding: 20px 25px;
-        margin: 20px 0;
-    }
-    .legal-highlight p {
-        margin: 0;
-        font-size: 14px;
-        color: #444444;
-        line-height: 1.7;
-    }
-    .legal-highlight strong {
-        color: #0B1F3B;
-    }
-
-    /* --- Footer --- */
-    .site-footer {
-        background: #0B1F3B;
-        color: #FFFFFF;
-        padding: 60px 0 0;
-    }
-    .site-footer h5 {
-        color: #FFFFFF;
-        font-size: 13px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 24px;
-        padding-bottom: 14px;
-        border-bottom: 2px solid #D4A843;
-        display: inline-block;
-    }
-    .site-footer p {
-        font-size: 14px;
-        line-height: 1.8;
-        margin: 0 0 12px;
-        color: #FFFFFF;
-    }
-    .footer-logo img { height: 50px; margin-bottom: 18px; }
-    .footer-links {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    .footer-links li { margin-bottom: 10px; }
-    .footer-links li a {
-        color: #FFFFFF;
-        text-decoration: none;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        transition: color 0.3s;
-    }
-    .footer-links li a::before {
-        content: '\f105';
-        font-family: 'FontAwesome';
-        font-size: 10px;
-        color: #D4A843;
-    }
-    .footer-links li a:hover { color: #E8C36A; }
-    .footer-contact {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    .footer-contact li {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        margin-bottom: 14px;
-        font-size: 14px;
-        color: #FFFFFF;
-    }
-    .footer-contact li a { color: #FFFFFF; text-decoration: none; }
-    .footer-contact li a:hover { color: #E8C36A; }
-    .footer-contact li i {
-        color: #D4A843;
-        margin-top: 4px;
-        width: 16px;
-        text-align: center;
-        flex-shrink: 0;
-    }
-    .footer-social {
-        display: flex;
-        gap: 10px;
-        margin-top: 20px;
-    }
-    .footer-social a {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: #085A4B;
-        border: 1px solid #0A6E5C;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #FFFFFF;
-        font-size: 13px;
-        text-decoration: none;
-        transition: all 0.3s;
-    }
-    .footer-social a:hover {
-        background: #D4A843;
-        border-color: #D4A843;
-        color: #0B1F3B;
-    }
-    .footer-bottom {
-        border-top: 1px solid #0A6E5C;
-        margin-top: 50px;
-        padding: 22px 0;
-        text-align: center;
-        font-size: 13px;
-        color: #FFFFFF;
-        background: #085A4B;
-    }
-    .footer-bottom a { color: #FFFFFF; text-decoration: none; }
-    .footer-bottom a:hover { color: #E8C36A; }
-
-    /* --- Go Top --- */
-    .go-top {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 44px;
-        height: 44px;
-        background: linear-gradient(135deg, #D4A843, #E8C36A);
-        color: #0B1F3B;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        font-size: 16px;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(20px);
-        transition: all 0.3s;
-        z-index: 999;
-    }
-    .go-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-    .go-top:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(212,168,67,0.4); }
-
-    /* =============================================
-       MOBILE NAVIGATION (≤991px)
-       ============================================= */
-    @media (max-width: 991px) {
-        .mobile-toggle { display: flex; }
-
-        /* Slide-in panel */
-        .main-nav {
-            position: fixed;
-            top: 0;
-            right: -320px;
-            width: 300px;
-            height: 100vh;
-            background: #FFFFFF;
-            box-shadow: -5px 0 30px rgba(11,31,59,0.15);
-            z-index: 2000;
-            transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow-y: auto;
-            padding: 24px 0 30px;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-            display: block !important;
-        }
-        .main-nav.open { right: 0; }
-
-        /* Vertical stack for top-level items */
-        .main-nav > ul {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        /* Each top-level link spans full width */
-        .main-nav > ul > li > a {
-            padding: 14px 24px;
-            border-bottom: 1px solid #F0F2F5;
-            justify-content: flex-start;
-            font-size: 13px;
-            min-height: 48px;
-            display: flex;
-            align-items: center;
-        }
-
-        /* COMPLETELY hide dropdowns on mobile */
-        .main-nav .nav-dropdown {
-            display: none !important;
-        }
-
-        /* Hide chevron icons on mobile */
-        .main-nav > ul > li > a .fa-chevron-down {
-            display: none;
-        }
-
-        .page-hero h1 { font-size: 30px; }
-        .page-hero .hero-accent { display: none; }
-        .section-header h2 { font-size: 28px; }
-    }
-
-    @media (max-width: 767px) {
-        .top-bar { text-align: center; }
-        .top-left, .top-right { justify-content: center; }
-        .page-hero { padding: 45px 0 40px; }
-        .page-hero h1 { font-size: 24px; }
-        .page-hero p { font-size: 14px; }
-        .section-padding { padding: 55px 0; }
-        .section-header h2 { font-size: 24px; }
-        .legal-content { padding: 25px 20px; }
-        .legal-toc ul { grid-template-columns: 1fr; }
-    }
-    </style>
 </head>
 <body>
 
-    <!-- ========== MAIN HEADER ========== -->
+    <!-- ========== MAIN HEADER (Nav + Overlay inside to share stacking context) ========== -->
     <header class="main-header" id="mainHeader">
         <div class="container">
             <div class="header-inner">
+
+                <!-- Logo -->
                 <div class="logo">
                     <a href="index.html" aria-label="Apex Breez Integrated Services Home">
                        <span class="marquee-text">
@@ -756,52 +82,54 @@
                     </a>
                 </div>
 
+                <!-- Desktop Navigation (sits beside logo) -->
+                <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                    <ul>
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+
+                        <li>
+                            <a href="About-Us.html" class="has-dropdown">
+                                About Us <i class="fa fa-chevron-down"></i>
+                            </a>
+                            <ul class="nav-dropdown">
+                                <li><a href="About-Us.html"><i class="fa fa-building"></i> Who We Are</a></li>
+                                <li><a href="About-Us.html#mission"><i class="fa fa-bullseye"></i> Our Mission</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="business-registration.html" class="has-dropdown">
+                                Services <i class="fa fa-chevron-down"></i>
+                            </a>
+                            <ul class="nav-dropdown">
+                                <li><a href="business-registration.html"><i class="fa fa-file-text-o"></i> Business Registration</a></li>
+                                <li><a href="business-advisory.html"><i class="fa fa-lightbulb-o"></i> Business Advisory</a></li>
+                                <li><a href="accounts.html"><i class="fa fa-calculator"></i> Accounting Systems</a></li>
+                                <li><a href="websiteDev.html"><i class="fa fa-laptop"></i> Website Development</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="contact.html">Contact Us</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Mobile Hamburger -->
                 <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
+
             </div>
         </div>
+
+        <!-- Overlay inside header so it shares the same stacking context as the nav on mobile -->
+        <div class="nav-overlay" id="navOverlay"></div>
     </header>
-
-    <!-- MOBILE NAVIGATION (Placed outside sticky header to fix mobile click bug) -->
-    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
-        <ul>
-            <li>
-                <a href="index.html">Home</a>
-            </li>
-
-            <li>
-                <a href="About-Us.html" class="has-dropdown">
-                    About Us <i class="fa fa-chevron-down"></i>
-                </a>
-                <ul class="nav-dropdown">
-                    <li><a href="About-Us.html"><i class="fa fa-building"></i> Who We Are</a></li>
-                    <li><a href="About-Us.html#mission"><i class="fa fa-bullseye"></i> Our Mission</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="business-registration.html" class="has-dropdown">
-                    Services <i class="fa fa-chevron-down"></i>
-                </a>
-                <ul class="nav-dropdown">
-                    <li><a href="business-registration.html"><i class="fa fa-file-text-o"></i> Business Registration</a></li>
-                    <li><a href="business-advisory.html"><i class="fa fa-lightbulb-o"></i> Business Advisory</a></li>
-                    <li><a href="accounts.html"><i class="fa fa-calculator"></i> Accounting Systems</a></li>
-                    <li><a href="websiteDev.html"><i class="fa fa-laptop"></i> Website Development</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="contact.html">Contact Us</a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- Mobile Nav Overlay -->
-    <div class="nav-overlay" id="navOverlay"></div>
 
     <!-- ========== PAGE HERO ========== -->
     <section class="page-hero">
@@ -1077,9 +405,9 @@
 <script>
 (function () {
 
-    const toggle = document.getElementById('mobileToggle');
-    const nav = document.getElementById('mainNav');
-    const overlay = document.getElementById('navOverlay');
+    var toggle = document.getElementById('mobileToggle');
+    var nav = document.getElementById('mainNav');
+    var overlay = document.getElementById('navOverlay');
 
     if (!toggle || !nav || !overlay) return;
 
@@ -1114,18 +442,17 @@
         closeNav();
     });
 
-    /* Mobile Navigation Links */
-    const navLinks = nav.querySelectorAll('a');
-
-    navLinks.forEach(function(link) {
-        link.addEventListener('click', function () {
+    /* Mobile Navigation Links — close panel on tap */
+    var navLinks = nav.querySelectorAll('a');
+    for (var i = 0; i < navLinks.length; i++) {
+        navLinks[i].addEventListener('click', function () {
             if (window.innerWidth <= 991) {
                 closeNav();
             }
         });
-    });
+    }
 
-    /* ESC Key */
+    /* ESC Key to close */
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && nav.classList.contains('open')) {
             closeNav();
@@ -1133,7 +460,7 @@
         }
     });
 
-    /* Desktop Resize */
+    /* Reset on desktop resize */
     window.addEventListener('resize', function () {
         if (window.innerWidth > 991) {
             closeNav();
@@ -1166,8 +493,9 @@
     }
 
     /* Smooth scroll for TOC links (Page-Specific) */
-    document.querySelectorAll('.legal-toc a[href^="#"]').forEach(function(anchor) {
-        anchor.addEventListener('click', function(e) {
+    var tocLinks = document.querySelectorAll('.legal-toc a[href^="#"]');
+    for (var j = 0; j < tocLinks.length; j++) {
+        tocLinks[j].addEventListener('click', function(e) {
             e.preventDefault();
             var target = document.querySelector(this.getAttribute('href'));
             if (target) {
@@ -1175,7 +503,7 @@
                 window.scrollTo({ top: offset, behavior: 'smooth' });
             }
         });
-    });
+    }
 
 })();
 </script>
