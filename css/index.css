@@ -1,5 +1,4 @@
-
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
     *, *::before, *::after { box-sizing: border-box; }
 
@@ -458,6 +457,66 @@
     }
     .learn-more:hover { gap: 10px; color: #0B1F3B; }
 
+    /* =============================================
+       PAYMENT CTA SECTION (links to external page)
+       ============================================= */
+    .payment-cta-section {
+        background: #FFFFFF;
+    }
+
+    .payment-cta-box {
+        background: #0B1F3B;
+        border-radius: 6px;
+        padding: 60px 40px;
+        text-align: center;
+        color: #FFFFFF;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #0A6E5C;
+    }
+
+    .payment-cta-box::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: #D4A843;
+    }
+
+    .payment-cta-box h2 {
+        font-size: 30px;
+        font-weight: 800;
+        margin: 0 0 14px;
+        color: #FFFFFF;
+        position: relative;
+    }
+
+    .payment-cta-box p {
+        font-size: 15px;
+        color: #FFFFFF;
+        margin: 0 auto 32px;
+        max-width: 520px;
+        position: relative;
+        line-height: 1.8;
+    }
+
+    .payment-cta-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: rgba(212,168,67,0.1);
+        border: 2px solid #D4A843;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 22px;
+        font-size: 26px;
+        color: #E8C36A;
+        position: relative;
+    }
+
     /* --- Stats --- */
     .stats-section {
         background: #085A4B;
@@ -782,7 +841,16 @@
         .cta-box h2 { font-size: 22px; }
         .stat-number { font-size: 32px; }
         .stat-label { font-size: 10px; letter-spacing: 1.5px; }
+
+        .payment-cta-box {
+            padding: 35px 22px;
+        }
+        .payment-cta-box h2 {
+            font-size: 22px;
+        }
     }
-.main-nav { flex-shrink: 0; }
-.logo { flex-shrink: 0; }
-.mobile-toggle { flex-shrink: 0; }
+
+    /* Shrink controls to prevent nav overflow */
+    .main-nav { flex-shrink: 0; }
+    .logo { flex-shrink: 0; }
+    .mobile-toggle { flex-shrink: 0; }
