@@ -1,6 +1,6 @@
 # Apex Breez Integrated Services
 
-![Apex Breez Integrated Services](https://www.apexbreez.com/images/logo.png)
+![Apex Breez Integrated Services](https://www.apexbreez.com/images/icon/updatedmylogo3.png)
 
 ## Official Repository
 
