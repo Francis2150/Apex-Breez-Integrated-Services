@@ -649,7 +649,7 @@
         }
         var data = collectFormData(); var btn = document.getElementById('submitBtn');
         btn.disabled = true; btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Submitting...';
-        fetch('https://elevater247.com/abms/api/submit-partnership.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+        fetch('https://apexbreez-management.apexbreez.com/api/submit-partnership.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
         .then(function(r) { if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'Server error'); }); return r.json(); })
         .then(function(r) {
             if (r.status === 'success') {

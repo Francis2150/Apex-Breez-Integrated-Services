@@ -851,7 +851,7 @@ document.getElementById('llcForm').addEventListener('submit', function(e) {
     btn.disabled = true;
     btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Submitting...';
 
-    fetch('https://elevater247.com/abms/api/submit-llc.php', {
+    fetch('https://apexbreez-management.apexbreez.com/api/submit-llc.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
