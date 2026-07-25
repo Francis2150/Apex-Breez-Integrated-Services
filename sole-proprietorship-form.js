@@ -168,7 +168,7 @@
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Submitting...';
 
-        fetch('https://elevater247.com/abms/api/submit-sole.php', {
+        fetch('https://apexbreez-management.apexbreez.com/api/submit-sole.php', {
             method: 'POST',
             body: formData
         })
