@@ -854,3 +854,43 @@
     .main-nav { flex-shrink: 0; }
     .logo { flex-shrink: 0; }
     .mobile-toggle { flex-shrink: 0; }
+    /* --- Insight Card Clickable & Fallback Fixes --- */
+    a.service-card {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+    .insight-img-wrap {
+        height: 200px;
+        overflow: hidden;
+        background: #f5f5f5;
+    }
+    .insight-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Blinking Fallback Animation */
+    .insight-blink {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: insightBlink 3s infinite linear;
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 28px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        letter-spacing: 2px;
+    }
+    @keyframes insightBlink {
+        0%   { background-color: #ff0000; } /* Red */
+        16%  { background-color: #000000; } /* Off */
+        32%  { background-color: #00ff00; } /* Bright Green */
+        48%  { background-color: #000000; } /* Off */
+        64%  { background-color: #0000ff; } /* Blue */
+        80%  { background-color: #000000; } /* Off */
+        100% { background-color: #ff0000; } /* Back to Red */
+    }
