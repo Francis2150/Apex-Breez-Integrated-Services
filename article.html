@@ -24,6 +24,105 @@
     <link rel="stylesheet" href="stylesheets/animate.css">
     <link rel="stylesheet" href="stylesheets/colors/color1.css" id="colors">
     <link rel="stylesheet" href="css/index.css">
+
+    <style>
+        /* --- Premium Article Typography --- */
+        .article-wrap {
+            background: #F5F7FA;
+            padding: 60px 0;
+        }
+        .article-card {
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(11,31,59,0.08);
+            overflow: hidden;
+            position: relative;
+        }
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #D4A843, #0A6E5C);
+            z-index: 2;
+        }
+        .article-header {
+            padding: 50px 60px 30px;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .article-meta i { color: #D4A843; margin-right: 6px; }
+        
+        .article-card h1 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #0B1F3B;
+            line-height: 1.25;
+            margin-bottom: 25px;
+        }
+        
+        .article-featured-img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            margin-bottom: 40px;
+        }
+        
+        .article-body {
+            padding: 0 60px 60px;
+            font-size: 17px;
+            line-height: 1.9;
+            color: #333;
+        }
+        
+        /* WYSIWYG Content Styling */
+        .article-body h2, .article-body h3, .article-body h4 {
+            color: #0B1F3B;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .article-body h2 { font-size: 28px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        .article-body h3 { font-size: 22px; }
+        
+        .article-body p { margin-bottom: 25px; }
+        
+        .article-body ul, .article-body ol {
+            padding-left: 25px;
+            margin-bottom: 25px;
+        }
+        .article-body li { margin-bottom: 10px; }
+        
+        .article-body blockquote {
+            border-left: 4px solid #D4A843;
+            padding: 15px 25px;
+            margin: 30px 0;
+            background: #F9F9F9;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .article-body a {
+            color: #0A6E5C;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .article-header, .article-body { padding-left: 25px; padding-right: 25px; }
+            .article-card h1 { font-size: 28px; }
+            .article-featured-img { height: 250px; }
+        }
+    </style>
 </head>
 <body>
 
@@ -69,14 +168,14 @@
     </header>
 
     <!-- ========== ARTICLE BODY SECTION ========== -->
-    <section class="section-padding" style="background: #FFFFFF; min-height: 60vh;">
+    <section class="article-wrap">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-10 col-md-offset-1">
                     
                     <!-- Article Container -->
                     <div id="articleContainer">
-                        <div class="text-center" style="padding: 50px 0;">
+                        <div class="article-card" style="text-align: center; padding: 100px 0;">
                             <i class="fa fa-spinner fa-spin fa-3x" style="color: #0A6E5C;"></i>
                             <p style="margin-top: 15px; color: #666;">Loading article...</p>
                         </div>
@@ -160,7 +259,7 @@
             const slug = params.get('slug');
 
             if (!slug) {
-                container.innerHTML = '<div class="alert alert-danger text-center">No article specified. Please go back and select an article.</div>';
+                container.innerHTML = '<div class="article-card" style="padding: 50px; text-align: center;"><div class="alert alert-danger">No article specified. Please go back and select an article.</div></div>';
                 return;
             }
 
@@ -169,7 +268,7 @@
                 
                 // Handle 404 or network errors
                 if (!res.ok) {
-                    container.innerHTML = `<div class="alert alert-warning text-center"><h3>Article not found</h3><p>We could not find the article you were looking for.</p><a href="index.html" class="btn-gold">Go Home</a></div>`;
+                    container.innerHTML = `<div class="article-card" style="padding: 50px; text-align: center;"><div class="alert alert-warning"><h3>Article not found</h3><p>We could not find the article you were looking for.</p><a href="index.html" class="btn-gold" style="margin-top:15px;">Go Home</a></div></div>`;
                     return;
                 }
 
@@ -178,33 +277,32 @@
                 if (result.status === 'success' && result.data) {
                     const article = result.data;
                     const date = new Date(article.published_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
-                    const imgSrc = article.featured_image || 'https://apexbreez.com/images/myupdatedlogo2.png';
                     
                     // Safely map categories
                     const categories = (article.categories && article.categories.length > 0) 
-                        ? article.categories.map(c => `<span class="badge" style="background: #0A6E5C; color: white; margin-right: 5px;">${c.name}</span>`).join('') 
+                        ? article.categories.map(c => `<span class="badge" style="background: #0A6E5C; color: white; margin-right: 5px; padding: 6px 12px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">${c.name}</span>`).join('') 
                         : '';
 
-                                      // Render HTML
+                    // Render HTML
                     container.innerHTML = `
-                        <div class="article-header text-center" style="margin-bottom: 30px;">
-                            ${categories ? `<div style="margin-bottom: 15px;">${categories}</div>` : ''}
-                            <h1 style="font-size: 32px; font-weight: 700; color: #333; margin-bottom: 15px; line-height: 1.3;">${article.title}</h1>
-                            <div style="color: #777; font-size: 14px;">
-                                <span><i class="fa fa-user"></i> ${article.author_name || 'Apex Breez'}</span> | 
-                                <span><i class="fa fa-calendar"></i> ${date}</span>
+                        <article class="article-card">
+                            <div class="article-header">
+                                ${categories ? `<div style="margin-bottom: 20px;">${categories}</div>` : ''}
+                                <h1>${article.title}</h1>
+                                <div class="article-meta">
+                                    <span><i class="fa fa-user"></i> ${article.author_name || 'Apex Breez'}</span>
+                                    <span><i class="fa fa-calendar"></i> ${date}</span>
+                                </div>
                             </div>
-                        </div>
-                        
-                        ${article.featured_image ? `
-                            <div style="height: 400px; overflow: hidden; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                                <img src="${article.featured_image}" alt="${article.title}" style="width: 100%; height: 100%; object-fit: cover;">
+                            
+                            ${article.featured_image ? `
+                                <img src="${article.featured_image}" alt="${article.title}" class="article-featured-img">
+                            ` : ''}
+                            
+                            <div class="article-body">
+                                ${article.body}
                             </div>
-                        ` : ''}
-                        
-                        <div class="article-body" style="font-size: 16px; line-height: 1.8; color: #444;">
-                            ${article.body}
-                        </div>
+                        </article>
                     `;
 
                     // Dynamically update SEO Meta Tags
@@ -223,11 +321,11 @@
                     if (ogImg) ogImg.setAttribute('content', article.featured_image || 'https://apexbreez.com/images/myupdatedlogo2.png');
 
                 } else {
-                    container.innerHTML = `<div class="alert alert-warning text-center"><h3>Article not found</h3><p>${result.message || 'We could not find this article.'}</p></div>`;
+                    container.innerHTML = `<div class="article-card" style="padding: 50px; text-align: center;"><div class="alert alert-warning"><h3>Article not found</h3><p>${result.message || 'We could not find this article.'}</p></div></div>`;
                 }
             } catch (error) {
                 console.error('Error loading article:', error);
-                container.innerHTML = '<div class="alert alert-danger text-center">An error occurred while loading the article. Please check your connection.</div>';
+                container.innerHTML = '<div class="article-card" style="padding: 50px; text-align: center;"><div class="alert alert-danger">An error occurred while loading the article. Please check your connection.</div></div>';
             }
         }
 
